@@ -5,9 +5,9 @@ class Database {
 
 	private static $_pdo;
 
-	const DB_USER = 'acct_lite';
+	const DB_USER = 'root';
 
-	const DB_PASS = 'acct_lite';
+	const DB_PASS = 'password';
 
 	/**
 	 * Get PDO connection by calling Database::getPdo()
@@ -16,7 +16,7 @@ class Database {
 	public static function getPdo() {
 		if (!self::$_pdo) {
 			try {
-				self::$_pdo = new PDO('mysql:host=localhost;dbname=acct_lite', self::DB_USER, self::DB_PASS);
+				self::$_pdo = new PDO('mysql:host=localhost;dbname=budget', self::DB_USER, self::DB_PASS);
 			} catch (PDOException $e) {
 				echo 'Connection to database failed: ' . $e->getMessage();
 			}

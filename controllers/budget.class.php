@@ -89,9 +89,10 @@ class Budget extends DatabaseObject {
 			$message = 'Could not update record: ' . $e->getMessage();
 		}
 	}
+	
 	/**
 	 * Deletes budget record from db
-	 * 
+	 * @return redirects to dashboard if successful returns $message otherwise
 	 */
 	public function deleteBudget() {
 		$id = $_GET['id'];
