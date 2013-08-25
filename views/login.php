@@ -16,6 +16,7 @@ if (isset($_POST['submit'])) {
 		$message = 'Could not log in.';
 	}
 }
+
 require_once('header.inc.php');
 ?>
 <form action="login.php" method="post">
