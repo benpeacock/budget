@@ -68,6 +68,7 @@ abstract class DatabaseObject {
 	
 	/**
 	 * Gets list of tags or categories (depending on class it's being called through) by user id.
+	 * Used to populate x-editable values 'name' and 'value'
 	 * @param int $user_id
 	 * @return array of id =>name for each tag or category as value=>text
 	 */
