@@ -23,13 +23,13 @@ class Item extends DatabaseObject {
 		$tag = $_POST['tag'];
 		$amount = $_POST['amount'];
 		$note = $_POST['note'];
-		$created = date("Y-m-d H:i:s");
+		// $created = date("Y-m-d H:i:s");
 		$dbh = Database::getPdo();
 		try {
 			$sql = "INSERT INTO " . self::DB_TABLE . "(
-			user_id, budget_id, name, category, tag, amount, note, created
+			user_id, budget_id, name, category, tag, note, amount
 			) VALUES (
-			:user_id, :budget_id, :name, :category, :tag, :amount, :note, :created
+			:user_id, :budget_id, :name, :category, :tag, :note, :amount
 			)";
 			$stmt = $dbh->prepare($sql);
 			$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
@@ -40,7 +40,7 @@ class Item extends DatabaseObject {
 			$stmt->bindParam(':amount', $amount, PDO::PARAM_INT);
 			// look up field length for note and add after PARAM_STR
 			$stmt->bindParam(':note', $note, PDO::PARAM_STR);
-			$stmt->bindParam(':created', $created);
+			//$stmt->bindParam(':created', $created);
 			$stmt->execute();
 			
 		}

@@ -22,7 +22,7 @@ require_once('init.inc.php');
 	    	$result = $stmt->execute();
     	}
     	catch (PDOException $e) {
-    		echo 'Could not update record.';
+    		echo 'Could not update record';
     	}
         
         //here, for debug reason we just return dump of $_POST, you will see result in browser console
