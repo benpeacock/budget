@@ -2,17 +2,18 @@
 require_once('../controllers/init.inc.php');
 
 if(isset($_POST['submit'])) {
+	$user_id = $_SESSION['user_id'];
+	$id = $_POST['id'];
+	$name = $_POST['name'];
+	$category = $_POST['category'];
+	$tag = $_POST['tag'];
+	$note = $_POST['note'];
+	$total = $_POST['total'];
+	
 	$action = $_POST['action'];
 	
 	switch ($action) {
 		case 'create_item':
-			//$user_id = $_SESSION['user_id'];
-			$user_id = 1; // TESTING ONLY
-			$name = $_POST['name'];
-			$category = $_POST['category'];
-			$tag = $_POST['tag'];
-			$note = $_POST['note'];
-			$total = $_POST['total'];
 			$overhead_item = new OverheadItem();
 			$result = $overhead_item->createOverheadItem($user_id, $name, $category, $tag, $note, $total);
 // 			if ($result == 1) {
@@ -23,28 +24,8 @@ if(isset($_POST['submit'])) {
 			break;
 			
 		case 'edit_item':
-			$id = $_POST['id'];
-			$name = $_POST['name'];
-			$category = $_POST['category'];
-			$tag = $_POST['tag'];
-			$note = $_POST['note'];
-			$total = $_POST['total'];
-			
-			$dbh = Database::getPdo();
-			try {
-				$sql = "UPDATE overhead_item SET total = :total, name = :name, category = :category, tag = :tag, note = :note WHERE id = :id";
-				$stmt = $dbh->prepare($sql);
-				$stmt->bindParam(':id', $id);
-				$stmt->bindParam(':name', $name);
-				$stmt->bindParam(':category', $category);
-				$stmt->bindParam(':tag', $tag);
-				$stmt->bindParam(':note', $note);
-				$stmt->bindParam(':total', $total);
-				$stmt->execute();
-				$result = $stmt->rowCount();
-			} catch (PDOException $e) {
-				echo 'Unable to edit overhead item ';
-			}
+			$foo = new OverheadItem();
+			$result = $foo->updateOverheadItem($id, $name, $category, $tag, $note, $total);
 			if ($result == 1) {
 				$message = 'Overhead item updated.';
 			} else {
