@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
 			$budget_id = $_POST['budget_id'];
 			$item = new Item();
 			$result = $item->addItem();
-			header('Location:budget.php?id=' . $budget_id . '');
+			header('Location:budget.php?action=display&id=' . $budget_id . '');
 			break;
 	}
 }

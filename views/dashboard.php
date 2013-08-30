@@ -25,7 +25,7 @@ foreach ($records as $row) {
 $overhead_item = new OverheadItem();
 $records = $overhead_item->getByUser($user_id);
 foreach ($records as $row) {
-	echo '<li><a href="overhead.php?id = ' . $row['id'] . '">' . $row['name'] . '</a></li>';
+	echo '<li><a href="overhead.php?action=display&id=' . $row['id'] . '">' . $row['name'] . '</a></li>';
 }
 ?>
 <a href="overhead.php?action=create_item">+ Create New Overhead Item</a>

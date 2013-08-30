@@ -13,17 +13,18 @@ class OverheadItem extends DatabaseObject {
 	public $note;
 	// I've got a total field in the db.  Get rid of it?
 	
-	public function createOverheadItem($user_id, $name, $category, $tag, $note ='') {
+	public function createOverheadItem($user_id, $name, $category, $tag, $note ='', $total) {
 		$dbh = Database::getPdo();
 		try {
-			$sql = "INSERT INTO " . self::DB_TABLE . " (user_id, name, category, tag, note) VALUES ";
-			$sql .= "(:user_id, :name, :category, :tag, :note)";
+			$sql = "INSERT INTO " . self::DB_TABLE . " (user_id, name, category, tag, note, total) VALUES ";
+			$sql .= "(:user_id, :name, :category, :tag, :note, :total)";
 			$stmt = $dbh->prepare($sql);
 			$stmt->bindParam(':user_id', $user_id);
  			$stmt->bindParam(':name', $name);
 			$stmt->bindParam(':category', $category);
 			$stmt->bindParam(':tag', $tag);
 			$stmt->bindParam(':note', $note);
+			$stmt->bindParam(':total', $total);
 			$stmt->execute();
 			$result = $stmt->rowCount();
 			return $result;
@@ -32,19 +33,18 @@ class OverheadItem extends DatabaseObject {
 		}
 	}
 	
-	public function displayOverheadItem($overhead_item_id) {
+	public function displayOverheadItem($id) {
 		$dbh = Database::getPdo();
 		try {
-			$overhead_item_id = $_GET['id'];
-			$sql = "SELECT * FROM overhead_split WHERE overhead_item_id = :overhead_item_id";
+			$sql = "SELECT * FROM overhead_item WHERE id = :id";
 			$stmt = $dbh->prepare($sql);
-			$stmt->bindParam(':overhead_item_id', $overhead_item_id, PDO::PARAM_INT);
+			$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 			$stmt->execute();
-			$result = $stmt->fetchAll();
+			$result = $stmt->fetch();
 			return $result;
-		}
-		catch (PDOException $e) {
-			$message = 'Unable to retrieve budget: ' . $e->getMessage();
+		} catch (PDOException $e) {
+			echo 'error';
 		}
 	}
+
 } // ends OverheadItem class

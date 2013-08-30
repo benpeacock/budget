@@ -12,8 +12,9 @@ if(isset($_POST['submit'])) {
 			$category = $_POST['category'];
 			$tag = $_POST['tag'];
 			$note = $_POST['note'];
+			$total = $_POST['total'];
 			$overhead_item = new OverheadItem();
-			$result = $overhead_item->createOverheadItem($user_id, $name, $category, $tag, $note);
+			$result = $overhead_item->createOverheadItem($user_id, $name, $category, $tag, $note, $total);
 			if ($result == 1) {
 				$message = 'Item successfully created.';
 			} else {
@@ -39,17 +40,67 @@ if(isset($_GET)) {
 	switch ($action) {
 		
 		case 'display':
-			$id = $_GET['id'] = $overhead_item_id;
+			$id = $_GET['id'];
 			$user_id = 1;
 			$overhead_item = new OverheadItem();
 			$result = $overhead_item->getById($id);
 			foreach ($result as $row) {
 				echo '<h2>' . $row['name'] . '</h2>';
 			}
-			$result = $overhead_item->displayOverheadItem($overhead_item_id);
-			//need to create form element here that will display existing splits and 
-			//submit revised ones upon ediitng.  Use x-editable? 
-			
+			$result = $overhead_item->displayOverheadItem($id);
+			echo '<form action="overhead.php" method="post">';
+			echo '<input type="hidden" name="action" value="edit_item" />';
+			echo '<input type="name" name="name" value="' . $result['name'] . '" />';
+			echo '<select name="category">';
+			$category = new Category();
+			$cat = $category->getByUser($user_id);
+			foreach ($cat as $row) {
+			?>
+			<option value="<?php echo $row['id'] ?>"<?php if ($row['id'] == $result['category']) { echo 'selected'; } ?>>
+			<?php echo $row['name']; ?></option>
+			<?php
+			}
+			echo '</select>';
+			echo '<select name="tag">';
+			$tag = new Tag();
+			$tag_record = $tag->getByUser($user_id);
+			foreach ($tag_record as $row) {
+				?>
+						<option value="<?php echo $row['id'] ?>"<?php if ($row['id'] == $result['tag']) { echo 'selected'; } ?>>
+						<?php echo $row['name']; ?></option>
+						<?php
+						}
+			echo '</select>';
+			echo '<input type="note" name="note" value="' . $result['note'] . '" />';
+			echo '<input type="number" name="amount" value="' . $result['amount'] . '" />';
+			echo '<input type="submit" name="submit" value="Edit Item" />';
+			echo '</form>';
+			echo '<hr />';
+// 			echo '<table class="table_main">';
+// 			echo '<tbody>';
+// 			echo '<th>Budget</th><th>Percent</th>';
+//			$overhead_split = new OverheadSplit();
+// 			$result = $overhead_split->getByOverheadItem($overhead_item_id);
+// 			foreach ($result as $row) {
+// 				echo '<tr>';
+// 				echo '<td>Percent: ' . $row['percent_of_total'] . '</td>';
+// 				echo '<td width="20%"><a class="name" data-type="text" data-url="../controllers/itemProcessor.php"
+// 		      data-pk="' . $row['id'] . '">' . $row['name'] . '</a></td>';
+// 				echo '<td width="15%"><a class="category" data-type="select" data-url="../controllers/itemProcessor.php"
+// 				data-pk="' . $row['id'] . '" data-value="' . $row['category'] . '" data-source="category.php?action=list&user_id=' . $user_id . '"></a></td>';
+// 				echo '<td width="15%"><a class="tag" data-type="select" data-url="../controllers/itemProcessor.php"
+// 				data-pk="' . $row['id'] . '" data-value="' . $row['tag'] . '" data-source="tag.php?action=list&user_id=' . $user_id . '"></a></td>';
+// 				echo '<td width="15%"><a class="amount" data-type="number" data-url="../controllers/itemProcessor.php"
+// 			  data-pk="' . $row['id'] . '">' . $row['amount'] . '</a></td>';
+// 				echo '<td width="25%"><a class="note" data-type="textarea" data-url="../controllers/itemProcessor.php"
+// 			  data-pk="' . $row['id'] . '">' . $row['note'] . '</a></td>';
+// 				echo '<td width=10%><a onclick="confirm(\'Delete item?\')" href="item.php?action=delete&budget_id=' . $id . '&id=
+// 				' . $row['id'] . '">Delete</a></td>';
+// 				echo '<tr/>';
+// 			}
+// 			echo '</tbody>';
+// 			echo '</table>';
+			break;
 		
 		case 'create_item':
 			?>
@@ -79,6 +130,9 @@ if(isset($_GET)) {
 			</ul>
 			</form>
 			<?php
+			break;
+			
+		case 'edit_item':
 	}
 } 
 require_once('header.inc.php');
