@@ -46,5 +46,24 @@ class OverheadItem extends DatabaseObject {
 			echo 'error';
 		}
 	}
+	
+// 	public function updateOverheadItem() {
+// 	$dbh = Database::getPdo();
+// 			try {
+// 				$sql = "UPDATE overhead_item SET total = :total, name = :name, category = :category, tag = :tag, note = :note WHERE id = :id";
+// 				$stmt = $dbh->prepare($sql);
+// 				$stmt->bindParam(':id', $id);
+// 				$stmt->bindParam(':name', $name);
+// 				$stmt->bindParam(':category', $category);
+// 				$stmt->bindParam(':tag', $tag);
+// 				$stmt->bindParam(':note', $note);
+// 				$stmt->bindParam(':total', $total);
+// 				$stmt->execute();
+// 				$result = $stmt->rowCount();
+// 				return $result;
+// 			} catch (PDOException $e) {
+// 				echo 'error';'
+// 			}
+// 	}
 
 } // ends OverheadItem class

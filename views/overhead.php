@@ -15,11 +15,42 @@ if(isset($_POST['submit'])) {
 			$total = $_POST['total'];
 			$overhead_item = new OverheadItem();
 			$result = $overhead_item->createOverheadItem($user_id, $name, $category, $tag, $note, $total);
-			if ($result == 1) {
-				$message = 'Item successfully created.';
-			} else {
-				$message = 'Could not create item.';
+// 			if ($result == 1) {
+// 				$message = 'Item successfully created.';
+// 			} else {
+// 				$message = 'Could not create item.';
+// 			}
+			break;
+			
+		case 'edit_item':
+			$id = $_POST['id'];
+			$name = $_POST['name'];
+			$category = $_POST['category'];
+			$tag = $_POST['tag'];
+			$note = $_POST['note'];
+			$total = $_POST['total'];
+			
+			$dbh = Database::getPdo();
+			try {
+				$sql = "UPDATE overhead_item SET total = :total, name = :name, category = :category, tag = :tag, note = :note WHERE id = :id";
+				$stmt = $dbh->prepare($sql);
+				$stmt->bindParam(':id', $id);
+				$stmt->bindParam(':name', $name);
+				$stmt->bindParam(':category', $category);
+				$stmt->bindParam(':tag', $tag);
+				$stmt->bindParam(':note', $note);
+				$stmt->bindParam(':total', $total);
+				$stmt->execute();
+				$result = $stmt->rowCount();
+			} catch (PDOException $e) {
+				echo 'Unable to edit overhead item ';
 			}
+			if ($result == 1) {
+				$message = 'Overhead item updated.';
+			} else {
+				$message = 'could not edit item';
+			}
+			break;
 	}
 }
 	
@@ -50,6 +81,7 @@ if(isset($_GET)) {
 			$result = $overhead_item->displayOverheadItem($id);
 			echo '<form action="overhead.php" method="post">';
 			echo '<input type="hidden" name="action" value="edit_item" />';
+			echo '<input type="hidden" name="id" value = "' . $result['id'] . '">';
 			echo '<input type="name" name="name" value="' . $result['name'] . '" />';
 			echo '<select name="category">';
 			$category = new Category();
@@ -72,7 +104,7 @@ if(isset($_GET)) {
 						}
 			echo '</select>';
 			echo '<input type="note" name="note" value="' . $result['note'] . '" />';
-			echo '<input type="number" name="amount" value="' . $result['amount'] . '" />';
+			echo '<input type="number" name="total" value="' . $result['total'] . '" />';
 			echo '<input type="submit" name="submit" value="Edit Item" />';
 			echo '</form>';
 			echo '<hr />';
@@ -131,13 +163,11 @@ if(isset($_GET)) {
 			</form>
 			<?php
 			break;
-			
-		case 'edit_item':
 	}
 } 
 require_once('header.inc.php');
 
-// displys a single overhead item for editing.
+if (!empty($message)) { echo $message; }
 
 require_once('footer.inc.php');
 ?>
