@@ -1,7 +1,5 @@
 <?php
 require_once('../controllers/init.inc.php');
-require_once('header.inc.php');
-echo '<hr />';
 
 if (isset($_GET['action'])) {
 	$action = $_GET['action'];
@@ -20,8 +18,18 @@ if (isset($_GET['action'])) {
 				<input type="submit" name="submit" value="Create Budget" />
 			</form>
 			<?php
+			break;
 		
+		//used to populate drop-down of budget names in overhead.php x-editable field
+		case 'list':
+			$user_id = $_GET['user_id'];
+			$budget = new Budget();
+			$result = $budget->getTagCatByUser($user_id);
+			echo json_encode($result);
+			break;
+			
 		case 'display':
+			require_once('header.inc.php');
 			$budget = new Budget();
 			$user_id = $_SESSION['user_id'];
 			$id = $_GET['id'];
@@ -84,7 +92,8 @@ if (isset($_GET['action'])) {
 				</tbody>
 				</table>
 			<?php
-			
+			require_once('footer.inc.php');
+			break;
 			}
 	}
 
@@ -98,8 +107,7 @@ if (isset($_POST['action'])) {
 			break;
 	}
 }
-	
-require_once('footer.inc.php');
+
 
 
 

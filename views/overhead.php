@@ -89,30 +89,34 @@ if(isset($_GET)) {
 			echo '<input type="submit" name="submit" value="Edit Item" />';
 			echo '</form>';
 			echo '<hr />';
-// 			echo '<table class="table_main">';
-// 			echo '<tbody>';
-// 			echo '<th>Budget</th><th>Percent</th>';
-//			$overhead_split = new OverheadSplit();
-// 			$result = $overhead_split->getByOverheadItem($overhead_item_id);
+			$overhead_item_id = $overhead_item->id;
+			$overhead_split = new OverheadSplit();
+			$result = $overhead_split->getByOverheadItem($overhead_item_id);
+			echo '<pre><tt>';
+			var_dump($result);
+			echo '</pre></tt>';
+			echo '<form action="overhead.php" method="post">';
+			echo '<input type="hidden" name="action" value="edit_split">';
+			echo '<table class="table_main">';
+			echo '<tbody>';
+			echo '<tr><th>Budget</th><th>Percent</th></tr>';
+//		 	this will display data from the db:
 // 			foreach ($result as $row) {
-// 				echo '<tr>';
-// 				echo '<td>Percent: ' . $row['percent_of_total'] . '</td>';
-// 				echo '<td width="20%"><a class="name" data-type="text" data-url="../controllers/itemProcessor.php"
-// 		      data-pk="' . $row['id'] . '">' . $row['name'] . '</a></td>';
-// 				echo '<td width="15%"><a class="category" data-type="select" data-url="../controllers/itemProcessor.php"
-// 				data-pk="' . $row['id'] . '" data-value="' . $row['category'] . '" data-source="category.php?action=list&user_id=' . $user_id . '"></a></td>';
-// 				echo '<td width="15%"><a class="tag" data-type="select" data-url="../controllers/itemProcessor.php"
-// 				data-pk="' . $row['id'] . '" data-value="' . $row['tag'] . '" data-source="tag.php?action=list&user_id=' . $user_id . '"></a></td>';
-// 				echo '<td width="15%"><a class="amount" data-type="number" data-url="../controllers/itemProcessor.php"
-// 			  data-pk="' . $row['id'] . '">' . $row['amount'] . '</a></td>';
-// 				echo '<td width="25%"><a class="note" data-type="textarea" data-url="../controllers/itemProcessor.php"
-// 			  data-pk="' . $row['id'] . '">' . $row['note'] . '</a></td>';
-// 				echo '<td width=10%><a onclick="confirm(\'Delete item?\')" href="item.php?action=delete&budget_id=' . $id . '&id=
-// 				' . $row['id'] . '">Delete</a></td>';
-// 				echo '<tr/>';
+// 				echo '<tr><td><input type="number" name="budget' . $num . '" value="' . $row['budget_id'] . '" /></td><td><input type="number" name="percent" value="' . $row['percent_of_total'] . '"</td></tr>';
 // 			}
-// 			echo '</tbody>';
-// 			echo '</table>';
+			foreach ($result as $row) {
+				echo '<tr>';
+				echo '<td width="15%"><a class="category" data-type="select" data-url="../controllers/splitProcessor.php"
+				data-pk="' . $row['id'] . '" data-value="' . $row['budget_id'] . '" data-source="budget.php?action=list&user_id=' . $user_id . '"></a></td>';
+				echo '<td width="20%"><a class="name" data-type="text" data-url="../controllers/splitProcessor.php"
+		      data-pk="' . $row['id'] . '">' . $row['percent_of_total'] . '</a></td>';
+				echo '<td width=10%><a onclick="confirm(\'Delete item?\')" href="item.php?action=delete&budget_id=' . $id . '&id=
+				' . $row['id'] . '">Delete</a></td>';
+				echo '<tr/>';
+			}
+			echo '</tbody>';
+			echo '</table>';
+			echo '</form>';
 			break;
 		
 		case 'create_item':
