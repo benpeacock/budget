@@ -1,7 +1,7 @@
     <!-- Inline versus pop-up editing -->
     $.fn.editable.defaults.mode = 'inline';
    
-    <!-- budget -->
+    <!-- begin budget.php fields -->
     $('.name').editable({
     	name: 'name',
     });
@@ -22,3 +22,12 @@
     	name: 'note',
     });
     <!-- end budget -->
+    <!-- begin overhead.php fields -->
+    
+    $('.budget_id').editable({
+    	name: 'budget_id',
+    });
+    $('.percent_of_total').editable({
+    	name: 'percent_of_total',
+    });
+    <!-- end overhead -->
