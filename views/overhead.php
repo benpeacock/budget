@@ -2,13 +2,17 @@
 require_once('../controllers/init.inc.php');
 
 if(isset($_POST['submit'])) {
-	$user_id = $_SESSION['user_id'];
-	$id = $_POST['id'];
-	$name = $_POST['name'];
-	$category = $_POST['category'];
-	$tag = $_POST['tag'];
-	$note = $_POST['note'];
-	$total = $_POST['total'];
+	if(!empty($_SESSION['user_id'])) {$user_id = $_SESSION['user_id']; }
+	if(!empty($_POST['user_id'])) {$user_id = $_POST['user_id']; }
+	if(!empty($_POST['id'])) { $id = $_POST['id']; }
+	if(!empty($_POST['name'])) { $name = $_POST['name']; }
+	if(!empty($_POST['category'])) { $category = $_POST['category']; }
+	if(!empty($_POST['tag'])) { $tag = $_POST['tag']; }
+	if(!empty($_POST['note'])) { $note = $_POST['note']; }
+	if(!empty($_POST['total'])) { $total = $_POST['total']; }
+	if(!empty($_POST['budget_id'])) { $budget_id = $_POST['budget_id']; }
+	if(!empty($_POST['overhead_item_id'])) { $overhead_item_id = $_POST['overhead_item_id']; }
+	if(!empty($_POST['percent_of_total'])) { $percent_of_total = $_POST['percent_of_total']; }
 	
 	$action = $_POST['action'];
 	
@@ -32,6 +36,16 @@ if(isset($_POST['submit'])) {
 				$message = 'could not edit item';
 			}
 			break;
+			
+		case 'add_split':
+			$overhead_split = new OverheadSplit();
+			$result = $overhead_split->createOverheadSplit($user_id, $budget_id, $overhead_item_id, $percent_of_total);
+			if ($result == 1) {
+				header('Location:overhead.php?action=display&id=' . $overhead_item_id . '');
+			} else {
+				$message = 'Could not add split to overhead item';
+			}
+			break;
 	}
 }
 	
@@ -46,7 +60,7 @@ if(isset($_POST['submit'])) {
 // 	$overhead_split = new OverheadSplit();
 // 	$split_result = $overhead_split->createOverheadSplit($budget1, $overhead_item_id, $percent1);
 
-if(isset($_GET)) {
+if(isset($_GET['action'])) {
 	$action = $_GET['action'];
 	
 	switch ($action) {
@@ -95,8 +109,8 @@ if(isset($_GET)) {
 // 			echo '<pre><tt>';
 // 			var_dump($result);
 // 			echo '</pre></tt>';
-			echo '<form action="overhead.php" method="post">';
-			echo '<input type="hidden" name="action" value="edit_split">';
+			//echo '<form action="overhead.php" method="post">';
+			// echo '<input type="hidden" name="action" value="edit_split">';
 			echo '<table class="table_main">';
 			echo '<tbody>';
 			echo '<tr><th>Budget</th><th>Percent</th></tr>';
@@ -114,9 +128,30 @@ if(isset($_GET)) {
 				' . $row['id'] . '">Delete</a></td>';
 				echo '<tr/>';
 			}
-			echo '</tbody>';
-			echo '</table>';
-			echo '</form>';
+			?>
+			<form method="post" action="overhead.php">
+				<tr>
+					<td><input type="hidden" name="action" value="add_split" /></td>
+					<?php echo '<input type="hidden" name="user_id" value="1" />'; ?>
+					<?php echo '<input type="hidden" name="budget_id" value="1" />'; ?>
+					<!-- CHECK THIS -->
+					<?php echo '<td><input type="hidden" name="overhead_item_id" value="1" /></td>'; ?>
+					<td><select name="budget">
+					<?php 
+					$budget = new Budget();
+					$result = $budget->getByUser($user_id);
+					foreach ($result as $row) {
+						echo '<option value="' . $row['id'] . '">' . $row['name'] . '</option>';
+					}
+					?>
+					</select></td>
+					<td><input type="number" name="percent_of_total" required /></td>
+					<td><input type="submit" name="submit" value="Add Split" /></td>
+				</tr>
+			</tbody>
+			</table>
+			</form>
+			<?php
 			break;
 		
 		case 'create_item':

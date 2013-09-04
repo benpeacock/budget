@@ -11,8 +11,7 @@ class OverheadSplit extends DatabaseObject {
 	public $overhead_item_id;
 	public $percent_of_total;
 	
-	public function createOverheadSplit($budget_id, $overhead_item_id, $percent_of_total) {
-		$user_id = $_SESSION['user_id'];
+	public function createOverheadSplit($user_id, $budget_id, $overhead_item_id, $percent_of_total) {
 		$dbh = Database::getPDO();
 		try {
 			$sql = "INSERT INTO " . self::DB_TABLE . " (user_id, budget_id, overhead_item_id, percent_of_total) VALUES ";
