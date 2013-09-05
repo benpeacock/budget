@@ -43,4 +43,21 @@ class Category extends DatabaseObject {
 			echo 'Unable to create record: ' . $e->getMessage();
 		}
 	}
+	
+	public function getCategoryObjectById($id) {
+		$dbh = Database::getPdo();
+		try {
+			$sql = "SELECT * FROM " . self::DB_TABLE . " WHERE id = :id";
+			$stmt = $dbh->prepare($sql);
+			$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+			$stmt->execute();
+			$category = new Category();
+			$stmt->setFetchMode(PDO::FETCH_INTO, $category);
+			$result = $stmt->fetch();
+			return $result;
+		} catch (PDOException $e) {
+			'Unable to retrieve record ' . $e->getMessage();
+		}
+	}
+	
 }

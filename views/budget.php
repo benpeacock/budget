@@ -31,7 +31,7 @@ if (isset($_GET['action'])) {
 		case 'display':
 			require_once('header.inc.php');
 			$budget = new Budget();
-			$user_id = $_SESSION['user_id'];
+			$user_id = 1;
 			$id = $_GET['id'];
 			$query = $budget->getById($id);
 			// Is there a more effecient way to extract this than by using foreach?
@@ -91,7 +91,29 @@ if (isset($_GET['action'])) {
 				</form>
 				</tbody>
 				</table>
+			<hr />
+			<h3>Overhead Items</h3>
 			<?php
+			$overhead_item = new Overheaditem();
+			$budget_id = $_GET['id'];
+			$result = $overhead_item->displayOverheadByBudget($budget_id);
+			if (!empty($result)) {
+				echo '<table>';
+				foreach ($result as $row) {
+					echo '<tr>';
+						echo '<td width="20%">' . $row['name'] . '</td>';
+						echo '<td width="15%">' . $row['category'] . '</td>';
+						echo '<td width="15%">' . $row['tag'] . '</td>';
+						echo '<td width="15%">' . $row['split_total'] . '</td>';
+						echo '<td width="25%">' . $row['note'] . '</td>';
+						echo '<td width="10%">edit button goes here</td>';
+					echo '</tr>';
+				}	
+				echo '</table>';
+				echo '<pre><tt>';
+				//var_dump($category_result);
+				echo '</pre></tt>';
+			}
 			require_once('footer.inc.php');
 			break;
 			}

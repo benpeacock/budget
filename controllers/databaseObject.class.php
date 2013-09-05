@@ -24,6 +24,20 @@ abstract class DatabaseObject {
 			$message =  'Unable to locate record: ' . $e->getMessage();
 		}
 	}
+	
+//	public function getObjectById($id) {
+// 		$dbh = Database::getPdo();
+// 		try {
+// 			$sql = "SELECT * FROM " . self::DB_TABLE . " WHERE id = :id";
+// 			$stmt = $dbh->prepare($sql);
+// 			$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+// 			$stmt->execute();
+// 			$result = $stmt->fetch(PDO::FETCH_OBJ);
+// 			return $result;
+// 		} catch (PDOException $e) {
+// 			'Unable to retrieve record ' . $e->getMessage();
+// 		}
+// 	}
 
 	/**
 	 * Looks up record by name
