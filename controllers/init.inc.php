@@ -15,3 +15,4 @@ require_once ('session.class.php');
 require_once ('email.class.php');
 require_once ('overheadItem.class.php');
 require_once ('overheadSplit.class.php');
+require_once ('report.class.php');
