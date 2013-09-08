@@ -5,41 +5,37 @@ if(isset($_POST['submit'])) {
 	$user_id = 1;
 	// $user_id = $_SESSION['user_id'];
 	$budget = array();
-	$category= array();
+	$category = array();
 	$tag = array();
 	
 	if(isset($_POST['budget'])) { $budget = $_POST['budget']; }
 	if(isset($_POST['category'])) { $category = $_POST['category']; }
 	if(isset($_POST['tag'])) { $tag = $_POST['tag']; }
-	if(isset($_POST['include_overhead'])) { $include_overhead=$_POST['include_overhead']; }
-	
-	echo '<pre><tt>';
-	var_dump($budget);
-	var_dump($category);
-	if(empty($category)) { echo 'empty'; }
-	var_dump($tag);
-	var_dump($include_overhead);
-	echo '</pre></tt>';
-	
+	if(isset($_POST['include_overhead'])) { $include_overhead = $_POST['include_overhead']; }
+
 	$report = new Report();
-	$result = $report->getReport($user_id, $budget, $category, $tag, $include_overhead);
-	echo '<pre><tt>';
-	var_dump($result);
-	echo '</pre></tt>';
+	$result = $report->getItemReport($user_id, $budget, $category, $tag, $include_overhead);
+	if (empty($result)) {
+		$message = 'No results found.';
+	}
 	echo '<table>';
+	echo '<tbody>';
 	foreach ($result as $row) {
-		$budget = new Budget();
-		$budget_name = $budget->getById($row['budget_id']);
+		echo '<tr><th>Budget</th><th>Name</th><th>Category</th><th>Tag</th><th>Amount</th></tr>';
 		echo '<tr>';
-			echo '<td>' . $row['budget_id'] . '</td>';
-			echo '<td>' . $row['name'] . '</td>';
-			echo '<td>' . $row['category'] . '</td>';
+			echo '<td width="20%">' . $row['budget'] . '</td>';
+			echo '<td width="20%">' . $row['name'] . '</td>';
+			echo '<td width="20%">' . $row['category'] . '</td>';
+			echo '<td width="20%">' . $row['tag'] . '</td>';
+			echo '<td width="20%">' . $row['amount'] . '</td>';
 		echo '</tr>';
 	}
+	echo '</tbody>';
 	echo '</table>';
 }
 
 ?>
+<h2>Filters:</h2>
 <form action="report.php" method="post">
 	<ul>
 		<li>

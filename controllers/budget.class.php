@@ -61,6 +61,22 @@ class Budget extends DatabaseObject {
 		}
 	}
 	
+	public function getBudgetObjectById($id) {
+		$dbh = Database::getPdo();
+		try {
+			$sql = "SELECT * FROM " . self::DB_TABLE . " WHERE id = :id";
+			$stmt = $dbh->prepare($sql);
+			$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+			$stmt->execute();
+			$budget = new Budget();
+			$stmt->setFetchMode(PDO::FETCH_INTO, $budget);
+			$result = $stmt->fetch();
+			return $result;
+		} catch (PDOException $e) {
+			'Unable to retrieve record ' . $e->getMessage();
+		}
+	}
+	
 	/**
 	 * Updates name and last_updated values of a budget.
 	 * @param unknown $id

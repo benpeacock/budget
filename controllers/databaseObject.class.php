@@ -25,7 +25,11 @@ abstract class DatabaseObject {
 		}
 	}
 	
-//	public function getObjectById($id) {
+	/** How can I use this function across classes?  I currently have to replicate it for each class (budegt, class and tag
+	 * so far) because
+	 *  I think I have to define the type of class (e.g. budget) within the method.
+	 */
+// 	public function getObjectById($id) {
 // 		$dbh = Database::getPdo();
 // 		try {
 // 			$sql = "SELECT * FROM " . self::DB_TABLE . " WHERE id = :id";
