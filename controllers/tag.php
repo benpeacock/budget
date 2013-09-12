@@ -28,8 +28,19 @@ if(isset($_GET['action'])) {
 		case 'edit':
 			$id = $_GET['id'];
 			$tag = new Tag();
-			$result = $tag->getTagObjectById($id);
+			$result = $tag->getOneById($id);
 			include ('../views/edit_tags.php');
+			break;
+			
+		case 'delete':
+			$id = $_GET['id'];
+			$tag = new Tag();
+			$result = $tag->deleteRecord($id);
+			if ($result == 1) {
+				header('Location:dashboard.php');
+			} else {
+				echo 'Unable to delete tag.';
+			}
 			break;
 	}
 	
@@ -41,10 +52,24 @@ if(isset($_POST['action'])) {
 	
 	switch ($action) {
 		case 'create':
-			$user_id = $_SESSION['user_id'];
+			$user_id = 1;
+			//$user_id = $_SESSION['user_id'];
 			$name = $_POST['name'];
 			$tag = new Tag();
 			$result = $tag->createTag($user_id, $name);
 			break;
+		
+		case 'edit':
+// 			$user_id = $_SESSION['user_id'];
+			$user_id = 1;
+			$id = $_POST['id'];
+			$name = $_POST['name'];
+			$tag = new Tag();
+			$result = $tag->updateById($id, $name);
+			if ($result == 1) {
+				header('Location:dashboard.php');
+			} else {
+				echo 'Unable to update tag.';
+			}
 		}
 }

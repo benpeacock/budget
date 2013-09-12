@@ -1,20 +1,13 @@
 <?php
 require_once('../models/init.inc.php');
+require_once 'header.inc.php';
 
 if (isset($_GET['action'])) {
 	$action = $_GET['action'];
 
 	switch ($action) {
 		case 'create':
-			require_once 'header.inc.php';
-			?>
-			<form action="category.php" method="post">
-				<input type="hidden" name="action" value="create" />
-				<input type="text" name="name" required />
-				<input type="submit" name="submit" value="Create Category" />
-			</form>
-		<?php
-			require_once 'footer.inc.php';
+			include '../views/create_categories.php';
 			break;
 		
 		case 'list':
@@ -25,11 +18,28 @@ if (isset($_GET['action'])) {
 			break;
 		
 		case 'display':
-			require_once('header.inc.php');
-			?>
-			<div>This is where categories go.</div>
-			<?php
-			require_once('footer.inc.php');
+			$user_id = 1;
+			$category = new Category();
+			$result = $category->getByUser($user_id);
+			include '../views/categories.php';
+			break;
+			
+		case 'edit':
+			$id = $_GET['id'];
+			$category = new Category();
+			$result = $category->getOneById($id);
+			include ('../views/edit_categories.php');
+			break;
+					
+		case 'delete':
+			$id = $_GET['id'];
+			$category = new Category();
+			$result = $category->deleteRecord($id);
+			if ($result == 1) {
+				header('Location:dashboard.php');
+			} else {
+				echo 'Unable to delete category.';
+				}
 	}
 }
 
@@ -43,6 +53,19 @@ if (isset($_POST['action'])) {
 			$category = new Category();
 			$result = $category->createCategory($user_id, $name);
 			break;
+		case 'edit':
+			// $user_id = $_SESSION['user_id'];
+			$user_id = 1;
+			$id = $_POST['id'];
+			$name = $_POST['name'];				
+			$category = new Category();
+			$result = $category->updateById($id, $name);
+			if ($result == 1) {
+				header('Location:dashboard.php');
+			} else {
+				echo 'Unable to update category.';
+			}
 	}
 }
+require_once('footer.inc.php');
 ?>

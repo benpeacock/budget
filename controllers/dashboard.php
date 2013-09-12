@@ -40,13 +40,13 @@ $tag = new Tag;
 $records = $tag->getByUser($user_id);
 echo '<ul>';
 foreach ($records as $row) {
-	echo '<li><a href="tag.php?id=' . $row['id'] . '">' . $row['name'] . '</a></li>';
+	echo '<li><a href="tag.php?action=edit&id=' . $row['id'] . '">' . $row['name'] . '</a></li>';
 }
 ?>
 <a href="tag.php?action=create">+ Create new tag</a>
 </div>
 
-<div id="tag_list">
+<div id="category_list">
 <h2>My Categories</h2>
 <?php
 $user_id = $_SESSION['user_id'];
@@ -54,7 +54,7 @@ $category = new Category;
 $records = $category->getByUser($user_id);
 echo '<ul>';
 foreach ($records as $row) {
-	echo '<li><a href="category.php?id=' . $row['id'] . '">' . $row['name'] . '</a></li>';
+	echo '<li><a href="category.php?action=edit&id=' . $row['id'] . '">' . $row['name'] . '</a></li>';
 }
 ?>
 <a href="category.php?action=create">+ Create new category</a>

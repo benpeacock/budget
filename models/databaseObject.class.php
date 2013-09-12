@@ -25,6 +25,21 @@ abstract class DatabaseObject {
 		}
 	}
 	
+	public function getOneById($id) {
+		$dbh = Database::getPdo();
+		try {
+			$sql = "SELECT * FROM " . static::DB_TABLE . " WHERE id = :id";
+			$stmt = $dbh->prepare($sql);
+			$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+			$stmt->execute();
+			$result = $stmt->fetch();
+			return $result;
+		}
+		catch (PDOException $e) {
+			$message =  'Unable to locate record: ' . $e->getMessage();
+		}
+	}
+	
 	/** How can I use this function across classes?  I currently have to replicate it for each class (budegt, class and tag
 	 * so far) because
 	 *  I think I have to define the type of class (e.g. budget) within the method.
@@ -126,6 +141,21 @@ abstract class DatabaseObject {
 		}
 		catch (PDOException $e) {
 			$message =  'Unable to locate record: ' . $e->getMessage();
+		}
+	}
+	
+	public function updateById($id, $name) {
+		$dbh = Database::getPdo();
+		try {
+			$sql = "UPDATE " . static::DB_TABLE . " SET name = :name WHERE id = :id";
+			$stmt = $dbh->prepare($sql);
+			$stmt->bindParam(':name', $name);
+			$stmt->bindParam(':id', $id);
+			$stmt->execute();
+			$result = $stmt->rowCount();
+			return $result;
+		} catch (PDOException $e) {
+			'Unable to update ' . static::DB_TABLE . ': ' . $e->getMessage();
 		}
 	}
 	
