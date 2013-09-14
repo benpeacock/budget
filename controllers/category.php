@@ -1,12 +1,13 @@
 <?php
 require_once('../models/init.inc.php');
-require_once 'header.inc.php';
+// require_once 'header.inc.php';
 
 if (isset($_GET['action'])) {
 	$action = $_GET['action'];
 
 	switch ($action) {
 		case 'create':
+			include '../controllers/header.inc.php';
 			include '../views/create_categories.php';
 			break;
 		
@@ -21,6 +22,7 @@ if (isset($_GET['action'])) {
 			$user_id = 1;
 			$category = new Category();
 			$result = $category->getByUser($user_id);
+			include '../controllers/header.inc.php';
 			include '../views/categories.php';
 			break;
 			
@@ -28,6 +30,7 @@ if (isset($_GET['action'])) {
 			$id = $_GET['id'];
 			$category = new Category();
 			$result = $category->getOneById($id);
+			include '../controllers/header.inc.php';
 			include ('../views/edit_categories.php');
 			break;
 					
@@ -48,7 +51,8 @@ if (isset($_POST['action'])) {
 	
 	switch ($action) {
 		case 'create':
-			$user_id = $_SESSION['user_id'];
+			// $user_id = $_SESSION['user_id'];
+			$user_id = 1;
 			$name = $_POST['name'];
 			$category = new Category();
 			$result = $category->createCategory($user_id, $name);
@@ -67,5 +71,5 @@ if (isset($_POST['action'])) {
 			}
 	}
 }
-require_once('footer.inc.php');
+// require_once('footer.inc.php');
 ?>

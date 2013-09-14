@@ -82,20 +82,12 @@ class Budget extends DatabaseObject {
 	 * @param unknown $id
 	 * @return number of rows updated (1)
 	 */
-	public function updateBudget($user_id, $name) {
+	public function editBudget($id, $name) {
 		$dbh = Database::getPdo();
 		try {
-			$last_updated = date("Y-m-d H:i:s");
-			$query = new Budget();
-			$row = $query->getByName($user_id, $name);
-			// Is there a beter way to get the id property out of the $row array than foreach?
-			foreach ($row as $item) {
-				$id = $item['id'];
-			}
-			$sql = "UPDATE INTO " . self::DB_TABLE . " (name, last_updated) VALUES (:name, :last_updated) WHERE id = :id";
+			$sql = "UPDATE " . self::DB_TABLE . " SET name = :name WHERE id = :id LIMIT 1";
 			$stmt = $dbh->prepare($sql);
 			$stmt->bindParam(':name', $name, PDO::PARAM_STR,45);
-			$stmt->bindParam(':last_updated', $last_updated);
 			$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 			$stmt->execute();
 			$result = $stmt->rowCount();

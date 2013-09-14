@@ -4,10 +4,11 @@ require_once('../models/init.inc.php');
 if(isset($_GET['action'])) {
 	$action = $_GET['action'];
 	
-	require_once('../controllers/header.inc.php');
+	// require_once('../controllers/header.inc.php');
 	
 	switch($action) {
 		case 'create':
+			include '../controllers/header.inc.php';
 			include ('../views/create_tags.php');
 			break;
 		
@@ -29,6 +30,7 @@ if(isset($_GET['action'])) {
 			$id = $_GET['id'];
 			$tag = new Tag();
 			$result = $tag->getOneById($id);
+			include '../controllers/header.inc.php';
 			include ('../views/edit_tags.php');
 			break;
 			
@@ -44,7 +46,7 @@ if(isset($_GET['action'])) {
 			break;
 	}
 	
-	require_once('../controllers/footer.inc.php');
+	// require_once('../controllers/footer.inc.php');
 }
 
 if(isset($_POST['action'])) {
