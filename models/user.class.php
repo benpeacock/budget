@@ -4,11 +4,14 @@ require_once('init.inc.php');
 
 class User extends DatabaseObject {
 	
+	const DB_TABLE = 'user';
+	
 	public $id;
 	public $first_name;
 	public $last_name;
 	public $username;
 	public $password;
+	
 	/**
 	 * A hash of current timestamp that's re-written everytime User::makeHash() is called.
 	 * @var string - VARCHAR(40)
@@ -115,6 +118,31 @@ class User extends DatabaseObject {
 			}
 			catch (PDOException $e) {
 				echo 'Unable to create hash ' . $e->message();
+			}
+		}
+		
+		public function resetPassword($email, $temp_hash, $password) {
+			$dbh = Database::getPdo();
+			try {
+				$hashed_pass = sha1($password);
+				
+				$sql = "UPDATE " . self::DB_TABLE . " SET password = :hashed_pass WHERE email = :email AND temp_hash = :temp_hash";
+				$stmt = $dbh->prepare($sql);
+				$stmt->bindParam(':hashed_pass', $hashed_pass);
+				$stmt->bindParam(':email', $email);
+				$stmt->bindParam(':temp_hash', $temp_hash);
+				$stmt->execute();
+				$result = $stmt->rowCount();
+					// remove temporary hash that was sent to the user so that it can't be re-used
+					try {
+						$sql = "UPDATE " . self::DB_TABLE . " SET temp_hash=''";
+						$dbh->query($sql);
+					} catch (PDOException $e) {
+						'Unable to delete temp hash ' . $e->getMessage();
+					}
+				return $result;
+			} catch (PDOException $e) {
+				echo 'Could not reset password: ' . $e->getMessage();
 			}
 		}
 }
