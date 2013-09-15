@@ -20,17 +20,14 @@ if(isset($_POST['submit'])) {
 		}
 		
 		case 'reset_mail':
+			// need to put in try/catch block
 			if(!empty($_POST['email'])) {
 				$email = $_POST['email'];
 				$user = new User();
 				$user = $user->findByEmail($email);
-				echo '<pre><tt>';
-				var_dump($user);
 				$temp_hash = $user->makeHash($user->id);
-				var_dump($temp_hash);
-				echo '</pre></tt>';
 				$email = new Email();
-				$email = $email->passwordReset($user->email, $temp_hash);
+				$email = $email->passwordReset($user->username, $user->email, $temp_hash);
 				$message = 'Password reset e-mail sent.';
 			} else {
 				$message = 'You must enter an e-mail address.';

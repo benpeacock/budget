@@ -8,17 +8,19 @@ class Email extends DatabaseObject {
 	public $address;
 	public $temp_hash;
 	
-	public function passwordReset($address, $temp_hash) {
-	
-		# Instantiate the client.
+	public function passwordReset($username, $address, $temp_hash) {
 		$mgClient = new Mailgun('key-6pfc3ghhk9rk4dtl4ws9a4b9fp2nwl12');
 		$domain = "budget.mailgun.org";
 		
-		# Make the call to the client.
+		$msg = 'Hi, you\'re receiving this because a password reset was requested for your account. ';
+		$msg .= 'To reset your password, click (or copy and paste into your browser) the following link: ';
+		$msg .= 'http://192.241.227.8/budget/controllers/user.php?action=reset_password&email=' . $address . '&temp_hash=' . $temp_hash;
+		
 		$result = $mgClient->sendMessage("$domain",
-		array('from'    => 'Excited User <ben@budget.mailgun.org>',
-		'to'      => 'Ben <ben9908@gmail.com>',
-		'subject' => 'Hello',
-		'text'    => 'Testing some Mailgun awesomness!'));
+		                  array('from'    => 'Admin <me@budget.mailgun.org>',
+		                  		'to' => $username . ' <' . $address . '>',
+		                        'subject' => 'Hello',
+		                        'text'    => $msg
+		                  		));
 	}
 } // ends Email class
