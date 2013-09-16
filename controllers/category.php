@@ -7,7 +7,7 @@ if (isset($_GET['action'])) {
 
 	switch ($action) {
 		case 'create':
-			include '../controllers/header.inc.php';
+			include '../views/header.inc.php';
 			include '../views/create_categories.php';
 			break;
 		
@@ -22,7 +22,7 @@ if (isset($_GET['action'])) {
 			$user_id = 1;
 			$category = new Category();
 			$result = $category->getByUser($user_id);
-			include '../controllers/header.inc.php';
+			include '../views/header.inc.php';
 			include '../views/categories.php';
 			break;
 			
@@ -30,7 +30,7 @@ if (isset($_GET['action'])) {
 			$id = $_GET['id'];
 			$category = new Category();
 			$result = $category->getOneById($id);
-			include '../controllers/header.inc.php';
+			include '../views/header.inc.php';
 			include ('../views/edit_categories.php');
 			break;
 					

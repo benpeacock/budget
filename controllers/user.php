@@ -1,6 +1,6 @@
 <?php
 require_once('../models/init.inc.php');
-require_once 'header.inc.php';
+require_once '../views/header.inc.php';
 
 if(isset($_POST['submit'])) {
 	
@@ -82,4 +82,4 @@ if(isset($_GET['action'])) {
 	}
 }
 
-require_once 'footer.inc.php';
+require_once '../views/footer.inc.php';

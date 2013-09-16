@@ -1,6 +1,6 @@
 <?php
 require_once '../models/init.inc.php';
-require_once 'header.inc.php';
+require_once '../views/header.inc.php';
 echo 'This is the home page for users who are not logged in.';
 ?>
 
@@ -17,4 +17,4 @@ echo 'This is the home page for users who are not logged in.';
 <li><input type="submit" name="submit" id="submit" /></li>
 </ul>
 </form>
-<?php require_once 'footer.inc.php'; ?>
+<?php require_once '../views/footer.inc.php'; ?>

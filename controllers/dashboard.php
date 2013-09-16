@@ -1,6 +1,6 @@
 <?php 
 require_once('../models/init.inc.php');
-require_once('header.inc.php');
+require_once('../views/header.inc.php');
 $user_id = $_SESSION['user_id'];
 ?>
 

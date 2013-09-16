@@ -185,9 +185,9 @@ if(isset($_GET['action'])) {
 			break;
 	}
 } 
-require_once('header.inc.php');
+require_once('../views/header.inc.php');
 
 if (!empty($message)) { echo $message; }
 
-require_once('footer.inc.php');
+require_once('../views/footer.inc.php');
 ?>

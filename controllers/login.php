@@ -17,7 +17,7 @@ if (isset($_POST['submit'])) {
 	}
 }
 
-require_once('header.inc.php');
+require_once('../views/header.inc.php');
 ?>
 <form action="login.php" method="post">
 Username: <input type="text" name="username" /><br />
@@ -26,6 +26,6 @@ Password: <input type="password" name="password" /><br />
 </form>
 <a href="user.php?action=forgot_password">Forgot password?</a>
 
-<?php require_once('footer.inc.php'); ?>
+<?php require_once('../views/footer.inc.php'); ?>
 
 

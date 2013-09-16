@@ -97,7 +97,7 @@ if(isset($_POST['submit_html']) || isset($_POST['submit_csv'])) {
 	}
 }
 
-require_once 'header.inc.php';
+require_once '../views/header.inc.php';
 ?>
 <h2>Filters:</h2>
 <form action="report.php" method="post">
@@ -151,5 +151,5 @@ require_once 'header.inc.php';
 	</ul>
 </form>
 
-<?php require_once 'footer.inc.php';?>
+<?php require_once '../views/footer.inc.php';?>
 

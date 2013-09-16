@@ -8,7 +8,7 @@ if(isset($_GET['action'])) {
 	
 	switch($action) {
 		case 'create':
-			include '../controllers/header.inc.php';
+			include '../views/header.inc.php';
 			include ('../views/create_tags.php');
 			break;
 		
@@ -30,7 +30,7 @@ if(isset($_GET['action'])) {
 			$id = $_GET['id'];
 			$tag = new Tag();
 			$result = $tag->getOneById($id);
-			include '../controllers/header.inc.php';
+			include '../views/header.inc.php';
 			include ('../views/edit_tags.php');
 			break;
 			
