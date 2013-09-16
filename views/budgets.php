@@ -1,4 +1,5 @@
 <?php
+//test
 foreach ($query as $row) {
 	echo '<h2>' . $budget_title = $row['name'] . '</h2>';
 }
