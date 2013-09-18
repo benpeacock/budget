@@ -10,7 +10,8 @@ if (isset($_GET['action'])) {
 			$budget = new Budget();
 			$budget->deleteBudget();
 			break;
-			
+		
+		// form to create a budget
 		case 'create':
 			include '../views/create_budgets.php';
 			break;

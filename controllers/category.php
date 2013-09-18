@@ -1,6 +1,6 @@
 <?php
 require_once('../models/init.inc.php');
-// require_once 'header.inc.php';
+// can't include header here for x-editable compatibility.  Including below in switch blocks.
 
 if (isset($_GET['action'])) {
 	$action = $_GET['action'];
