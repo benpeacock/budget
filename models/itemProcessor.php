@@ -1,8 +1,6 @@
 <?php
 require_once('init.inc.php');
-    /*
-    Script for update record from X-editable.
-    */
+    // Script for update record from X-editable.
     $pk = $_POST['pk'];
     $name = $_POST['name'];
     $value = $_POST['value'];
@@ -24,9 +22,6 @@ require_once('init.inc.php');
     	catch (PDOException $e) {
     		echo 'Could not update record';
     	}
-        
-        //here, for debug reason we just return dump of $_POST, you will see result in browser console
-        //print_r($_POST);
 
     } else {
         header('HTTP 400 Bad Request', true, 400);

@@ -23,7 +23,16 @@ class Item extends DatabaseObject {
 		$tag = $_POST['tag'];
 		$amount = $_POST['amount'];
 		$note = $_POST['note'];
-		// $created = date("Y-m-d H:i:s");
+		
+		
+		// Is this function being used?
+		
+		/**
+		* Creates new item record in database
+		* @param int $user_id, string $name, int $category, int $tag, string $note, int $amount
+		* return ?
+		*/
+		public function createItem($user_id, $name, $category, $tag, $note, $amount) {
 		$dbh = Database::getPdo();
 		try {
 			$sql = "INSERT INTO " . self::DB_TABLE . "(
@@ -40,11 +49,9 @@ class Item extends DatabaseObject {
 			$stmt->bindParam(':amount', $amount, PDO::PARAM_INT);
 			// look up field length for note and add after PARAM_STR
 			$stmt->bindParam(':note', $note, PDO::PARAM_STR);
-			//$stmt->bindParam(':created', $created);
 			$stmt->execute();
 			
-		}
-		catch (PDOException $e) {
+		} catch (PDOException $e) {
 			$message = 'Unable to add item';
 		}
 	}

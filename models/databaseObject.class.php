@@ -25,6 +25,11 @@ abstract class DatabaseObject {
 		}
 	}
 	
+	/**
+	* Returns record from database by id
+	* @param int ($id)
+	* @return database object as an array
+	*/
 	public function getOneById($id) {
 		$dbh = Database::getPdo();
 		try {
@@ -39,24 +44,6 @@ abstract class DatabaseObject {
 			$message =  'Unable to locate record: ' . $e->getMessage();
 		}
 	}
-	
-	/** How can I use this function across classes?  I currently have to replicate it for each class (budegt, class and tag
-	 * so far) because
-	 *  I think I have to define the type of class (e.g. budget) within the method.
-	 */
-// 	public function getObjectById($id) {
-// 		$dbh = Database::getPdo();
-// 		try {
-// 			$sql = "SELECT * FROM " . self::DB_TABLE . " WHERE id = :id";
-// 			$stmt = $dbh->prepare($sql);
-// 			$stmt->bindParam(':id', $id, PDO::PARAM_INT);
-// 			$stmt->execute();
-// 			$result = $stmt->fetch(PDO::FETCH_OBJ);
-// 			return $result;
-// 		} catch (PDOException $e) {
-// 			'Unable to retrieve record ' . $e->getMessage();
-// 		}
-// 	}
 
 	/**
 	 * Looks up record by name
@@ -144,6 +131,11 @@ abstract class DatabaseObject {
 		}
 	}
 	
+	/**
+	* Finds records by id, then updates the name field of the record in database
+	* @param int $id
+	* @return int affected rows
+	*/
 	public function updateById($id, $name) {
 		$dbh = Database::getPdo();
 		try {

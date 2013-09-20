@@ -24,6 +24,10 @@ class Database {
 		return self::$_pdo;
 	}
 	
+	/**
+	* Tests whether application is able to access database
+	* @return string
+	*/
 	public static function databaseTest() {
 		$dbh = Database::getPdo();
 		if(isset($dbh)) {

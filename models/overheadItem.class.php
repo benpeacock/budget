@@ -33,6 +33,11 @@ class OverheadItem extends DatabaseObject {
 		}
 	}
 	
+	/**
+	* Returns a single overhead item record form the database
+	* @param int $id
+	* @return
+	*/
 	public function displayOverheadItem($id) {
 		$dbh = Database::getPdo();
 		try {

@@ -71,5 +71,4 @@ if (isset($_POST['action'])) {
 			}
 	}
 }
-// require_once('footer.inc.php');
 ?>

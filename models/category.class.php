@@ -9,6 +9,11 @@ class Category extends DatabaseObject {
 	public $user_id;
 	public $name;
 	
+	/**
+	* Creates a new categroy record in database
+	* @param int $user_id, string $name
+	* @return bool
+	*/
 	public function createCategory($user_id, $name) {
 		$dbh = Database::getPdo();
 		try {
@@ -30,6 +35,11 @@ class Category extends DatabaseObject {
 		}	
 	}
 	
+	/**
+	* Retrieves all fields for all category records by user
+	* @param int $user_id
+	* @return categories as array
+	*/
 	public function getCategories($user_id) {
 		$dbh = Database::getPdo();
 		try {
@@ -44,6 +54,11 @@ class Category extends DatabaseObject {
 		}
 	}
 	
+	/**
+	* Returns one category record from database as an object
+	* @param int $id
+	* @return category as object
+	*/
 	public function getCategoryObjectById($id) {
 		$dbh = Database::getPdo();
 		try {
@@ -60,4 +75,4 @@ class Category extends DatabaseObject {
 		}
 	}
 	
-}
+} // ends category class

@@ -61,6 +61,11 @@ class Budget extends DatabaseObject {
 		}
 	}
 	
+	/**
+	* Retrieves one budget record from database as an object
+	* @param int $id
+	* @return budget as an aobject
+	*/
 	public function getBudgetObjectById($id) {
 		$dbh = Database::getPdo();
 		try {
