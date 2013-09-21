@@ -29,7 +29,7 @@ if(isset($_GET['action'])) {
 		case 'edit':
 			$id = $_GET['id'];
 			$tag = new Tag();
-			$result = $tag->getOneById($id);
+			$tag_result = $tag->getOneById($id);
 			include '../views/header.inc.php';
 			include ('../views/edit_tags.php');
 			break;

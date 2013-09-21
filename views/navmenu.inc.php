@@ -19,8 +19,8 @@
               ?>
 	              <ul class="nav navbar-nav">
 		              <li class="active"><a href="#">Home</a></li>
-		              <li><a href="#about">About</a></li>
 		              <li><a href="#contact">Help</a></li>
+		              <li><a href="dashboard.php?id=<?php echo $_SESSION['user_id']; ?>">My Dashboard</a></li>
 	              </ul>
 	              <ul class="nav navbar-nav navbar-right">
 			              <li class="navbar-text">Hello, 
@@ -30,18 +30,17 @@
 			              $result = $user->getOneById($id);
 			              echo $result['first_name']; 
 			              ?></li>
-			              <li><button type="button" class="btn btn-default navbar-btn">Sign Out</button></li>
+			              <li><button onclick="window.location='logout.php'" type="button" class="btn btn-default navbar-btn">Sign Out</button></li>
 			      </ul>
               <?php 
               } else {
 				?>
 				<ul class="nav navbar-nav">
 				<li class="active"><a href="#">Home</a></li>
-				<li><a href="#about">About</a></li>
 				<li><a href="#contact">Help</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-				<li><button type="button" class="btn btn-default navbar-btn">Sign In</button></li>
+				<li><button onclick="window.location='login.php'" type="button" class="btn btn-default navbar-btn">Sign In</button></li>
 				</ul>
 			<?php } ?>
             </div>

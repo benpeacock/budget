@@ -1,12 +1,14 @@
+<div class="container">
+<div class="row">
 <?php
-//test
 foreach ($query as $row) {
-	echo '<h2>' . $budget_title = $row['name'] . '</h2>';
+	echo '<div class="col-md-2"><h2>' . $budget_title = $row['name'] . '</h2></div>';
 }
-echo '<a href="../controllers/budget.php?action=edit&id=' . $id . '">Edit Budget Name</a>';
-echo '<br />';
-echo '<a onclick="confirm(\'Delete budget?\')" href=budget.php?action=delete&id=' . $id. '>Delete budget</a>';
+echo '<div class="col-md-1"><a href="../controllers/budget.php?action=edit&id=' . $id . '">Edit</a></div>';
+// echo '<br />';
+echo '<div class="col-md-1"><a onclick="confirm(\'Delete budget?\')" href=budget.php?action=delete&id=' . $id. '>Delete</a></div>';
 $query = $budget->displayBudget($id);
+echo '</div>';
 echo '<table class="table_main">';
 echo '<tbody>';
 echo '<th>Name</th><th>Category</th><th>Tag</th><th>Amount</th><th>Notes</th>';
@@ -58,27 +60,26 @@ foreach ($query as $row) {
 				</form>
 				</tbody>
 				</table>
+				</div>
 			<hr />
-			<h3>Overhead Items</h3>
+			<!-- <h3>Overhead Items</h3> -->
 			<?php
-			$overhead_item = new Overheaditem();
-			$budget_id = $_GET['id'];
-			$result = $overhead_item->displayOverheadByBudget($budget_id);
-			if (!empty($result)) {
-				echo '<table>';
-				foreach ($result as $row) {
-					echo '<tr>';
-						echo '<td width="20%">' . $row['name'] . '</td>';
-						echo '<td width="15%">' . $row['category'] . '</td>';
-						echo '<td width="15%">' . $row['tag'] . '</td>';
-						echo '<td width="15%">' . $row['split_total'] . '</td>';
-						echo '<td width="25%">' . $row['note'] . '</td>';
-						echo '<td width="10%">edit button goes here</td>';
-					echo '</tr>';
-				}	
-				echo '</table>';
-				echo '<pre><tt>';
-				//var_dump($category_result);
-				echo '</pre></tt>';
-			}
+// 			$overhead_item = new Overheaditem();
+// 			$budget_id = $_GET['id'];
+// 			$result = $overhead_item->displayOverheadByBudget($budget_id);
+// 			if (!empty($result)) {
+// 				echo '<table>';
+// 				foreach ($result as $row) {
+// 					echo '<tr>';
+// 						echo '<td width="20%">' . $row['name'] . '</td>';
+// 						echo '<td width="15%">' . $row['category'] . '</td>';
+// 						echo '<td width="15%">' . $row['tag'] . '</td>';
+// 						echo '<td width="15%">' . $row['split_total'] . '</td>';
+// 						echo '<td width="25%">' . $row['note'] . '</td>';
+// 						echo '<td width="10%">edit button goes here</td>';
+// 					echo '</tr>';
+// 				}	
+// 				echo '</table>';
+// 			}
 ?>
+</div>

@@ -4,7 +4,8 @@ require_once('../views/header.inc.php');
 $user_id = $_SESSION['user_id'];
 ?>
 
-<div id="budget_list" style="position: relative">
+<div class="container">
+<div id="budget_list" class="col-md-4">
 <h2>My Budgets</h2>
 <ul>
 <?php
@@ -18,21 +19,21 @@ foreach ($records as $row) {
 </ul>
 </div>
 
-<div id="overhead_item_list">
-<h2>My Overhead Items</h2>
-<ul>
+<!-- <div id="overhead_item_list"> -->
+<!-- <h2>My Overhead Items</h2> -->
+<!-- <ul> -->
 <?php
-$overhead_item = new OverheadItem();
-$records = $overhead_item->getByUser($user_id);
-foreach ($records as $row) {
-	echo '<li><a href="overhead.php?action=display&id=' . $row['id'] . '">' . $row['name'] . '</a></li>';
-}
-?>
-<a href="overhead.php?action=create_item">+ Create New Overhead Item</a>
-</ul>
-</div>
+// $overhead_item = new OverheadItem();
+// $records = $overhead_item->getByUser($user_id);
+// foreach ($records as $row) {
+// 	echo '<li><a href="overhead.php?action=display&id=' . $row['id'] . '">' . $row['name'] . '</a></li>';
+// }
+// ?>
+<!-- <a href="overhead.php?action=create_item">+ Create New Overhead Item</a> -->
+<!-- </ul> -->
+<!-- </div> -->
 
-<div id="tag_list">
+<div id="tag_list" class="col-md-4">
 <h2>My Tags</h2>
 <?php
 
@@ -46,7 +47,7 @@ foreach ($records as $row) {
 <a href="tag.php?action=create">+ Create new tag</a>
 </div>
 
-<div id="category_list">
+<div id="category_list" class="col-md-4">
 <h2>My Categories</h2>
 <?php
 $user_id = $_SESSION['user_id'];
@@ -58,6 +59,7 @@ foreach ($records as $row) {
 }
 ?>
 <a href="category.php?action=create">+ Create new category</a>
+</div>
 </div>
 
 

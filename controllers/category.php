@@ -29,7 +29,7 @@ if (isset($_GET['action'])) {
 		case 'edit':
 			$id = $_GET['id'];
 			$category = new Category();
-			$result = $category->getOneById($id);
+			$category_result = $category->getOneById($id);
 			include '../views/header.inc.php';
 			include ('../views/edit_categories.php');
 			break;
