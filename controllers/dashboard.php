@@ -4,7 +4,7 @@ require_once('../views/header.inc.php');
 $user_id = $_SESSION['user_id'];
 ?>
 
-<div id="budget_list">
+<div id="budget_list" style="position: relative">
 <h2>My Budgets</h2>
 <ul>
 <?php

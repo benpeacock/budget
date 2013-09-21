@@ -66,3 +66,5 @@ class Session {
 	}
 
 }  // end Session class
+
+$session = new Session();

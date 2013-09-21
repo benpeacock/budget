@@ -1,8 +1,6 @@
 <?php
 require_once('../models/init.inc.php');
 
-$session = new Session();
-
 if (isset($_POST['submit'])) {
 	$username = trim($_POST['username']);
 	$hash_me = trim($_POST['password']);
@@ -13,7 +11,7 @@ if (isset($_POST['submit'])) {
 		$session->login($found_user);
 		header('Location:dashboard.php');
 	} else {
-		$message = 'Could not log in.';
+		echo 'Could not log in.';
 	}
 }
 
