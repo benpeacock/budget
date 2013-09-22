@@ -30,6 +30,7 @@
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" />
     <!--  MultiSelect plugin from local files -->
     <link href="../css/jquery.multiselect.css" rel="stylesheet" />
+    <link href="../css/styles.css" />
   </head>
   
 <?php include 'navmenu.inc.php'; ?>

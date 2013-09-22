@@ -2,9 +2,11 @@
 require_once('../models/init.inc.php');
 require_once '../views/header.inc.php';
 
-if (!empty($message)) {
-	echo $message;
-}
+$message = '';
+
+if (!empty($errors)) { foreach ($errors as $error) { echo $error . '<br />'; }}
+
+if (!empty($message)) { echo $message; }
 
 if(isset($_POST['submit'])) {
 	
@@ -13,15 +15,18 @@ if(isset($_POST['submit'])) {
 	switch ($action) {
 		
 		case 'create':
-			$email = trim($_POST['email']);
-			echo $email;
-			echo '<br />';
-			$username = trim($_POST['username']);
-			echo $username;
-			echo '<br />';
+			$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+			if (filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
+				exit('Invalid e-mail address. <a href="user.php?action=create_user">Try Again</a>');
+			}
+			$username = trim(filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING));
+			if (!ctype_alnum($username)) {
+				exit('Invalid username.  Letters and numbers only.  <a href="user.php?action=create_user">Try Again</a>');
+			}
+			if (strlen($username) > 45) {
+				exit('Username max length is 45 characters.');
+			}
 			$password = trim(SHA1($_POST['password']));
-			echo $password;
-			echo '<br />';
 			$user = new User();
 			$result = $user->createUser($email, $username, $password);
 			echo 'Result: ' . $result;
@@ -32,9 +37,6 @@ if(isset($_POST['submit'])) {
 					$session->login($found_user);
 					header('Location:dashboard.php');
 				}
-				
-			} else {
-				echo 'Couldn\'t retrieve user id.';
 			}
 			break;
 		

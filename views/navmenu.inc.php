@@ -18,7 +18,7 @@
               if ($session->isLoggedIn()) {
               ?>
 	              <ul class="nav navbar-nav">
-		              <li class="active"><a href="#">Home</a></li>
+		              <li class="active"><a href="http://192.241.227.8/budget/controllers/">Home</a></li>
 		              <li><a href="#contact">Help</a></li>
 		              <li><a href="dashboard.php?id=<?php echo $_SESSION['user_id']; ?>">My Dashboard</a></li>
 	              </ul>
@@ -36,7 +36,7 @@
               } else {
 				?>
 				<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home</a></li>
+				<li class="active"><a href="http://192.241.227.8/budget/controllers/">Home</a></li>
 				<li><a href="#contact">Help</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
