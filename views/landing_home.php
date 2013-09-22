@@ -3,7 +3,7 @@
     <div class="jumbotron">
     	<h1>Easy.  Budgets.</h1>
     	<p>Easy as Excel.  Database-driven.</p>
-    	<p><a class="btn btn-primary btn-lg">Get started free &raquo;</a></p>
+    	<p><a href="user.php?action=create_user" class="btn btn-primary btn-lg">Get started free &raquo;</a></p>
     </div>
     
     <!-- Marketing messaging and featurettes

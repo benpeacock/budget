@@ -7,8 +7,7 @@ class User extends DatabaseObject {
 	const DB_TABLE = 'user';
 	
 	public $id;
-	public $first_name;
-	public $last_name;
+	public $email;
 	public $username;
 	public $password;
 	
@@ -21,38 +20,27 @@ class User extends DatabaseObject {
 	
 	/**
 	 * Creates a new user in db
+	 * @param string email
 	 * @param string $username
 	 * @param hashed string $password
-	 * @param string $first_name
-	 * @param string $last_name
+	 * @return user instance
 	 */
-	public function createUser($username, $password, $first_name, $last_name) {
-		
-		if(empty($first_name) || empty($last_name) || empty($username) || empty($password)) {
-			$message = 'Must complete all required fields.';
-			break;
-		} else {
+	public function createUser($email, $username, $password) {
 			$dbh = Database::getPdo();
 			try {
-				$sql = "INSERT INTO user (username, password, first_name, last_name) VALUES 
-						(:username, :password, :first_name, :last_name)";
+				$sql = "INSERT INTO user (email, username, password) VALUES 
+						(:email, :username, :password)";
 				$stmt = $dbh->prepare($sql);
+				$stmt->bindParam(':email', $email);
 				$stmt->bindParam(':username', $username);
 				$stmt->bindParam(':password', $password);
-				$stmt->bindParam(':first_name', $first_name);
-				$stmt->bindParam(':last_name', $last_name);
 				$stmt->execute();
 				$result = $stmt->rowCount();
-				if ($result == 1) {
-					$message = 'User succesfully created.';
-					return $message;
-				}
+				return $result;
+			} catch (PDOException $e) {
+				$message = 'Unable to create user' . $e->message;
 			}
-				catch (PDOException $e) {
-					$message = 'Unable to create user' . $e->message;
-				}
 		}
-	}
 	
 	/**
 	 * Checks input of login.php against existing db records
@@ -92,8 +80,8 @@ class User extends DatabaseObject {
 				$stmt->execute();
 				$user = new User();
 				$stmt->setFetchMode(PDO::FETCH_INTO, $user);
-				$stmt->fetch();
-				return $user;
+				$result = $stmt->fetch();
+				return $result;
 			}
 			catch (PDOException $e) {
 				echo 'Unable to locate record ' . $e->message();

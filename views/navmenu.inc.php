@@ -28,7 +28,7 @@
 			              $user = new User();
 			              $id = $_SESSION['user_id'];
 			              $result = $user->getOneById($id);
-			              echo $result['first_name']; 
+			              echo $result['username']; 
 			              ?></li>
 			              <li><button onclick="window.location='logout.php'" type="button" class="btn btn-default navbar-btn">Sign Out</button></li>
 			      </ul>

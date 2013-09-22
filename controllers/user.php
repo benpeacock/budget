@@ -2,6 +2,10 @@
 require_once('../models/init.inc.php');
 require_once '../views/header.inc.php';
 
+if (!empty($message)) {
+	echo $message;
+}
+
 if(isset($_POST['submit'])) {
 	
 	$action = $_POST['action'];
@@ -9,16 +13,29 @@ if(isset($_POST['submit'])) {
 	switch ($action) {
 		
 		case 'create':
-		if ($_POST['password'] != $_POST['password_twice']) {
-			$message = 'Passwords do not match';
-		} elseif ($_POST['password'] == $_POST['password_twice']) {
+			$email = trim($_POST['email']);
+			echo $email;
+			echo '<br />';
 			$username = trim($_POST['username']);
+			echo $username;
+			echo '<br />';
 			$password = trim(SHA1($_POST['password']));
-			$first_name = trim($_POST['first_name']);
-			$last_name = trim($_POST['last_name']);
+			echo $password;
+			echo '<br />';
 			$user = new User();
-			$user->createUser($username, $password, $first_name, $last_name);
-		}
+			$result = $user->createUser($email, $username, $password);
+			echo 'Result: ' . $result;
+			echo '<br />';
+			if ($result == 1) {
+				$found_user = $user->authenticate($username, $password);
+				if ($found_user) {
+					$session->login($found_user);
+					header('Location:dashboard.php');
+				}
+				
+			} else {
+				echo 'Couldn\'t retrieve user id.';
+			}
 			break;
 		
 		// Sends user a link they can use to reset their password.
@@ -31,12 +48,10 @@ if(isset($_POST['submit'])) {
 					$temp_hash = $user->makeHash($user->id);
 					$email = new Email();
 					$email = $email->passwordReset($user->username, $user->email, $temp_hash);
-					$message = 'Password reset e-mail sent.';
+					header('Location: login.php');
 				} catch (PDOException $e) {
 					echo 'Error sending password reset email ' . $e->getMessage();
 				}
-			} else {
-				$message = 'You must enter an e-mail address.';
 			}
 			break;
 			
@@ -78,6 +93,11 @@ if(isset($_GET['action'])) {
 	// Displays password reset fields 'password' and 'password again' where users input new password.
 		case 'reset_password':
 			include '../views/reset_password.php';
+			break;
+		
+	// Displays user creation form
+		case 'create_user':
+			include '../views/create_user.php';
 			break;
 	}
 }

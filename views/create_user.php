@@ -1,12 +1,11 @@
-<h2>Sign Up (Create New User):</h2>
-<form action="user.php" method="post">
-<ul>
-<input type="hidden" name="action" value="create_user" />
-<li>first name: <input type="text" name="first_name" id="first_name" /></li>
-<li>last name: <input type="text" name="last_name" id="last_name" /></li>
-<li>username: <input type="text" name="username" id="username" /></li>
-<li>password: <input type="text" name="password" id="password" /></li>
-<li>confirm pw: <input type="text" name="password_twice" id="password_twice" /></li>
-<li><input type="submit" name="submit" id="submit" /></li>
-</ul>
-</form>
+<div class="clearfix">
+	<form action="user.php" method="post" class="form-signin">
+	<h2 class="form-signin-heading">Create Account</h2>
+		<input type="hidden" name="action" value="create" />
+		<input type="email" class="form-control" name="email" placeholder="email" />
+		<input type="text" name="username" class="form-control" id="username" placeholder="username" />
+		<input type="password" name="password" class="form-control" id="password" placeholder="password" />
+		<input type="password" name="password_twice" class="form-control" id="password_twice" placeholder="password again" />
+		<button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Create Account</button>
+	</form>
+</div>

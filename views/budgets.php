@@ -83,3 +83,4 @@ foreach ($query as $row) {
 // 			}
 ?>
 </div>
+<div class="container"><span>Total:</span><span>Number</span></div>
