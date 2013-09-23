@@ -15,9 +15,7 @@ class Budget extends DatabaseObject {
 	 * Creates new budget record
 	 * @return redirect to dashboard.php if successful, or error message if not
 	 */
-	public function createBudget() {
-		$user_id = $_SESSION['user_id'];
-		$name = $_POST['name'];
+	public function createBudget($user_id, $name) {
 		$budget = new Budget();
 		$dbh = Database::getPdo();
 			try {

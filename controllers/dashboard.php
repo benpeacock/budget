@@ -1,7 +1,6 @@
 <?php 
 require_once('../models/init.inc.php');
 require_once('../views/header.inc.php');
-$user_id = $_SESSION['user_id'];
 ?>
 
 <div class="container">
@@ -10,7 +9,7 @@ $user_id = $_SESSION['user_id'];
 <ul>
 <?php
 $budget = new Budget;
-$records = $budget->getByUser($user_id);
+$records = $budget->getByUser($session->user_id);
 foreach ($records as $row) {
 	echo '<li><a href="budget.php?action=display&id=' . $row['id'] . '">' . $row['name'] . '</a></li>';
 }
@@ -38,7 +37,7 @@ foreach ($records as $row) {
 <?php
 
 $tag = new Tag;
-$records = $tag->getByUser($user_id);
+$records = $tag->getByUser($session->user_id);
 echo '<ul>';
 foreach ($records as $row) {
 	echo '<li><a href="tag.php?action=edit&id=' . $row['id'] . '">' . $row['name'] . '</a></li>';
@@ -52,7 +51,7 @@ foreach ($records as $row) {
 <?php
 $user_id = $_SESSION['user_id'];
 $category = new Category;
-$records = $category->getByUser($user_id);
+$records = $category->getByUser($session->user_id);
 echo '<ul>';
 foreach ($records as $row) {
 	echo '<li><a href="category.php?action=edit&id=' . $row['id'] . '">' . $row['name'] . '</a></li>';
@@ -62,5 +61,6 @@ foreach ($records as $row) {
 </div>
 </div>
 
+<?php include '../views/footer.inc.php'; ?>
 
 

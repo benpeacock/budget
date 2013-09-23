@@ -1,6 +1,6 @@
 <?php
 require_once('../models/init.inc.php');
-// can't include header here for x-editable compatibility.  Including below in switch blocks.
+// can't include header or footer directly for x-editable compatibility.  Including below in switch blocks.
 
 if (isset($_GET['action'])) {
 	$action = $_GET['action'];
@@ -9,22 +9,23 @@ if (isset($_GET['action'])) {
 		case 'create':
 			include '../views/header.inc.php';
 			include '../views/create_categories.php';
+			include '../views/footer.inc.php';
 			break;
 		
 		case 'list':
-			$user_id = $_GET['user_id'];
 			$category = new Category();
-			$result = $category->getTagCatByUser($user_id);
+			$result = $category->getTagCatByUser($session->user_id);
 			echo json_encode($result);
 			break;
 		
-		case 'display':
-			$user_id = 1;
-			$category = new Category();
-			$result = $category->getByUser($user_id);
-			include '../views/header.inc.php';
-			include '../views/categories.php';
-			break;
+// 		case 'display':
+// 			$user_id = 1;
+// 			$category = new Category();
+// 			$result = $category->getByUser($user_id);
+// 			include '../views/header.inc.php';
+// 			include '../views/categories.php';
+// 			include '../views/footer.inc.php';
+// 			break;
 			
 		case 'edit':
 			$id = $_GET['id'];
@@ -32,6 +33,7 @@ if (isset($_GET['action'])) {
 			$category_result = $category->getOneById($id);
 			include '../views/header.inc.php';
 			include ('../views/edit_categories.php');
+			include '../views/footer.inc.php';
 			break;
 					
 		case 'delete':
@@ -51,15 +53,18 @@ if (isset($_POST['action'])) {
 	
 	switch ($action) {
 		case 'create':
-			// $user_id = $_SESSION['user_id'];
-			$user_id = 1;
-			$name = $_POST['name'];
+			$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+			if (!ctype_alnum($name)) {
+				exit ('Invalid category name.  Numbers and letters only.  <a href="category.php?action=create">Try Again</a>');
+			}
+			if (strlen($name) > 45) {
+				exit ('Invalid category name.  Max length 45 characters.  <a href="category.php?action=create">Try Again</a>');
+			}
 			$category = new Category();
-			$result = $category->createCategory($user_id, $name);
+			$result = $category->createCategory($session->user_id, $name);
 			break;
+			
 		case 'edit':
-			// $user_id = $_SESSION['user_id'];
-			$user_id = 1;
 			$id = $_POST['id'];
 			$name = $_POST['name'];				
 			$category = new Category();

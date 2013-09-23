@@ -20,7 +20,7 @@
 	              <ul class="nav navbar-nav">
 		              <li class="active"><a href="http://192.241.227.8/budget/controllers/">Home</a></li>
 		              <li><a href="#contact">Help</a></li>
-		              <li><a href="dashboard.php?id=<?php echo $_SESSION['user_id']; ?>">My Dashboard</a></li>
+		              <li><a href="dashboard.php">My Dashboard</a></li>
 	              </ul>
 	              <ul class="nav navbar-nav navbar-right">
 			              <li class="navbar-text">Hello, 

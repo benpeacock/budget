@@ -17,9 +17,9 @@ foreach ($query as $row) {
 	echo '<td width="20%"><a class="name" data-type="text" data-url="../models/itemProcessor.php"
 		      data-pk="' . $row['id'] . '">' . $row['name'] . '</a></td>';
 	echo '<td width="15%"><a class="category" data-type="select" data-url="../models/itemProcessor.php"
-				data-pk="' . $row['id'] . '" data-value="' . $row['category'] . '" data-source="category.php?action=list&user_id=' . $user_id . '"></a></td>';
+				data-pk="' . $row['id'] . '" data-value="' . $row['category'] . '" data-source="category.php?action=list&user_id=' . $session->user_id . '"></a></td>';
 	echo '<td width="15%"><a class="tag" data-type="select" data-url="../models/itemProcessor.php"
-				data-pk="' . $row['id'] . '" data-value="' . $row['tag'] . '" data-source="tag.php?action=list&user_id=' . $user_id . '"></a></td>';
+				data-pk="' . $row['id'] . '" data-value="' . $row['tag'] . '" data-source="tag.php?action=list&user_id=' . $session->user_id . '"></a></td>';
 	echo '<td width="15%"><a class="amount" data-type="number" data-url="../models/itemProcessor.php"
 			  data-pk="' . $row['id'] . '">' . $row['amount'] . '</a></td>';
 	echo '<td width="25%"><a class="note" data-type="textarea" data-url="../models/itemProcessor.php"
