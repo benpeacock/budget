@@ -2,12 +2,6 @@
 require_once('../models/init.inc.php');
 require_once '../views/header.inc.php';
 
-$message = '';
-
-if (!empty($errors)) { foreach ($errors as $error) { echo $error . '<br />'; }}
-
-if (!empty($message)) { echo $message; }
-
 if(isset($_POST['submit'])) {
 	
 	$action = $_POST['action'];
@@ -25,6 +19,9 @@ if(isset($_POST['submit'])) {
 			}
 			if (strlen($username) > 45) {
 				exit('Username max length is 45 characters.');
+			}
+			if (strlen($_POST['password']) < 8) {
+				exit('Password not long enough.');
 			}
 			$password = trim(SHA1($_POST['password']));
 			$user = new User();
@@ -44,7 +41,10 @@ if(isset($_POST['submit'])) {
 		case 'reset_mail':
 			if(!empty($_POST['email'])) {
 				try {
-					$email = $_POST['email'];
+					$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+					if (filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
+						exit('Invalid e-mail address. <a href="user.php?action=reset_password">Try Again</a>');
+					}
 					$user = new User();
 					$user = $user->findByEmail($email);
 					$temp_hash = $user->makeHash($user->id);
@@ -60,12 +60,21 @@ if(isset($_POST['submit'])) {
 			// Accepts POSTed form data from user.php?action=reset_password link that's sent by e-mail to user
 			case 'reset_password':
 				if ($_POST['password'] != $_POST['password_again']) {
-					echo 'Passwords do not match.';
+					exit('Passwords do not match.');
 				} else {
 					try {
-						$email = $_POST['email'];
-						$temp_hash = $_POST['temp_hash'];
-						$password = $_POST['password'];
+						$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+						if (filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
+							exit('Invalid e-mail address. <a href="user.php?action=reset_password">Try Again</a>');
+						}
+						$temp_hash = filter_input(INPUT_POST, 'temp_hash', FILTER_SANITIZE_STRING);
+						if (filter_var($temp_hash, FILTER_VALIDATE_REGEXP, '^[a-zA-Z0-9]+$') == false) {
+							exit ('Invalid temporary hash.  <a href="user.php?action=reset_password">Try Again</a>');
+						}
+						if (strlen($_POST['password']) < 8) {
+							exit ('Password minimum length eight characters.');
+						}
+						$password = trim(SHA1($_POST['password']));
 						$user = new User();
 						$result = $user->resetPassword($email, $temp_hash, $password);
 						// eventually replace following with JQUery in reset_password form

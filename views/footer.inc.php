@@ -23,5 +23,8 @@
         <!--  MultiSelect JQuery plugin from local file -->
         <script src="../js/jquery.multiselect.js"></script>
         <script src="../js/multiselect_control.js"></script>
+        
+        <!-- <script src="../js/validate_controls.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script> -->
 	</body>
 </html>
