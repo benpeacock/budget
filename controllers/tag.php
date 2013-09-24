@@ -28,7 +28,10 @@ if(isset($_GET['action'])) {
 // 			break;
 		
 		case 'edit':
-			$id = $_GET['id'];
+			$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+			if (filter_var($id, FILTER_VALIDATE_INT) == false) {
+				exit ('Invalid tag id.  <a href="dashboard.php">Try Again</a>');
+			}
 			$tag = new Tag();
 			$tag_result = $tag->getOneById($id);
 			include '../views/header.inc.php';
@@ -37,7 +40,10 @@ if(isset($_GET['action'])) {
 			break;
 			
 		case 'delete':
-			$id = $_GET['id'];
+			$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+			if (filter_var($id, FILTER_VALIDATE_INT) == false) {
+				exit ('Invalid tag id.  <a href="dashboard.php">Try Again</a>');
+			}
 			$tag = new Tag();
 			$result = $tag->deleteRecord($id);
 			if ($result == 1) {
@@ -68,8 +74,17 @@ if(isset($_POST['action'])) {
 			break;
 		
 		case 'edit':
-			$id = $_POST['id'];
-			$name = $_POST['name'];
+			$id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+			if (filter_var($id, FILTER_VALIDATE_INT) == false) {
+				exit ('Invalid tag id.  <a href="tag.php?action=create">Try Again</a>');
+			}
+			$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+			if (!ctype_alnum($name)) {
+				exit ('Invalid tag name.  Numbers and letters only.  <a href="tag.php?action=create">Try Again</a>');
+			}
+			if (strlen($name) > 45) {
+				exit ('Invalid tag name.  Max length 45 characters.  <a href="tag.php?action=create">Try Again</a>');
+			}		
 			$tag = new Tag();
 			$result = $tag->updateById($id, $name);
 			if ($result == 1) {

@@ -28,7 +28,10 @@ if (isset($_GET['action'])) {
 // 			break;
 			
 		case 'edit':
-			$id = $_GET['id'];
+			$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+			if (filter_var($id, FILTER_VALIDATE_INT) == false) {
+				exit ('Invalid category id.  <a href="dashboard.php">Try Again</a>');
+			}
 			$category = new Category();
 			$category_result = $category->getOneById($id);
 			include '../views/header.inc.php';
@@ -37,7 +40,10 @@ if (isset($_GET['action'])) {
 			break;
 					
 		case 'delete':
-			$id = $_GET['id'];
+			$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+			if (filter_var($id, FILTER_VALIDATE_INT) == false) {
+				exit ('Invalid category id.  <a href="dashboard.php">Try Again</a>');
+			}
 			$category = new Category();
 			$result = $category->deleteRecord($id);
 			if ($result == 1) {
@@ -65,8 +71,17 @@ if (isset($_POST['action'])) {
 			break;
 			
 		case 'edit':
-			$id = $_POST['id'];
-			$name = $_POST['name'];				
+			$id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+			if (filter_var($id, FILTER_VALIDATE_INT) == false) {
+				exit ('Invalid category id.  <a href="category.php?action=create">Try Again</a>');
+			}
+			$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+			if (!ctype_alnum($name)) {
+				exit ('Invalid category name.  Numbers and letters only.  <a href="category.php?action=create">Try Again</a>');
+			}
+			if (strlen($name) > 45) {
+				exit ('Invalid category name.  Max length 45 characters.  <a href="category.php?action=create">Try Again</a>');
+			}			
 			$category = new Category();
 			$result = $category->updateById($id, $name);
 			if ($result == 1) {

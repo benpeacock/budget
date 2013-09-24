@@ -31,7 +31,10 @@ if (isset($_GET['action'])) {
 			break;
 			
 		case 'edit':
-			$id = $_GET['id'];
+			$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+			if (filter_var($id, FILTER_VALIDATE_INT) == false) {
+				exit('Invalid budget ID number.');
+			}
 			$budget = new Budget();
 			$result = $budget->getOneById($id);
 			include '../views/edit_budgets.php';
@@ -57,7 +60,7 @@ if (isset($_POST['action'])) {
 			
 		case 'edit':
 			$id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
-			if (filter_var($name, FILTER_VALIDATE_INT) == false) {
+			if (filter_var($id, FILTER_VALIDATE_INT) == false) {
 				exit ('Invalid budget id.');
 			}
 			$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
