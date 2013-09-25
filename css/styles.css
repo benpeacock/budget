@@ -1,5 +1,7 @@
-div .custom {
-	margin-top: 100px;
-	padding: 100px 0 0 0;
-	text-decoration: underline;
+.mv-dn-30 {
+	margin-top: 30px;
+}
+
+.bg-lgray {
+	background-color: #EEEEEE;
 }

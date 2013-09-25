@@ -31,7 +31,7 @@
     <!--  MultiSelect plugin from local files -->
     <link href="../css/jquery.multiselect.css" rel="stylesheet" />
     <!--  Custom styles from local files -->
-    <link href="../css/styles.css" />
+    <link href="../css/styles.css" rel="stylesheet" />
   </head>
   
 <?php include 'navmenu.inc.php'; ?>

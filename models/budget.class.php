@@ -115,4 +115,27 @@ class Budget extends DatabaseObject {
 			$message = 'Unable to delete budget. <a href="dashboard.php"><<Back to Dashboard</a>';
 		}
 	}
+	
+	/**
+	 * Sums the amount for each item included in a given budget.  Current() fetches the first and only value in the array before returning it.
+	 * @param int $id
+	 * $return float $result or int 0 if value is null
+	 */
+	public static function sumBudget($budget_id) {
+		$dbh = Database::getPdo();
+		try {
+			$sql = "SELECT SUM(amount) FROM item WHERE budget_id = :budget_id";
+			$stmt = $dbh->prepare($sql);
+			$stmt->bindParam(':budget_id', $budget_id, PDO::PARAM_INT);
+			$stmt->execute();
+			$result = current($stmt->fetch());
+			if ($result == NULL) {
+				return 0;
+			} else {
+			return $result;
+			}
+		} catch (PDOException $e) {
+			echo 'Unable to locate budget' . $e->getMessage();
+		}
+	}
 } // end Budget class
