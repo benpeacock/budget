@@ -15,37 +15,65 @@ class Item extends DatabaseObject {
 	public $note;
 	public $created;
 	
-	public function addItem() {
-		$user_id = $_POST['user_id'];
-		$budget_id = $_POST['budget_id'];
-		$name = $_POST['name'];
-		$category = $_POST['category'];
-		$tag = $_POST['tag'];
-		$amount = $_POST['amount'];
-		$note = $_POST['note'];
-		// $created = date("Y-m-d H:i:s");
+	/**
+	 * Creates a new item record.  
+	 * @param int $user_id
+	 * @param int $budget_id
+	 * @param string $name
+	 * @param int $category
+	 * @param int $tag
+	 * @param float $amount
+	 * @param string $note
+	 * @return int $result 
+	 */
+	public function addItem($user_id, $budget_id, $name, $category, $tag, $amount, $note) {
 		$dbh = Database::getPdo();
 		try {
-			$sql = "INSERT INTO " . self::DB_TABLE . "(
-			user_id, budget_id, name, category, tag, note, amount
-			) VALUES (
-			:user_id, :budget_id, :name, :category, :tag, :note, :amount
-			)";
+			$sql = "INSERT INTO " . self::DB_TABLE . "(";
+			$sql .= "user_id, budget_id, name, ";
+			if (!empty($category)) {
+				$sql .= "category, ";
+			}
+			if (!empty($tag)) {
+				$sql .= "tag, ";
+			}
+			if (!empty($note)){
+				$sql .= "note, ";
+			}
+			$sql .= "amount) VALUES (";
+			$sql .= ":user_id, :budget_id, :name, ";
+			if (!empty($category)) {
+				$sql .= ":category, ";
+			}
+			if (!empty($tag)) {
+				$sql .= ":tag, ";
+			}
+			if (!empty($note)) {
+				$sql .= ":note, ";
+			}
+			$sql .= ":amount)";
 			$stmt = $dbh->prepare($sql);
 			$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 			$stmt->bindParam(':budget_id', $budget_id, PDO::PARAM_INT);
 			$stmt->bindParam(':name', $name, PDO::PARAM_STR, 45);
-			$stmt->bindParam(':category', $category, PDO::PARAM_INT);
+			// category not required
+			if (!empty($category)) {
+				$stmt->bindParam(':category', $category, PDO::PARAM_INT);
+			}
+			// tag not required
+			if (!empty($tag)) {
 			$stmt->bindParam(':tag', $tag, PDO::PARAM_INT);
+			}
 			$stmt->bindParam(':amount', $amount, PDO::PARAM_INT);
-			// look up field length for note and add after PARAM_STR
-			$stmt->bindParam(':note', $note, PDO::PARAM_STR);
-			//$stmt->bindParam(':created', $created);
+			if (!empty($note)) {
+			$stmt->bindParam(':note', $note, PDO::PARAM_STR, 300);
+			}
 			$stmt->execute();
-			
+			$result = $stmt->rowCount();
+			return $result;
 		}
 		catch (PDOException $e) {
-			$message = 'Unable to add item';
+			echo 'Cannot add item ' . $e->getMessage();
 		}
 	}
 }
