@@ -6,7 +6,7 @@
 	}
 	?>
 		<div class="col-md-1 mv-dn-30"><a href="../controllers/budget.php?action=edit&id=<?php echo $id; ?>">Edit</a></div>
-		<div class="col-md-1 mv-dn-30"><a onclick="confirm(\'Delete budget?\')" href=budget.php?action=delete&id=<?php echo $id; ?>">Delete</a></div>
+		<div class="col-md-1 mv-dn-30"><a onclick="return confirm('Delete budget?')" href=budget.php?action=delete&id=<?php echo $id; ?>">Delete</a></div>
 	<?php $query = $budget->displayBudget($id); ?>
 	</div>
 	<div>
@@ -16,17 +16,17 @@
 				<?php 
 				foreach ($query as $row) {
 					echo '<tr>';
-					echo '<td width="20%"><a class="name" pattern="^[a-zA-Z0-9]+$" maxlength="45" data-type="text" data-url="../models/itemProcessor.php"
+					echo '<td id="item-name"><a class="name" pattern="^[a-zA-Z0-9]+$" maxlength="45" data-type="text" data-url="../models/itemProcessor.php"
 						      data-pk="' . $row['id'] . '">' . $row['name'] . '</a></td>';
-					echo '<td width="15%"><a class="category" data-type="select" data-url="../models/itemProcessor.php"
+					echo '<td id="item-category"><a class="category" data-type="select" data-url="../models/itemProcessor.php"
 								data-pk="' . $row['id'] . '" data-value="' . $row['category'] . '" data-source="category.php?action=list&user_id=' . $row['user_id'] . '"></a></td>';
-					echo '<td width="15%"><a class="tag" data-type="select" data-url="../models/itemProcessor.php"
+					echo '<td id="item-tag"><a class="tag" data-type="select" data-url="../models/itemProcessor.php"
 								data-pk="' . $row['id'] . '" data-value="' . $row['tag'] . '" data-source="tag.php?action=list&user_id=' . $row['user_id'] . '"></a></td>';
-					echo '<td width="15%"><a class="amount" data-type="number" data-url="../models/itemProcessor.php"
+					echo '<td id="item-amount"><a class="amount" data-type="number" data-url="../models/itemProcessor.php"
 							  data-pk="' . $row['id'] . '">' . $row['amount'] . '</a></td>';
-					echo '<td width="25%"><a class="note" pattern="^[a-zA-Z0-9]+$ " maxlength="45" data-type="textarea" data-url="../models/itemProcessor.php"
+					echo '<td id="item-note"><a class="note" pattern="^[a-zA-Z0-9]+$" maxlength="45" data-type="textarea" data-url="../models/itemProcessor.php"
 							  data-pk="' . $row['id'] . '">' . $row['note'] . '</a></td>';
-					echo '<td width=10%><a onclick="confirm(\'Delete item?\')" href="item.php?action=delete&budget_id=' . $id . '&id=
+					echo '<td id="item-delete"><a onclick="return confirm(\'Delete item?\')" href="item.php?action=delete&budget_id=' . $id . '&id=
 								' . $row['id'] . '">Delete</a></td>';
 					echo '<tr/>';
 				}

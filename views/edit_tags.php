@@ -14,7 +14,7 @@
 					<a href="dashboard.php">Cancel</a>
 				</div>
 					<div class="col-md-4 pull-right">
-						<a onclick="confirm(\'Delete tag?\')" href="tag.php?action=delete&id=<?php echo $tag_result['id']; ?>">Delete Tag</a>
+						<a onclick="return confirm('Delete tag?')" href="tag.php?action=delete&id=<?php echo $tag_result['id']; ?>">Delete Tag</a>
 					</div>
 				</div>
 			

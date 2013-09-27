@@ -14,7 +14,7 @@
 					<a href="dashboard.php">Cancel</a>
 				</div>
 					<div class="col-md-4 pull-right">
-						<a onclick="confirm(\'Delete category?\')" href="category.php?action=delete&id=<?php echo $category_result['id']; ?>">Delete Category</a>
+						<a onclick="return confirm('Delete category?')" href="category.php?action=delete&id=<?php echo $category_result['id']; ?>">Delete Category</a>
 					</div>
 				</div>
 			

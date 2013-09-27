@@ -5,9 +5,9 @@ class Database {
 
 	private static $_pdo;
 
-	const DB_USER = 'root';
+	const DB_USER = 'application';
 
-	const DB_PASS = 'password';
+	const DB_PASS = 'Torgy89*';
 
 	/**
 	 * Get PDO connection by calling Database::getPdo()
