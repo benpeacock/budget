@@ -1,36 +1,27 @@
 <!-- GENERAL STYLES -->
 
-.mv-dn-30 {
-	margin-top: 30px;
-}
-
-.bg-lgray {
-	background-color: #EEEEEE;
-}
-
-
 <!-- BUDGETS.PHP TABLE LAYOUT STYLES -->
 
 #item-name {
-	td-width: 20%;
+	width: 25%;
 }
 
 #item-category {
-	td-width: 15%;
+	width: 10%;
 }
 
 #item-tag {
-	td-width: 15%
+	width: 10%
 }
 
 #item-amount {
-	td-width: 25%
+	width: 15%
 }
 
 #item-note {
-	td-width: 20%;
+	width: 30%;
 }
 
 #item-delete {
-	td-width: 5%;
+	width: 10%;
 }

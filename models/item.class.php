@@ -76,4 +76,25 @@ class Item extends DatabaseObject {
 			echo 'Cannot add item ' . $e->getMessage();
 		}
 	}
+	
+	/**
+	 * Retrieves one budget record from database as an object
+	 * @param int $id
+	 * @return budget as an aobject
+	 */
+	public function getItemObjectById($id) {
+		$dbh = Database::getPdo();
+		try {
+			$sql = "SELECT * FROM " . self::DB_TABLE . " WHERE budget_id = :id";
+			$stmt = $dbh->prepare($sql);
+			$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+			$stmt->execute();
+			$item = new Item();
+			$stmt->setFetchMode(PDO::FETCH_INTO, $item);
+			$result = $stmt->fetch();
+			return $result;
+		} catch (PDOException $e) {
+			'Unable to retrieve record ' . $e->getMessage();
+		}
+	}
 }

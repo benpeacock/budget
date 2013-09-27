@@ -1,18 +1,19 @@
 <div class="container">
-	<div class="row bg-lgray">
+	<div class="row">
 	<?php
 	foreach ($query as $row) {
 		echo '<div class="col-md-2"><h2>' . $budget_title = $row['name'] . '</h2></div>';
 	}
 	?>
-		<div class="col-md-1 mv-dn-30"><a href="../controllers/budget.php?action=edit&id=<?php echo $id; ?>">Edit</a></div>
-		<div class="col-md-1 mv-dn-30"><a onclick="return confirm('Delete budget?')" href=budget.php?action=delete&id=<?php echo $id; ?>">Delete</a></div>
+		<div class="col-md-1" style="margin-top: 30px"><a href="../controllers/budget.php?action=edit&id=<?php echo $id; ?>">Edit</a></div>
+		<div class="col-md-1" style="margin-top: 30px"><a onclick="return confirm('Delete budget?')" href=budget.php?action=delete&id=<?php echo $id; ?>">Delete</a></div>
+		<div class="container pull-right"><h3>Total: $<?php echo Budget::sumBudget($id); ?></h3></div>
 	<?php $query = $budget->displayBudget($id); ?>
 	</div>
 	<div>
-		<table class="table_main">
+		<table class="table table-striped">
 			<tbody>
-				<th>Name</th><th>Category</th><th>Tag</th><th>Amount</th><th>Notes</th>
+				<th class="font-30">Name<span class="help-block"><small>a-Z, 0-9 only</small></span></th><th>Category</th><th>Tag</th><th>Amount<span class="help-block"><small>0.00 format</small></th><th>Notes<span class="help-block"><small>max 300 characters</small></th><th>Options</th>
 				<?php 
 				foreach ($query as $row) {
 					echo '<tr>';
@@ -78,20 +79,6 @@
 							<button class="btn btn-small" type="submit" name="submit">Add Item</button>
 						</td>
 					</tr>
-					<tr>
-						<td>
-							<span style="help-block">a-Z, 0-9 only</span>
-						</td>
-						<td>
-						</td>
-						<td>
-						</td>
-						<td>
-							<span style="help-block">0.00 format</span>
-						</td>
-						<td>
-							<span style="help-block">max 300 characters</span>
-						</td>
 				</form>
 			</tbody>
 		</table>
