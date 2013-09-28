@@ -11,9 +11,9 @@
 	<?php $query = $budget->displayBudget($id); ?>
 	</div>
 	<div>
-		<table class="table table-striped">
+		<table class="table table-bordered table-striped">
 			<tbody>
-				<th class="font-30">Name<span class="help-block"><small>a-Z, 0-9 only</small></span></th><th>Category</th><th>Tag</th><th>Amount<span class="help-block"><small>0.00 format</small></th><th>Notes<span class="help-block"><small>max 300 characters</small></th><th>Options</th>
+				<th>Name<span class="help-block"><small>a-Z, 0-9 only</small></span></th><th>Category</th><th>Tag</th><th>Amount<span class="help-block"><small>0.00 format</small></th><th>Notes<span class="help-block"><small>max 300 characters</small></th><th>Options</th>
 				<?php 
 				foreach ($query as $row) {
 					echo '<tr>';

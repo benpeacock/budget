@@ -1,13 +1,24 @@
 <?php
 require_once('init.inc.php');
     // Script for update record from X-editable.
-    $pk = $_POST['pk'];
-    $name = $_POST['name'];
-    $value = $_POST['value'];
+    $pk = filter_input(INPUT_POST, 'pk', FILTER_SANITIZE_NUMBER_INT);
+    if (filter_var($pk, FILTER_VALIDATE_INT) == false) {
+    	exit('Invalid item id');
+    }
     
+   	// Name and value are applied to multiple data types, so using strip_tags() 
+   	// and htmlspecialchars() rather than filter_input() and filter_var()
+    $name = trim(strip_tags(htmlspecialchars($_POST['name'])));
+    $value = trim(strip_tags(htmlspecialchars($_POST['value'])));
+    if (strlen($value) > 45) {
+    	exit ('Invalid valie. Max length 45 characters.');
+    }
+//     $pk = $_POST['pk'];
+//     $name = $_POST['name'];
+//     $value = $_POST['value'];
     $validNames = array('name', 'category', 'tag', 'amount', 'note');
-    if (!in_array($_POST['name'], $validNames)) {
-    	$message = 'Invalid field.';
+    if (!in_array($name, $validNames)) {
+    	exit ('Invalid filed name');
     }
 
     if(!empty($value)) {
