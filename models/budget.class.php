@@ -105,14 +105,13 @@ class Budget extends DatabaseObject {
 	 * Deletes budget record from db
 	 * @return redirects to dashboard if successful returns $message otherwise
 	 */
-	public function deleteBudget() {
-		$id = $_GET['id'];
+	public function deleteBudget($id) {
 		$budget = new Budget();
 		$result = $budget->deleteRecord($id);
 		if ($result == 1) {
 			header('Location:dashboard.php');
 		} elseif ($result != 1) {
-			$message = 'Unable to delete budget. <a href="dashboard.php"><<Back to Dashboard</a>';
+			exit('Unable to delete budget. <a href="dashboard.php"><<Back to Dashboard</a>');
 		}
 	}
 	

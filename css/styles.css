@@ -1,5 +1,13 @@
 <!-- GENERAL STYLES -->
 
+.pad-20 {
+	padding: 20px 20px 20px 20px;
+}
+
+.report-cell {
+	width: 20%;
+}
+
 <!-- BUDGETS.PHP TABLE LAYOUT STYLES -->
 
 #item-name {
@@ -11,11 +19,11 @@
 }
 
 #item-tag {
-	width: 10%
+	width: 10%;
 }
 
 #item-amount {
-	width: 15%
+	width: 15%;
 }
 
 #item-note {

@@ -13,9 +13,7 @@ require_once('init.inc.php');
     if (strlen($value) > 45) {
     	exit ('Invalid valie. Max length 45 characters.');
     }
-//     $pk = $_POST['pk'];
-//     $name = $_POST['name'];
-//     $value = $_POST['value'];
+    
     $validNames = array('name', 'category', 'tag', 'amount', 'note');
     if (!in_array($name, $validNames)) {
     	exit ('Invalid filed name');

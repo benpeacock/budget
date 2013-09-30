@@ -7,8 +7,12 @@ if (isset($_GET['action'])) {
 
 	switch ($action) {
 		case 'delete':
+			$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+			if (filter_var($id, FILTER_VALIDATE_INT) == false) {
+				exit('Invalid budget id.');
+			}
 			$budget = new Budget();
-			$budget->deleteBudget();
+			$budget->deleteBudget($id);
 			break;
 		
 		// form to create a budget

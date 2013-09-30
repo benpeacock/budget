@@ -20,7 +20,7 @@
 	              <ul class="nav navbar-nav">
 		              <li class="active"><a href="http://192.241.227.8/budget/controllers/">Home</a></li>
 		              <li><a href="dashboard.php">My Dashboard</a></li>
-		              <li><a href="reports.php">Reports</a></li>
+		              <li><a href="report.php">Reports</a></li>
 		              <li><a href="#contact">Help</a></li>
 	              </ul>
 	              <ul class="nav navbar-nav navbar-right">

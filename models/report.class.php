@@ -6,9 +6,9 @@ class Report extends DatabaseObject {
 	const DB_TABLE = 'report';
 	
 	public $user_id;
-	public $budget_id;
+	public $budget;
 	
-	public function getItemReport($user_id, $budget, $category, $tag, $include_overhead) {
+	public function getItemReport($user_id, $budget='', $category='', $tag='') {
 		$dbh = Database::getPdo();
 		try {
 			//uses item_report sql view

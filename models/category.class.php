@@ -17,7 +17,6 @@ class Category extends DatabaseObject {
 	public function createCategory($user_id, $name) {
 		$dbh = Database::getPdo();
 		try {
-			$created = date("Y-m-d H:i:s");
 			$sql = "INSERT INTO " . self::DB_TABLE . " (user_id, name) VALUES (:user_id, :name)";
 			$stmt = $dbh->prepare($sql);
 			$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
