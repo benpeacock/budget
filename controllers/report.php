@@ -1,6 +1,10 @@
 <?php 
 require_once '../models/init.inc.php';
 
+if (!isset($session->user_id)) {
+	include '../views/login_alert.php';
+}
+
 $submit = '';
 $budget = array();
 $category = array();

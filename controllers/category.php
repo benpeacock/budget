@@ -2,6 +2,10 @@
 require_once('../models/init.inc.php');
 // can't include header or footer directly for x-editable compatibility.  Including below in switch blocks.
 
+if (!isset($session->user_id)) {
+	include '../views/login_alert.php';
+}
+
 if (isset($_GET['action'])) {
 	$action = $_GET['action'];
 

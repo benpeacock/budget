@@ -1,6 +1,10 @@
 <?php
 require_once('../models/init.inc.php');
 
+if (!isset($session->user_id)) {
+	include '../views/login_alert.php';
+}
+
 if(isset($_POST['submit'])) {
 	if(!empty($_SESSION['user_id'])) {$user_id = $_SESSION['user_id']; }
 	if(!empty($_POST['user_id'])) {$user_id = $_POST['user_id']; }

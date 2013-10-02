@@ -2,6 +2,10 @@
 require_once('../models/init.inc.php');
 require_once('../views/header.inc.php');
 
+if (!isset($session->user_id)) {
+	include '../views/login_alert.php';
+}
+
 if (isset($_GET['action'])) {
 	$action = $_GET['action'];
 
