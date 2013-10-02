@@ -7,12 +7,14 @@ class Report extends DatabaseObject {
 	
 	public $user_id;
 	public $budget;
+	public $category;
+	public $tag;
 	
 	public function getItemReport($user_id, $budget='', $category='', $tag='') {
 		$dbh = Database::getPdo();
 		try {
 			//uses item_report sql view
-			$sql = "SELECT name, budget, category, tag, amount FROM item_report WHERE user_id = {$user_id}";
+			$sql = "SELECT item, budget, category, tag, amount FROM item_report WHERE user_id = {$user_id}";
 			
 			if(!empty($budget)) {
 				$budget_string = implode(", ", $budget);
@@ -24,7 +26,7 @@ class Report extends DatabaseObject {
 				$sql .= " AND category_id IN ($category_string)";
 			}
 	
-			if(!empty($tag)) { 
+			if(!empty($tag)) {
 				$tag_string = implode(", ", $tag); 
 				$sql .= " AND tag_id IN ($tag_string)";
 			}
@@ -82,5 +84,11 @@ class Report extends DatabaseObject {
 		    header("Content-Transfer-Encoding: binary");
 		}
 		
+		public function reportFilter($input) {
+			if (!is_numeric($input)) {
+				exit('Invalid report id selection.');
+			}
+			return $input;
+		}
 } // end report class
 

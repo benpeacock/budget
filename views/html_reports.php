@@ -8,8 +8,8 @@
 			foreach ($report_result as $row) {
 				$addup[] = $row['amount'];
 				echo '<tr>';
+					echo '<td class="report-cell">' . $row['item'] . '</td>';
 					echo '<td class="report-cell">' . $row['budget'] . '</td>';
-					echo '<td class="report-cell">' . $row['name'] . '</td>';
 					echo '<td class="report-cell">' . $row['category'] . '</td>';
 					echo '<td class="report-cell">' . $row['tag'] . '</td>';
 					echo '<td class="report-cell">' . $row['amount'] . '</td>';
