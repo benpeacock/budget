@@ -39,32 +39,17 @@ class Report extends DatabaseObject {
 			echo 'Unable to complete report query';
 		}
 	}
-	
-// 		public function arrayToCsv(array &$array) {
-// 		   if (count($array) == 0) {
-// 		     return null;
-// 		   }
-// 		   ob_start();
-// 		   $fh = fopen("php://output", 'w');
-// 		   fputcsv($fh, array_keys(reset($array)));
-// 		   foreach ($array as $row) {
-// 		      fputcsv($fh, $row);
-// 		   }
-// 		   fclose($fh);
-// 		   return ob_get_clean();
-// 		}
 
 		public function arrayToCsv($array) {
+			ob_start();
 			$fh = fopen("php://output", 'w');
-			$header = array();
-			if (empty($header)) {
-				$header = array_keys($array);
-				fputcsv($fh, $header);
-			}
+			$header = array('item', 'budget', 'category', 'tag', 'amount');
+			fputcsv($fh, $header);
 			foreach ($array as $row) {
 				fputcsv($fh, $row);
 			}
 			fclose($fh);
+			return ob_get_clean();
 		}
 	
 		public function downloadSendHeaders($filename) {

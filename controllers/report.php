@@ -48,8 +48,18 @@ switch ($submit) {
 		if (empty($csv_result)) {
 			exit ('No results found');
 		}
+		$file = array();
+		foreach ($csv_result as $row) {
+			$line = array();
+			$line[] = $row['item'];
+			$line[] = $row['budget'];
+			$line[] = $row['category'];
+			$line[] = $row['tag'];
+			$line[] = $row['amount'];
+			$file[] = $line;
+		}
 		$report->downloadSendHeaders("data_export_" . date("Y-m-d") . ".csv");
-		echo $report->arrayToCsv($csv_result);
+		echo $report->arrayToCsv($file);
 		die();
 		break;
 }
