@@ -26,10 +26,9 @@
 	              <ul class="nav navbar-nav navbar-right">
 			              <li class="navbar-text">Hello, 
 			              <?php 
-			              $user = new User();
-			              $id = $_SESSION['user_id'];
-			              $result = $user->getOneById($id);
-			              echo $result['username']; 
+ 			              $user = new User();
+			              $result = $user->getOneById($session->user_id);
+			              echo $result['username'];
 			              ?></li>
 			              <li><button onclick="window.location='logout.php'" type="button" class="btn btn-default navbar-btn">Sign Out</button></li>
 			      </ul>
@@ -41,6 +40,7 @@
 				<li><a href="#contact">Help</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
+				<li><a href="user.php?action=create_user">Create Account</a></li>
 				<li><button onclick="window.location='login.php'" type="button" class="btn btn-default navbar-btn">Sign In</button></li>
 				</ul>
 			<?php } ?>

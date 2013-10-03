@@ -2,7 +2,7 @@
 require_once('../models/init.inc.php');
 require_once '../views/header.inc.php';
 
-if (!isset($session->user_id)) {
+if (!isset($session->user_id) && $_GET['action'] != 'create_user') {
 	include '../views/login_alert.php';
 }
 
