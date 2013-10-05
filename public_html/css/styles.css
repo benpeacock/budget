@@ -1,0 +1,35 @@
+<!-- GENERAL STYLES -->
+
+.pad-20 {
+	padding: 20px 20px 20px 20px;
+}
+
+.report-cell {
+	width: 20%;
+}
+
+<!-- BUDGETS.PHP TABLE LAYOUT STYLES -->
+
+#item-name {
+	width: 25%;
+}
+
+#item-category {
+	width: 10%;
+}
+
+#item-tag {
+	width: 10%;
+}
+
+#item-amount {
+	width: 15%;
+}
+
+#item-note {
+	width: 30%;
+}
+
+#item-delete {
+	width: 10%;
+}
