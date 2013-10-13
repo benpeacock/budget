@@ -1,6 +1,6 @@
 <div class="container">
 	<h2>Filters:</h2>
-	<form action="report.php" method="post" class="form-horizontal">
+	<form action="/report" method="post" class="form-horizontal">
 		<div class="row">
 			<div class="col-md-2">
 				<label>Budget Name(s):</label>

@@ -1,5 +1,3 @@
-  <!-- NAVBAR
-================================================== -->
   <body>
     <div class="navbar-wrapper">
       <div class="container">
@@ -11,16 +9,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">Account Abroad</a>
+              <a class="navbar-brand" href="/">Account Abroad</a>
             </div>
             <div class="navbar-collapse collapse">
-              <?php
-              if ($session->isLoggedIn()) {
-              ?>
+              <?php if ($session->isLoggedIn()) { ?>
 	              <ul class="nav navbar-nav">
-		              <li class="active"><a href="controllers/index.php">Home</a></li>
-		              <li><a href="controllers/dashboard.php">My Dashboard</a></li>
-		              <li><a href="condtrollers/report.php">Reports</a></li>
+		              <li class="active"><a href="/">Home</a></li>
+		              <li><a href="/dashboard">My Dashboard</a></li>
+		              <li><a href="/report">Reports</a></li>
 		              <li><a href="#contact">Help</a></li>
 	              </ul>
 	              <ul class="nav navbar-nav navbar-right">
@@ -30,18 +26,18 @@
 			              $result = $user->getOneById($session->user_id);
 			              echo $result['username'];
 			              ?></li>
-			              <li><button onclick="window.location='controllers/logout.php'" type="button" class="btn btn-default navbar-btn">Sign Out</button></li>
+			              <li><button onclick="window.location='/logout'" type="button" class="btn btn-default navbar-btn">Sign Out</button></li>
 			      </ul>
               <?php 
               } else {
 				?>
 				<ul class="nav navbar-nav">
-				<li class="active"><a href="controllers/index.php">Home</a></li>
+				<li class="active"><a href="/">Home</a></li>
 				<li><a href="#contact">Help</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-				<li><a href="controllers/user.php?action=create_user">Create Account</a></li>
-				<li><button onclick="window.location='controllers/login.php'" type="button" class="btn btn-default navbar-btn">Sign In</button></li>
+				<li><a href="/user/create_user">Create Account</a></li>
+				<li><button onclick="window.location='/login'" type="button" class="btn btn-default navbar-btn">Sign In</button></li>
 				</ul>
 			<?php } ?>
             </div>

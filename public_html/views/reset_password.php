@@ -1,4 +1,4 @@
-<form action="user.php" method="post">
+<form action="/user" method="post">
 	<input type="hidden" name="action" value="reset_password" />
 	<input type="hidden" name="email" value="<?php echo $_GET['email']; ?>" />
 	<input type="hidden" name="temp_hash" value="<?php echo $_GET['temp_hash']; ?>" />

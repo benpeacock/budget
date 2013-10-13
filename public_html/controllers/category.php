@@ -1,5 +1,7 @@
 <?php
-require_once('../models/init.inc.php');
+require_once dirname(__FILE__) . '/../../config.php';
+require_once ROOT . 'models/init.inc.php';
+
 // can't include header or footer directly for x-editable compatibility.  Including below in switch blocks.
 
 if (!isset($session->user_id)) {

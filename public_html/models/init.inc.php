@@ -1,5 +1,6 @@
 <?php
 
+// require_once ('../../config.php');
 require_once ('database.class.php');
 require_once ('databaseObject.class.php');
 require_once ('budget.class.php');

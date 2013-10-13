@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <!-- <link rel="shortcut icon" href="../../assets/ico/favicon.png"> -->
 
-    <title>App Name Here</title>
+    <title>Account Abroad</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
@@ -21,17 +20,17 @@
 <![endif]-->
 
     <!-- Custom styles for this template -->
-    <link href="../bootstrap/css/carousel.css" rel="stylesheet">
-    <link href="../bootstrap/css/signin.css" rel="stylesheet">
+    <link href="/bootstrap/css/carousel.css" rel="stylesheet">
+    <link href="/bootstrap/css/signin.css" rel="stylesheet">
     <!--  X-editable plugin from CDN -->
     <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.5/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet"/>
     <!--  JQuery UI CSS -->
     <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" />
     <!--  MultiSelect plugin from local files -->
-    <link href="../css/jquery.multiselect.css" rel="stylesheet" />
+    <link href="/css/jquery.multiselect.css" rel="stylesheet" />
     <!--  Custom styles from local files -->
-    <link href="../css/styles.css" rel="stylesheet" />
+    <link href="/css/styles.css" rel="stylesheet" />
   </head>
   
 <?php include 'navmenu.inc.php'; ?>

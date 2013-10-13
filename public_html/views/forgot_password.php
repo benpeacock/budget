@@ -1,5 +1,5 @@
 <div class="clearfix">
-	<form action="user.php" method="post" class="form-signin">
+	<form action="/user" method="post" class="form-signin">
 		<h2 class="form-signin-heading">Email Address</h2>
 		<input type="hidden" class="form-control" name="action" value="reset_mail" />
 		<label class="sr-only" for="email">Email</label>

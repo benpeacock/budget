@@ -1,5 +1,6 @@
 <?php
-require_once('../models/init.inc.php');
+require_once '../../config.php';
+require_once ROOT . 'models/init.inc.php';
 // can't include header or footer directl for x-editable compatability.  Including instead for each switch case.
 
 if (!isset($session->user_id)) {

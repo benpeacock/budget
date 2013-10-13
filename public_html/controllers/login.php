@@ -1,5 +1,6 @@
 <?php
-require_once('../models/init.inc.php');
+require_once '../../config.php';
+require_once ROOT . 'models/init.inc.php';
 
 if (isset($_POST['submit'])) {
 	$username = trim($_POST['username']);
@@ -9,17 +10,15 @@ if (isset($_POST['submit'])) {
 	$found_user = $user->authenticate($username, $password);
 	if ($found_user) {
 		$session->login($found_user);
-		header('Location:dashboard.php');
+		header('Location:/dashboard');
 	} else {
 		echo 'Could not log in.';
 	}
 }
 
-require_once('../views/header.inc.php');
+require_once ROOT . 'views/header.inc.php';
+include ROOT . 'views/login_form.php';
+require_once ROOT . 'views/footer.inc.php';
 ?>
-
-<?php include '../views/login_form.php'; ?>
-
-<?php require_once('../views/footer.inc.php'); ?>
 
 

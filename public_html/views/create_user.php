@@ -1,5 +1,5 @@
 <div class="clearfix">
-	<form action="user.php" method="post" class="form-signin" id="create-user">
+	<form action="/user" method="post" class="form-signin" id="create-user">
 	<h2>Sign up.  It's free.</h2>
 		<fieldset>
 			<input type="hidden" name="action" value="create" />

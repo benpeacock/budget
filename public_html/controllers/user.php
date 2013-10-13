@@ -1,12 +1,13 @@
 <?php
-require_once '../../config.php';
+require_once dirname(__FILE__) . '/../../config.php';
 require_once ROOT . 'models/init.inc.php';
 require_once ROOT . 'views/header.inc.php';
 
-if (!isset($session->user_id) && $_GET['action'] != 'create_user') {
-	include 'views/login_alert.php';
-	exit();
-}
+//  Fouls up functionality of different $_GET actions if I have this here.  Just leave it out.
+// 	if (!isset($session->user_id) && $_GET['action'] != 'create_user') {
+// 		include ROOT . 'views/login_alert.php';
+// 		exit();
+// 	}
 
 if(isset($_POST['submit'])) {
 	
@@ -21,7 +22,7 @@ if(isset($_POST['submit'])) {
 			}
 			$username = trim(filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING));
 			if (!ctype_alnum($username)) {
-				exit('Invalid username.  Letters and numbers only.  <a href="user.php?action=create_user">Try Again</a>');
+				exit('Invalid username.  Letters and numbers only.  <a href="/user/create_user">Try Again</a>');
 			}
 			if (strlen($username) > 45) {
 				exit('Username max length is 45 characters.');
@@ -38,7 +39,7 @@ if(isset($_POST['submit'])) {
 				$found_user = $user->authenticate($username, $password);
 				if ($found_user) {
 					$session->login($found_user);
-					header('Location:dashboard.php');
+					header('Location:/dashboard');
 				}
 			}
 			break;
@@ -49,14 +50,14 @@ if(isset($_POST['submit'])) {
 				try {
 					$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 					if (filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
-						exit('Invalid e-mail address. <a href="user.php?action=reset_password">Try Again</a>');
+						exit('Invalid e-mail address. <a href="/user/reset_password">Try Again</a>');
 					}
 					$user = new User();
 					$user = $user->findByEmail($email);
 					$temp_hash = $user->makeHash($user->id);
 					$email = new Email();
 					$email = $email->passwordReset($user->username, $user->email, $temp_hash);
-					header('Location: login.php');
+					header('Location: /login');
 				} catch (PDOException $e) {
 					echo 'Error sending password reset email ' . $e->getMessage();
 				}
@@ -85,7 +86,7 @@ if(isset($_POST['submit'])) {
 						$result = $user->resetPassword($email, $temp_hash, $password);
 						// eventually replace following with JQUery in reset_password form
 						if ($result == 1) {
-							echo 'Password successfully reset.  Go to <a href="login.php">Login</a>.';
+							echo 'Password successfully reset.  Go to <a href="/login">Login</a>.';
 						} else {
 							echo 'Password could not be reset.';
 						}
@@ -104,17 +105,17 @@ if(isset($_GET['action'])) {
 	// Displays field to input e-mail address for password reset
 	switch ($action) {
 		case 'forgot_password':
-			include '../views/forgot_password.php';
+			include ROOT . 'views/forgot_password.php';
 			break;
 			
 	// Displays password reset fields 'password' and 'password again' where users input new password.
 		case 'reset_password':
-			include '../views/reset_password.php';
+			include ROOT . 'views/reset_password.php';
 			break;
 		
 	// Displays user creation form
 		case 'create_user':
-			include '../views/create_user.php';
+			include ROOT . 'views/create_user.php';
 			break;
 	}
 }

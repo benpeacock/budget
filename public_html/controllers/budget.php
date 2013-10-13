@@ -1,9 +1,10 @@
 <?php
-require_once('../models/init.inc.php');
-require_once('../views/header.inc.php');
+require_once '../../config.php';
+require_once ROOT . 'models/init.inc.php';
+require_once ROOT . 'views/header.inc.php';
 
 if (!isset($session->user_id)) {
-	include '../views/login_alert.php';
+	include ROOT . 'views/login_alert.php';
 	exit();
 }
 

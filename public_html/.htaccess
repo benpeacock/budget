@@ -1,0 +1,30 @@
+RewriteEngine on
+
+# ALL CONTROLLERS 
+# Example: 'accountabroad.com/[controller]'
+RewriteRule ^(\w+)$ controllers/$1.php
+
+# USER
+# Example: 'accountabroad.com/user/[action_name]
+RewriteRule ^user/(\w+)$ controllers/user.php?action=$1
+
+# BUDGET
+# Example: 'accountabroad.com/budget/[action_name]
+RewriteRule ^budget/(\w+)$ controllers/budget.php?action=$1
+
+# Example: 'accountabroad.com/budget/[action_name]/[id]
+RewriteRule ^budget/(\w+)/(\w+)$ controllers/budget.php?action=$1&id=$2
+
+# CATEGORY
+# Example: 'accountabroad.com/category/[action_name]
+RewriteRule ^category/(\w+)$ controllers/category.php?action=$1
+
+# Example: 'accountabroad.com/category/[action_name]/[id]
+RewriteRule ^category/(\w+)/(\w+)$ controllers/category.php?action=$1&id=$2
+
+# TAG
+# Example: 'accountabroad.com/tag/[action_name]
+RewriteRule ^tag/(\w+)$ controllers/tag.php?action=$1
+
+# Example: 'accountabroad.com/tag/[action_name]/[id]
+RewriteRule ^tag/(\w+)/(\w+)$ controllers/tag.php?action=$1&id=$2
