@@ -1,13 +1,10 @@
 <?php
+require_once dirname(__FILE__) . '../../../config.php';
 require_once('init.inc.php');
 
 class Database {
 
 	private static $_pdo;
-
-	const DB_USER = 'application';
-
-	const DB_PASS = 'Torgy89*';
 
 	/**
 	 * Get PDO connection by calling Database::getPdo()
@@ -16,7 +13,7 @@ class Database {
 	public static function getPdo() {
 		if (!self::$_pdo) {
 			try {
-				self::$_pdo = new PDO('mysql:host=localhost;dbname=budget', self::DB_USER, self::DB_PASS);
+				self::$_pdo = new PDO('mysql:host=localhost;dbname=budget', DB_USER, DB_PASS);
 			} catch (PDOException $e) {
 				echo 'Connection to database failed: ' . $e->getMessage();
 			}
