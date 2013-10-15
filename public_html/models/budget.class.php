@@ -28,7 +28,7 @@ class Budget extends DatabaseObject {
 				$stmt->execute();
 				$return = $stmt->rowCount();
 				if ($return == 1) {
-					header('Location:dashboard.php');
+					header('Location:/dashboard');
 				} elseif ($return != 1) {
 					$message = 'Could not create budget.';
 				}
@@ -109,9 +109,9 @@ class Budget extends DatabaseObject {
 		$budget = new Budget();
 		$result = $budget->deleteRecord($id);
 		if ($result == 1) {
-			header('Location:dashboard.php');
+			header('Location:/dashboard');
 		} elseif ($result != 1) {
-			exit('Unable to delete budget. <a href="dashboard.php"><<Back to Dashboard</a>');
+			exit('Unable to delete budget. <a href="/dashboard"><<Back to Dashboard</a>');
 		}
 	}
 	

@@ -5,8 +5,8 @@
 		echo '<div class="col-md-2"><h2>' . $budget_title = $row['name'] . '</h2></div>';
 	}
 	?>
-		<div class="col-md-1" style="margin-top: 30px"><a href="../controllers/budget.php?action=edit&id=<?php echo $id; ?>">Edit</a></div>
-		<div class="col-md-1" style="margin-top: 30px"><a onclick="return confirm('Delete budget?')" href=budget.php?action=delete&id=<?php echo $id; ?>">Delete</a></div>
+		<div class="col-md-1" style="margin-top: 30px"><a href="/budget/edit/<?php echo $id; ?>">Edit</a></div>
+		<div class="col-md-1" style="margin-top: 30px"><a onclick="return confirm('Delete budget?')" href="/budget/delete/<?php echo $id; ?>">Delete</a></div>
 		<div class="col-md-1 pull-right"><button onclick="location.reload()" type="button" class="btn" style="margin-top:15px;"><span class="glyphicon glyphicon-refresh"></span></button></div>
 		<div class="col-md-3 pull-right"><h3 class="text-right">Total: $<?php echo Budget::sumBudget($id); ?></h3></div>
 	<?php $query = $budget->displayBudget($id); ?>

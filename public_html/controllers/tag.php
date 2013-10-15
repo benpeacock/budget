@@ -4,7 +4,7 @@ require_once ROOT . 'models/init.inc.php';
 // can't include header or footer directl for x-editable compatability.  Including instead for each switch case.
 
 if (!isset($session->user_id)) {
-	include '../views/login_alert.php';
+	include ROOT . 'views/login_alert.php';
 }
 
 if(isset($_GET['action'])) {
@@ -12,9 +12,9 @@ if(isset($_GET['action'])) {
 	
 	switch($action) {
 		case 'create':
-			include '../views/header.inc.php';
-			include '../views/create_tags.php';
-			include '../views/footer.inc.php';
+			include ROOT . 'views/header.inc.php';
+			include ROOT . 'views/create_tags.php';
+			include ROOT . 'views/footer.inc.php';
 			break;
 		
 		case 'list':
@@ -35,24 +35,24 @@ if(isset($_GET['action'])) {
 		case 'edit':
 			$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 			if (filter_var($id, FILTER_VALIDATE_INT) == false) {
-				exit ('Invalid tag id.  <a href="dashboard.php">Try Again</a>');
+				exit ('Invalid tag id.  <a href="/dashboard">Try Again</a>');
 			}
 			$tag = new Tag();
 			$tag_result = $tag->getOneById($id);
-			include '../views/header.inc.php';
-			include '../views/edit_tags.php';
-			include '../views/footer.inc.php';
+			include ROOT . 'views/header.inc.php';
+			include ROOT . 'views/edit_tags.php';
+			include ROOT . 'views/footer.inc.php';
 			break;
 			
 		case 'delete':
 			$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 			if (filter_var($id, FILTER_VALIDATE_INT) == false) {
-				exit ('Invalid tag id.  <a href="dashboard.php">Try Again</a>');
+				exit ('Invalid tag id.  <a href="/dashboard">Try Again</a>');
 			}
 			$tag = new Tag();
 			$result = $tag->deleteRecord($id);
 			if ($result == 1) {
-				header('Location:dashboard.php');
+				header('Location:/dashboard');
 			} else {
 				echo 'Unable to delete tag.';
 			}
@@ -69,10 +69,10 @@ if(isset($_POST['action'])) {
 		case 'create':
 			$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
 			if (!ctype_alnum($name)) {
-				exit ('Invalid tag name.  Numbers and letters only.  <a href="tag.php?action=create">Try Again</a>');
+				exit ('Invalid tag name.  Numbers and letters only.  <a href="/tag/create">Try Again</a>');
 			}
 			if (strlen($name) > 45) {
-				exit ('Invalid tag name.  Max length 45 characters.  <a href="tag.php?action=create">Try Again</a>');
+				exit ('Invalid tag name.  Max length 45 characters.  <a href="/tag/create">Try Again</a>');
 			}
 			$tag = new Tag();
 			$result = $tag->createTag($session->user_id, $name);
@@ -81,19 +81,19 @@ if(isset($_POST['action'])) {
 		case 'edit':
 			$id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
 			if (filter_var($id, FILTER_VALIDATE_INT) == false) {
-				exit ('Invalid tag id.  <a href="tag.php?action=create">Try Again</a>');
+				exit ('Invalid tag id.  <a href="tag/create">Try Again</a>');
 			}
 			$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
 			if (!ctype_alnum($name)) {
-				exit ('Invalid tag name.  Numbers and letters only.  <a href="tag.php?action=create">Try Again</a>');
+				exit ('Invalid tag name.  Numbers and letters only.  <a href="tag/create">Try Again</a>');
 			}
 			if (strlen($name) > 45) {
-				exit ('Invalid tag name.  Max length 45 characters.  <a href="tag.php?action=create">Try Again</a>');
+				exit ('Invalid tag name.  Max length 45 characters.  <a href="tag/create">Try Again</a>');
 			}		
 			$tag = new Tag();
 			$result = $tag->updateById($id, $name);
 			if ($result == 1) {
-				header('Location:dashboard.php');
+				header('Location:/dashboard');
 			} else {
 				echo 'Unable to update tag.';
 			}

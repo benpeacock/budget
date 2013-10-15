@@ -23,7 +23,7 @@ if (isset($_GET['action'])) {
 		
 		// form to create a budget
 		case 'create':
-			include '../views/create_budgets.php';
+			include ROOT . 'views/create_budgets.php';
 			break;
 		
 		//used to populate drop-down of budget names in overhead.php x-editable field
@@ -37,7 +37,7 @@ if (isset($_GET['action'])) {
 			$budget = new Budget();
 			$id = $_GET['id'];
 			$query = $budget->getById($id);
-			include '../views/budgets.php';
+			include ROOT . 'views/budgets.php';
 			break;
 			
 		case 'edit':
@@ -47,7 +47,7 @@ if (isset($_GET['action'])) {
 			}
 			$budget = new Budget();
 			$result = $budget->getOneById($id);
-			include '../views/edit_budgets.php';
+			include ROOT . 'views/edit_budgets.php';
 			break;
 			}
 	}
@@ -59,10 +59,10 @@ if (isset($_POST['action'])) {
 		case 'create' :
 			$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
 			if (!ctype_alnum($name)) {
-				exit ('Invalid budget name.  Numbers and letters only.  <a href="budget.php?action=create">Try Again</a>');
+				exit ('Invalid budget name.  Numbers and letters only.  <a href="/budget/create">Try Again</a>');
 			}
 			if (strlen($name) > 45) {
-				exit ('Invalid budget name.  Max length 45 characters.  <a href="category.php?action=create">Try Again</a>');
+				exit ('Invalid budget name.  Max length 45 characters.  <a href="/category/create">Try Again</a>');
 			}
 			$budget = new Budget();
 			$budget->createBudget($session->user_id, $name);
@@ -75,15 +75,15 @@ if (isset($_POST['action'])) {
 			}
 			$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
 			if (!ctype_alnum($name)) {
-				exit ('Invalid budget name.  Numbers and letters only.  <a href="budget.php?action=create">Try Again</a>');
+				exit ('Invalid budget name.  Numbers and letters only.  <a href="/budget/create">Try Again</a>');
 			}
 			if (strlen($name) > 45) {
-				exit ('Invalid budget name.  Max length 45 characters.  <a href="budget.php?action=create">Try Again</a>');
+				exit ('Invalid budget name.  Max length 45 characters.  <a href="/budget/create">Try Again</a>');
 			}
 			$budget = new Budget();
 			$result = $budget->editBudget($id, $name);
 			if ($result == 1) {
-				header('Location: budget.php?action=display&id=' . $id);
+				header('Location: budget/display/' . $id);
 			} else {
 				echo 'Count not rename budget';
 			}
@@ -91,7 +91,7 @@ if (isset($_POST['action'])) {
 	}
 }
 
-require_once('../views/footer.inc.php');
+require_once ROOT . 'views/footer.inc.php';
 ?>
 
 

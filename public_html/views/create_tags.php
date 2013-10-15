@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="col-lg-4">
 			<h2>Create Tag</h2>
-			<form action="tag.php" method="post" class="form-horizontal">
+			<form action="/tag" method="post" class="form-horizontal">
 				<div class="control-group">
 					<input type="hidden" name="action" value="create" />
 					<label class="sf-only" for="name">Tag Name</label>

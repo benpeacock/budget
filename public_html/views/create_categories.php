@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="col-lg-4">
 			<h2>Create Category</h2>
-			<form action="category.php" method="post" class="form-horizontal">
+			<form action="/category" method="post" class="form-horizontal">
 				<div class="control-group">
 					<input type="hidden" name="action" value="create" />
 					<label class="sf-only" for="name">Category Name</label>

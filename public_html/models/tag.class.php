@@ -24,7 +24,7 @@ class Tag extends DatabaseObject {
 					$stmt->execute();
 					$return = $stmt->rowCount();
 					if ($return == 1) {
-						header('Location:dashboard.php');
+						header('Location:/dashboard');
 					} elseif ($return != 1) {
 						$message = 'Could not create tag.';
 					}

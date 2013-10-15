@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="col-lg-4">
 			<h2>Edit Budget: <?php echo $result['name']; ?></h2>
-			<form action="budget.php" method="post" class="form-horizontal">
+			<form action="/budget" method="post" class="form-horizontal">
 				<input type="hidden" name="action" value="edit" />
 				<input type="hidden" name="id" value="<?php echo $result['id']; ?>" />
 				<label class="sf-only" for="name">Budget Name</label>
@@ -11,10 +11,10 @@
 				<button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Edit Budget</button>
 				<div class="row">
 				<div class="col-md-4">
-					<a href="dashboard.php">Cancel</a>
+					<a href="/dashboard">Cancel</a>
 				</div>
 				<div class="col-md-4 pull-right">
-					<a onclick="confirm(\'Delete item?\')" href="budget.php?action=delete&id=<?php echo $id; ?>">Delete Budget</a>
+					<a onclick="confirm(\'Delete item?\')" href="/budget/delete/<?php echo $id; ?>">Delete Budget</a>
 				</div>
 				</div>
 			</form>

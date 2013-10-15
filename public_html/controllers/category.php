@@ -48,12 +48,12 @@ if (isset($_GET['action'])) {
 		case 'delete':
 			$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 			if (filter_var($id, FILTER_VALIDATE_INT) == false) {
-				exit ('Invalid category id.  <a href="dashboard.php">Try Again</a>');
+				exit ('Invalid category id.  <a href="/dashboard">Try Again</a>');
 			}
 			$category = new Category();
 			$result = $category->deleteRecord($id);
 			if ($result == 1) {
-				header('Location:dashboard.php');
+				header('Location:/dashboard');
 			} else {
 				echo 'Unable to delete category.';
 				}
@@ -67,10 +67,10 @@ if (isset($_POST['action'])) {
 		case 'create':
 			$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
 			if (!ctype_alnum($name)) {
-				exit ('Invalid category name.  Numbers and letters only.  <a href="category.php?action=create">Try Again</a>');
+				exit ('Invalid category name.  Numbers and letters only.  <a href="/category/create">Try Again</a>');
 			}
 			if (strlen($name) > 45) {
-				exit ('Invalid category name.  Max length 45 characters.  <a href="category.php?action=create">Try Again</a>');
+				exit ('Invalid category name.  Max length 45 characters.  <a href="/category/create">Try Again</a>');
 			}
 			$category = new Category();
 			$result = $category->createCategory($session->user_id, $name);

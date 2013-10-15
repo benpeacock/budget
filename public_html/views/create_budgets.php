@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="col-lg-4">
 			<h2>Create Budget</h2>
-			<form action="budget.php" class="form-horizontal" method="post">
+			<form action="/budget" class="form-horizontal" method="post">
 				<div class="control-group">
 					<input type="hidden" name="action" value="create" />
 					<label class="sr-only" for="name">Budget Name</label>

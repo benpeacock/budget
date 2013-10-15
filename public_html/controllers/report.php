@@ -3,7 +3,7 @@ require_once '../../config.php';
 require_once ROOT . 'models/init.inc.php';
 
 if (!isset($session->user_id)) {
-	include '../views/login_alert.php';
+	include ROOT . 'views/login_alert.php';
 	exit();
 }
 
@@ -28,9 +28,9 @@ if(isset($_POST['submit_csv'])) { $submit = 'csv'; }
 
 switch ($submit) {
 	case '':
-		include '../views/header.inc.php';
-		include '../views/reports.php';
-		include '../views/footer.inc.php';
+		include ROOT . 'views/header.inc.php';
+		include ROOT . 'views/reports.php';
+		include ROOT . 'views/footer.inc.php';
 		break;
 		
 	case 'html':
@@ -39,9 +39,9 @@ switch ($submit) {
 		if (empty($report_result)) {
 			exit ('No results found');
 		}
-		include '../views/header.inc.php';
-		include '../views/html_reports.php';
-		include '../views/footer.inc.php';
+		include ROOT . 'views/header.inc.php';
+		include ROOT . 'views/html_reports.php';
+		include ROOT . 'views/footer.inc.php';
 		break;
 
 	case 'csv':
