@@ -14,7 +14,7 @@
         <!--  Twitter boostrap from CDN -->
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         <!--  X-editable plugin from CDN -->
-        <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.5/bootstrap-editable/js/bootstrap-editable.min.js"></script>
+        <script src="/vendor/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
         <script src="/js/editable.js"></script>
         <!--  MultiSelect JQuery plugin from local file -->
         <script src="/js/jquery.multiselect.js"></script>

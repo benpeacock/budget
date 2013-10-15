@@ -23,7 +23,7 @@
     <link href="/bootstrap/css/carousel.css" rel="stylesheet">
     <link href="/bootstrap/css/signin.css" rel="stylesheet">
     <!--  X-editable plugin from CDN -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.4.5/bootstrap-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+    <link href="/vendor/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
     <!--  JQuery UI CSS -->
     <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" />

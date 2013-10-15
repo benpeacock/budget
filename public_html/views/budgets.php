@@ -15,24 +15,21 @@
 		<table class="table table-bordered table-striped">
 			<tbody>
 				<th>Name<span class="help-block"><small>a-Z, 0-9 only</small></span></th><th>Category</th><th>Tag</th><th>Amount<span class="help-block"><small>0.00 format</small></th><th>Notes<span class="help-block"><small>max 300 characters</small></th><th>Options</th>
-				<?php 
-				foreach ($query as $row) {
-					echo '<tr>';
-					echo '<td id="item-name"><a class="name" pattern="^[a-zA-Z0-9]+$" maxlength="45" data-type="text" data-url="../models/itemProcessor.php"
-						      data-pk="' . $row['id'] . '">' . $row['name'] . '</a></td>';
-					echo '<td id="item-category"><a class="category" data-type="select" data-url="../models/itemProcessor.php"
-								data-pk="' . $row['id'] . '" data-value="' . $row['category'] . '" data-source="category.php?action=list&user_id=' . $row['user_id'] . '"></a></td>';
-					echo '<td id="item-tag"><a class="tag" data-type="select" data-url="../models/itemProcessor.php"
-								data-pk="' . $row['id'] . '" data-value="' . $row['tag'] . '" data-source="tag.php?action=list&user_id=' . $row['user_id'] . '"></a></td>';
-					echo '<td id="item-amount"><a class="amount" data-type="number" data-url="../models/itemProcessor.php"
-							  data-pk="' . $row['id'] . '">' . $row['amount'] . '</a></td>';
-					echo '<td id="item-note"><a class="note" pattern="^[a-zA-Z0-9]+$" maxlength="45" data-type="textarea" data-url="../models/itemProcessor.php"
-							  data-pk="' . $row['id'] . '">' . $row['note'] . '</a></td>';
-					echo '<td id="item-delete"><a onclick="return confirm(\'Delete item?\')" href="item.php?action=delete&budget_id=' . $id . '&id=
-								' . $row['id'] . '">Delete</a></td>';
-					echo '<tr/>';
-				}
-				?>
+				<?php foreach ($query as $row) { ?>
+					<tr>
+					<td id="item-name"><a class="name" pattern="^[a-zA-Z0-9]+$" maxlength="45" data-type="text" data-url="/models/itemProcessor.php"
+						      data-pk="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></a></td>
+					<td id="item-category"><a class="category" data-type="select" data-url="/models/itemProcessor.php"
+								data-pk="<? echo $row['id'] ?>" data-value="<?php echo $row['category'] ?>" data-source="/category/list/<?php echo $row['user_id'] ?>"></a></td>
+					<td id="item-tag"><a class="tag" data-type="select" data-url="/models/itemProcessor.php"
+								data-pk="<? echo $row['id'] ?>" data-value="<?php echo $row['tag'] ?>" data-source="/tag/list/<?php echo $row['user_id'] ?>"></a></td>
+					<td id="item-amount"><a class="amount" data-type="number" data-url="/models/itemProcessor.php"
+							  data-pk="<? echo $row['id'] ?>"><?php echo $row['amount'] ?></a></td>
+					<td id="item-note"><a class="note" pattern="^[a-zA-Z0-9]+$" maxlength="45" data-type="textarea" data-url="/models/itemProcessor.php"
+							  data-pk="<? echo $row['id'] ?>"><?php echo $row['note'] ?></a></td>
+					<td id="item-delete"><a onclick="return confirm(\'Delete item?\')" href="item/delete/' . $id . '/<? echo $row['id'] ?>">Delete</a></td>
+					<tr/>
+				<?php } ?>
 				<form method="post" action="item.php" class="form-inline">
 					<tr>
 						<input type="hidden" name="action" value="add" />

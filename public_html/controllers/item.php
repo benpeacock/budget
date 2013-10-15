@@ -16,7 +16,7 @@ if (isset($_GET['action'])) {
 			$budget_id = $_GET['budget_id'];
 			$item = new Item();
 			$result = $item->deleteRecord($id);
-			header('Location:budget.php?action=display&id=' . $budget_id . '');
+			header('Location:/budget/display/' . $budget_id . '');
 			break;
 	}
 }
