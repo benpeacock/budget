@@ -14,13 +14,13 @@ $tag = array();
 
 // Filter arrays coming back from reports.php by calling reportFilter() against each value in array
 if (!empty($_POST['budget'])) {
-	$budget = array_filter($_POST['budget'], "reportFilter"); 
+	$budget = array_filter($_POST['budget'], "is_numeric");
 }
 if (!empty($_POST['category'])) {
-	$category = array_filter($_POST['category'], "reportFilter");
+	$category = array_filter($_POST['category'], "is_numeric");
 }
 if (!empty($_POST['tag'])) {
-	$tag = array_filter($_POST['tag'], "reportFilter"); 
+	$tag = array_filter($_POST['tag'], "is_numeric"); 
 }
 
 if(isset($_POST['submit_html'])) { $submit = 'html'; }

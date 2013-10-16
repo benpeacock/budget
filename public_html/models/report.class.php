@@ -68,12 +68,5 @@ class Report extends DatabaseObject {
 		    header("Content-Disposition: attachment;filename={$filename}");
 		    header("Content-Transfer-Encoding: binary");
 		}
-		
-		public function reportFilter($input) {
-			if (!is_numeric($input)) {
-				exit('Invalid report id selection.');
-			}
-			return $input;
-		}
 } // end report class
 
