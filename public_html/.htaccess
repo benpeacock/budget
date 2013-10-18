@@ -28,3 +28,7 @@ RewriteRule ^tag/(\w+)$ controllers/tag.php?action=$1
 
 # Example: 'accountabroad.com/tag/[action_name]/[id]
 RewriteRule ^tag/(\w+)/(\w+)$ controllers/tag.php?action=$1&id=$2
+
+# ITEM
+# Example: 'item/delete/[budget_id]/[id]'
+RewriteRule ^item/delete/(\w+)/(\w+)$ controllers/item.php?action=delete?budget_id=$1&id=$2

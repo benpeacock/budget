@@ -1,7 +1,7 @@
 		<footer>
 	        <div class="container">
 	        	<div class="custom">
-	           <p class="text-center">&copy; <?php echo date("Y"); ?> Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+	           <p class="text-center">&copy; <?php echo date("Y"); ?> accountabroad.com &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
 	        </div>
 	        </div>
         </footer>
