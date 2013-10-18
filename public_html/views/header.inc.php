@@ -7,6 +7,8 @@
     <meta name="author" content="">
 
     <title>Account Abroad</title>
+    
+    <link rel="icon" type="image/png" href="/images/favicon.ico" />
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
