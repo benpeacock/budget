@@ -1,4 +1,11 @@
-RewriteEngine on
+RewriteEngine On
+
+# REDIRECT HTTP TO HTTPS
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# DENY ACCESS WHN SSL IS NOT USED FOR THE HTTP REQUEST
+# SSLRequireSSL
 
 # ALL CONTROLLERS 
 # Example: 'accountabroad.com/[controller]'
