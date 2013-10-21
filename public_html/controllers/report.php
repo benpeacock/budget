@@ -36,9 +36,6 @@ switch ($submit) {
 	case 'html':
 		$report = new Report();
 		$report_result = $report->getItemReport($session->user_id, $budget, $category, $tag);
-		if (empty($report_result)) {
-			exit ('No results found');
-		}
 		include ROOT . 'views/header.inc.php';
 		include ROOT . 'views/html_reports.php';
 		include ROOT . 'views/footer.inc.php';

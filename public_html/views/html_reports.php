@@ -1,6 +1,11 @@
 <div class="container">
 	<h2>Results</h2>
 	<table class="table table-striped">
+	<?php if (empty($report_result)) { 
+		include ROOT . 'views/no_results.php';
+		exit();
+		} 
+		?>
 		<tbody>
 			<tr><th>Budget</th><th>Name</th><th>Category</th><th>Tag</th><th>Amount</th></tr>
 			<?php
