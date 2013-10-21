@@ -30,11 +30,11 @@ class Budget extends DatabaseObject {
 				if ($return == 1) {
 					header('Location:/dashboard');
 				} elseif ($return != 1) {
-					$message = 'Could not create budget.';
+					echo 'Could not create budget.';
 				}
 			}
 			catch (PDOException $e) {
-				$message =  'Unable to create record: ' . $e->getMessage();
+				echo 'Unable to create budget: ' . $e->getMessage();
 			}
 		}
 	
@@ -46,7 +46,6 @@ class Budget extends DatabaseObject {
 	public function displayBudget($budget_id) {
 		$dbh = Database::getPdo();
 		try {
-			$budget_id = $_GET['id'];
 			$sql = "SELECT * FROM item WHERE budget_id = :budget_id";
 			$stmt = $dbh->prepare($sql);
 			$stmt->bindParam(':budget_id', $budget_id, PDO::PARAM_INT);
@@ -55,14 +54,14 @@ class Budget extends DatabaseObject {
 			return $result;
 		}
 		catch (PDOException $e) {
-			$message = 'Unable to retrieve budget: ' . $e->getMessage();
+			echo 'Unable to retrieve budget: ' . $e->getMessage();
 		}
 	}
 	
 	/**
 	* Retrieves one budget record from database as an object
 	* @param int $id
-	* @return budget as an aobject
+	* @return budget as an object
 	*/
 	public function getBudgetObjectById($id) {
 		$dbh = Database::getPdo();
@@ -76,7 +75,7 @@ class Budget extends DatabaseObject {
 			$result = $stmt->fetch();
 			return $result;
 		} catch (PDOException $e) {
-			'Unable to retrieve record ' . $e->getMessage();
+			echo 'Unable to retrieve record ' . $e->getMessage();
 		}
 	}
 	
@@ -97,7 +96,7 @@ class Budget extends DatabaseObject {
 			return $result;
 		}
 		catch (PDOException $e) {
-			$message = 'Could not update record: ' . $e->getMessage();
+			echo 'Could not update record: ' . $e->getMessage();
 		}
 	}
 	
@@ -106,12 +105,16 @@ class Budget extends DatabaseObject {
 	 * @return redirects to dashboard if successful returns $message otherwise
 	 */
 	public function deleteBudget($id) {
-		$budget = new Budget();
-		$result = $budget->deleteRecord($id);
-		if ($result == 1) {
-			header('Location:/dashboard');
-		} elseif ($result != 1) {
-			exit('Unable to delete budget. <a href="/dashboard"><<Back to Dashboard</a>');
+		try {
+			$budget = new Budget();
+			$result = $budget->deleteRecord($id);
+			if ($result == 1) {
+				header('Location:/dashboard');
+			} elseif ($result != 1) {
+				exit('Unable to delete budget. <a href="/dashboard"><<Back to Dashboard</a>');
+			}
+		} catch (PDOException $e) {
+			echo 'Unable to delete budget:' . $e->getMessage();
 		}
 	}
 	

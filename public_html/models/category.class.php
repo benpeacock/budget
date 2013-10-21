@@ -70,7 +70,7 @@ class Category extends DatabaseObject {
 			$result = $stmt->fetch();
 			return $result;
 		} catch (PDOException $e) {
-			'Unable to retrieve record ' . $e->getMessage();
+			echo 'Unable to retrieve record ' . $e->getMessage();
 		}
 	}
 	

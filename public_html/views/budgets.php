@@ -30,7 +30,7 @@
 					<td id="item-delete"><a onclick="return confirm(\'Delete item?\')" href="item/delete/' . $id . '/<? echo $row['id'] ?>">Delete</a></td>
 					<tr/>
 				<?php } ?>
-				<form method="post" action="item.php" class="form-inline">
+				<form method="post" action="/item" class="form-inline">
 					<tr>
 						<input type="hidden" name="action" value="add" />
 						<input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?>" />
