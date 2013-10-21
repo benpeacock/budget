@@ -18,7 +18,7 @@ if (isset($_GET['action'])) {
 				exit('Invalid budget id.');
 			}
 			$budget = new Budget();
-			$budget->deleteBudget($id);
+			$budget->deleteBudget($id, $session->user_id);
 			break;
 		
 		// form to create a budget

@@ -104,14 +104,14 @@ class Budget extends DatabaseObject {
 	 * Deletes budget record from db
 	 * @return redirects to dashboard if successful returns $message otherwise
 	 */
-	public function deleteBudget($id) {
+	public function deleteBudget($id, $user_id) {
 		try {
 			$budget = new Budget();
-			$result = $budget->deleteRecord($id);
+			$result = $budget->deleteRecord($id, $user_id);
 			if ($result == 1) {
 				header('Location:/dashboard');
 			} elseif ($result != 1) {
-				exit('Unable to delete budget. <a href="/dashboard"><<Back to Dashboard</a>');
+				exit('Unable to delete budget. <a href="/dashboard">Back</a>');
 			}
 		} catch (PDOException $e) {
 			echo 'Unable to delete budget:' . $e->getMessage();

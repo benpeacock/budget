@@ -114,20 +114,22 @@ abstract class DatabaseObject {
 	/**
 	 * Common method to delete a single record from the database by id
 	 * @param int $id
+	 * @param int $user_id
 	 * @return number of affected rows
 	 */
-	public function deleteRecord($id) {
+	public function deleteRecord($id, $user_id) {
 		$dbh = Database::getPdo();
 		try {
-			$sql = "DELETE FROM " . static::DB_TABLE . " WHERE id = :id LIMIT 1";
+			$sql = "DELETE FROM " . static::DB_TABLE . " WHERE id = :id AND user_id = :user_id LIMIT 1";
 			$stmt = $dbh->prepare($sql);
 			$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+			$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 			$stmt->execute();
 			$result = $stmt->rowCount();
 			return $result;
 		}
 		catch (PDOException $e) {
-			$message =  'Unable to locate record: ' . $e->getMessage();
+			echo 'Unable to locate record: ' . $e->getMessage();
 		}
 	}
 	
