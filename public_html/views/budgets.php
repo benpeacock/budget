@@ -1,7 +1,6 @@
 <div class="container">
 	<div class="row">
 	<?php
-	echo $session->user_id;
 	foreach ($query as $row) {
 		echo '<div class="col-md-2"><h2>' . $budget_title = $row['name'] . '</h2></div>';
 	}

@@ -40,7 +40,10 @@ if (isset($_GET['action'])) {
 				exit('Invalid budget ID number.');
 			}
 			$query = $budget->getById($id);
-			if ($budget->user_id != $session->user_id) {
+			foreach ($query as $row) {
+				$user_id = $row['user_id'];
+			}
+			if ($user_id != $session->user_id) {
 				exit ('Invalid ID match.');
 			}
 			include ROOT . 'views/budgets.php';
@@ -84,10 +87,10 @@ if (isset($_POST['action'])) {
 			}
 			$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
 			if (!ctype_alnum($name)) {
-				exit ('Invalid budget name.  Numbers and letters only.  <a href="/budget/create">Try Again</a>');
+				exit ('Invalid budget name.  Numbers and letters only.  <a href="/dashboard">Try Again</a>');
 			}
 			if (strlen($name) > 45) {
-				exit ('Invalid budget name.  Max length 45 characters.  <a href="/budget/create">Try Again</a>');
+				exit ('Invalid budget name.  Max length 45 characters.  <a href="/dashboard">Try Again</a>');
 			}
 			$budget = new Budget();
 			$result = $budget->editBudget($id, $name, $session->user_id);

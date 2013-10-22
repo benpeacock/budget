@@ -5,7 +5,7 @@ require_once ROOT . 'models/init.inc.php';
 // can't include header or footer directly for x-editable compatibility.  Including below in switch blocks.
 
 if (!isset($session->user_id)) {
-	include ROOT . '/views/login_alert.php';
+	include ROOT . 'views/login_alert.php';
 }
 
 if (isset($_GET['action'])) {
@@ -27,10 +27,13 @@ if (isset($_GET['action'])) {
 		case 'edit':
 			$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 			if (filter_var($id, FILTER_VALIDATE_INT) == false) {
-				exit ('Invalid category id.  <a href="dashboard.php">Try Again</a>');
+				exit ('Invalid category id.  <a href="/dashboard">Try Again</a>');
 			}
 			$category = new Category();
 			$category_result = $category->getOneById($id);
+			if ($category_result['user_id'] != $session->user_id) {
+				exit ('Invalid ID match.');
+			}
 			include ROOT . 'views/header.inc.php';
 			include ROOT . 'views/edit_categories.php';
 			include ROOT . 'views/footer.inc.php';
@@ -42,12 +45,12 @@ if (isset($_GET['action'])) {
 				exit ('Invalid category id.  <a href="/dashboard">Try Again</a>');
 			}
 			$category = new Category();
-			$result = $category->deleteRecord($id);
+			$result = $category->deleteRecord($id, $session->user_id);
 			if ($result == 1) {
 				header('Location:/dashboard');
 			} else {
 				echo 'Unable to delete category.';
-				}
+			}
 	}
 }
 
@@ -80,7 +83,7 @@ if (isset($_POST['action'])) {
 				exit ('Invalid category name.  Max length 45 characters.  <a href="category.php?action=create">Try Again</a>');
 			}			
 			$category = new Category();
-			$result = $category->updateById($id, $name);
+			$result = $category->updateById($id, $name, $session->user_id);
 			if ($result == 1) {
 				header('Location:dashboard.php');
 			} else {

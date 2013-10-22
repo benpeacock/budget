@@ -62,7 +62,7 @@ abstract class DatabaseObject {
 			return $result;
 		}
 		catch (PDOException $e) {
-			$message =  'Unable to locate record: ' . $e->getMessage();
+			echo  'Unable to locate record: ' . $e->getMessage();
 		}
 	}
 	
@@ -82,7 +82,7 @@ abstract class DatabaseObject {
 			return $result;
 		}
 		catch (PDOException $e) {
-			$message = 'Unable to retrieve records: ' . $e->getMessage();
+			echo 'Unable to retrieve records: ' . $e->getMessage();
 		}
 	}
 	
@@ -107,7 +107,7 @@ abstract class DatabaseObject {
 			return $cast_array;
 		}
 		catch (PDOException $e) {
-			$message = 'Unable to retrieve records: ' . $e->getMessage();
+		echo 'Unable to retrieve records: ' . $e->getMessage();
 		}
 	}
 	
@@ -138,18 +138,19 @@ abstract class DatabaseObject {
 	* @param int $id
 	* @return int affected rows
 	*/
-	public function updateById($id, $name) {
+	public function updateById($id, $name, $user_id) {
 		$dbh = Database::getPdo();
 		try {
-			$sql = "UPDATE " . static::DB_TABLE . " SET name = :name WHERE id = :id";
+			$sql = "UPDATE " . static::DB_TABLE . " SET name = :name WHERE id = :id and user_id = :user_id";
 			$stmt = $dbh->prepare($sql);
 			$stmt->bindParam(':name', $name);
 			$stmt->bindParam(':id', $id);
+			$stmt->bindParam(':user_id', $user_id);
 			$stmt->execute();
 			$result = $stmt->rowCount();
 			return $result;
 		} catch (PDOException $e) {
-			'Unable to update ' . static::DB_TABLE . ': ' . $e->getMessage();
+			echo 'Unable to update ' . static::DB_TABLE . ': ' . $e->getMessage();
 		}
 	}
 	

@@ -46,7 +46,7 @@
 		<button type="button" class="btn btn-md" onclick="location.href='/category/create'">Create New Category</button>
 		<ul>
 		<?php
-		$user_id = $_SESSION['user_id'];
+		$user_id = $session->user_id;
 		$category = new Category;
 		$records = $category->getByUser($session->user_id);
 		foreach ($records as $row) {

@@ -46,7 +46,7 @@ class Budget extends DatabaseObject {
 	public function displayBudget($budget_id, $user_id) {
 		$dbh = Database::getPdo();
 		try {
-			$sql = "SELECT * FROM item WHERE budget_id = :budget_id AND user_id = :user_id";
+			$sql = "SELECT * FROM item WHERE budget_id = :budget_id AND user_id = :user_id LIMIT 1";
 			$stmt = $dbh->prepare($sql);
 			$stmt->bindParam(':budget_id', $budget_id, PDO::PARAM_INT);
 			$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
@@ -67,7 +67,7 @@ class Budget extends DatabaseObject {
 	public function getBudgetObjectById($id) {
 		$dbh = Database::getPdo();
 		try {
-			$sql = "SELECT * FROM " . self::DB_TABLE . " WHERE id = :id";
+			$sql = "SELECT * FROM " . self::DB_TABLE . " WHERE id = :id LIMIT 1";
 			$stmt = $dbh->prepare($sql);
 			$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 			$stmt->execute();

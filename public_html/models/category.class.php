@@ -26,7 +26,7 @@ class Category extends DatabaseObject {
 			if ($return == 1) {
 					header('Location:/dashboard');
 				} elseif ($return != 1) {
-					$message = 'Could not create category.';
+					echo 'Could not create category.';
 				}
 		}
 		catch (PDOException $e) {
