@@ -43,12 +43,13 @@ class Budget extends DatabaseObject {
 		 * @param int $budget_id
 		 * @return budget as array
 		 */
-	public function displayBudget($budget_id) {
+	public function displayBudget($budget_id, $user_id) {
 		$dbh = Database::getPdo();
 		try {
-			$sql = "SELECT * FROM item WHERE budget_id = :budget_id";
+			$sql = "SELECT * FROM item WHERE budget_id = :budget_id AND user_id = :user_id";
 			$stmt = $dbh->prepare($sql);
 			$stmt->bindParam(':budget_id', $budget_id, PDO::PARAM_INT);
+			$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 			$stmt->execute();
 			$result = $stmt->fetchAll();
 			return $result;
@@ -84,13 +85,14 @@ class Budget extends DatabaseObject {
 	 * @param unknown $id
 	 * @return number of rows updated (1)
 	 */
-	public function editBudget($id, $name) {
+	public function editBudget($id, $name, $user_id) {
 		$dbh = Database::getPdo();
 		try {
-			$sql = "UPDATE " . self::DB_TABLE . " SET name = :name WHERE id = :id LIMIT 1";
+			$sql = "UPDATE " . self::DB_TABLE . " SET name = :name WHERE id = :id AND user_id = :user_id LIMIT 1";
 			$stmt = $dbh->prepare($sql);
 			$stmt->bindParam(':name', $name, PDO::PARAM_STR,45);
 			$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+			$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 			$stmt->execute();
 			$result = $stmt->rowCount();
 			return $result;

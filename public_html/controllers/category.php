@@ -5,7 +5,7 @@ require_once ROOT . 'models/init.inc.php';
 // can't include header or footer directly for x-editable compatibility.  Including below in switch blocks.
 
 if (!isset($session->user_id)) {
-	include '../views/login_alert.php';
+	include ROOT . '/views/login_alert.php';
 }
 
 if (isset($_GET['action'])) {
@@ -13,9 +13,9 @@ if (isset($_GET['action'])) {
 
 	switch ($action) {
 		case 'create':
-			include '../views/header.inc.php';
-			include '../views/create_categories.php';
-			include '../views/footer.inc.php';
+			include ROOT . 'views/header.inc.php';
+			include ROOT . 'views/create_categories.php';
+			include ROOT . 'views/footer.inc.php';
 			break;
 		
 		case 'list':
@@ -23,15 +23,6 @@ if (isset($_GET['action'])) {
 			$result = $category->getTagCatByUser($session->user_id);
 			echo json_encode($result);
 			break;
-		
-// 		case 'display':
-// 			$user_id = 1;
-// 			$category = new Category();
-// 			$result = $category->getByUser($user_id);
-// 			include '../views/header.inc.php';
-// 			include '../views/categories.php';
-// 			include '../views/footer.inc.php';
-// 			break;
 			
 		case 'edit':
 			$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
@@ -40,9 +31,9 @@ if (isset($_GET['action'])) {
 			}
 			$category = new Category();
 			$category_result = $category->getOneById($id);
-			include '../views/header.inc.php';
-			include ('../views/edit_categories.php');
-			include '../views/footer.inc.php';
+			include ROOT . 'views/header.inc.php';
+			include ROOT . 'views/edit_categories.php';
+			include ROOT . 'views/footer.inc.php';
 			break;
 					
 		case 'delete':

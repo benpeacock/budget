@@ -35,8 +35,14 @@ if (isset($_GET['action'])) {
 			
 		case 'display':
 			$budget = new Budget();
-			$id = $_GET['id'];
+			$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+			if (filter_var($id, FILTER_VALIDATE_INT) == false) {
+				exit('Invalid budget ID number.');
+			}
 			$query = $budget->getById($id);
+			if ($budget->user_id != $session->user_id) {
+				exit ('Invalid ID match.');
+			}
 			include ROOT . 'views/budgets.php';
 			break;
 			
@@ -47,6 +53,9 @@ if (isset($_GET['action'])) {
 			}
 			$budget = new Budget();
 			$result = $budget->getOneById($id);
+			if ($budget->user_id != $session->user_id) {
+				exit ('Invalid ID match.');
+			}
 			include ROOT . 'views/edit_budgets.php';
 			break;
 			}
@@ -81,7 +90,7 @@ if (isset($_POST['action'])) {
 				exit ('Invalid budget name.  Max length 45 characters.  <a href="/budget/create">Try Again</a>');
 			}
 			$budget = new Budget();
-			$result = $budget->editBudget($id, $name);
+			$result = $budget->editBudget($id, $name, $session->user_id);
 			if ($result == 1) {
 				header('Location: budget/display/' . $id);
 			} else {

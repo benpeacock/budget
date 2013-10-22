@@ -1,6 +1,7 @@
 <div class="container">
 	<div class="row">
 	<?php
+	echo $session->user_id;
 	foreach ($query as $row) {
 		echo '<div class="col-md-2"><h2>' . $budget_title = $row['name'] . '</h2></div>';
 	}
@@ -9,7 +10,7 @@
 		<div class="col-md-1" style="margin-top: 30px"><a onclick="return confirm('Delete budget?')" href="/budget/delete/<?php echo $id; ?>">Delete</a></div>
 		<div class="col-md-1 pull-right"><button onclick="location.reload()" type="button" class="btn" style="margin-top:15px;"><span class="glyphicon glyphicon-refresh"></span></button></div>
 		<div class="col-md-3 pull-right"><h3 class="text-right">Total: $<?php echo Budget::sumBudget($id); ?></h3></div>
-	<?php $query = $budget->displayBudget($id); ?>
+	<?php $query = $budget->displayBudget($id, $session->user_id); ?>
 	</div>
 	<div>
 		<table class="table table-bordered table-striped">
@@ -33,7 +34,6 @@
 				<form method="post" action="/item" class="form-inline">
 					<tr>
 						<input type="hidden" name="action" value="add" />
-						<input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id'] ?>" />
 						<input type="hidden" name="budget_id" value="<?php echo $id; ?>" />
 						<td>
 							<label class="sr-only" for="name">Name</label>

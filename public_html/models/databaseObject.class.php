@@ -13,7 +13,7 @@ abstract class DatabaseObject {
 	public function getById($id) {
 		$dbh = Database::getPdo();
 		try {
-			$sql = "SELECT * FROM " . static::DB_TABLE . " WHERE id = :id";
+			$sql = "SELECT * FROM " . static::DB_TABLE . " WHERE id = :id LIMIT 1";
 			$stmt = $dbh->prepare($sql);
 			$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 			$stmt->execute();
@@ -21,7 +21,7 @@ abstract class DatabaseObject {
 			return $result;
 		}
 		catch (PDOException $e) {
-			$message =  'Unable to locate record: ' . $e->getMessage();
+			echo 'Unable to locate record: ' . $e->getMessage();
 		}
 	}
 	
@@ -41,7 +41,7 @@ abstract class DatabaseObject {
 			return $result;
 		}
 		catch (PDOException $e) {
-			$message =  'Unable to locate record: ' . $e->getMessage();
+			echo 'Unable to locate record: ' . $e->getMessage();
 		}
 	}
 
