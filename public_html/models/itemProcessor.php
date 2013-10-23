@@ -11,12 +11,12 @@ require_once('init.inc.php');
     $name = trim(strip_tags(htmlspecialchars($_POST['name'])));
     $value = trim(strip_tags(htmlspecialchars($_POST['value'])));
     if (strlen($value) > 45) {
-    	exit ('Invalid valie. Max length 45 characters.');
+    	exit ('Invalid value. Max length 45 characters.');
     }
     
     $validNames = array('name', 'category', 'tag', 'amount', 'note');
     if (!in_array($name, $validNames)) {
-    	exit ('Invalid filed name');
+    	exit ('Invalid field name');
     }
 
     if(!empty($value)) {
