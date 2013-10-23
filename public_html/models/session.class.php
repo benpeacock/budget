@@ -10,7 +10,7 @@ class Session {
 	private $logged_in = false;
 	
 	/**
-	 * User id passed to other parts of application through $_SESSION['used_id']
+	 * User id passed to other parts of application through $session->user_id
 	 * @var int
 	 */
 	public $user_id;

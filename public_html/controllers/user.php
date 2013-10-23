@@ -3,11 +3,7 @@ require_once dirname(__FILE__) . '/../../config.php';
 require_once ROOT . 'models/init.inc.php';
 require_once ROOT . 'views/header.inc.php';
 
-//  Fouls up functionality of different $_GET actions if I have this here.  Just leave it out.
-// 	if (!isset($session->user_id) && $_GET['action'] != 'create_user') {
-// 		include ROOT . 'views/login_alert.php';
-// 		exit();
-// 	}
+//  Fouls up functionality of different $_GET actions to have login_alert.php here, so leaving it out.
 
 if(isset($_POST['submit'])) {
 	
@@ -84,14 +80,13 @@ if(isset($_POST['submit'])) {
 						$password = trim(SHA1($_POST['password']));
 						$user = new User();
 						$result = $user->resetPassword($email, $temp_hash, $password);
-						// eventually replace following with JQUery in reset_password form
 						if ($result == 1) {
 							echo 'Password successfully reset.  Go to <a href="/login">Login</a>.';
 						} else {
 							echo 'Password could not be reset.';
 						}
 					} catch (PDOException $e) {
-						'Unable to reset password: ' . $e->getMessage();
+						echo 'Unable to reset password: ' . $e->getMessage();
 					}
 				}
 				break;
@@ -102,22 +97,19 @@ if(isset($_POST['submit'])) {
 if(isset($_GET['action'])) {
 	$action = $_GET['action'];
 	
-	// Displays field to input e-mail address for password reset
 	switch ($action) {
 		case 'forgot_password':
 			include ROOT . 'views/forgot_password.php';
 			break;
 			
-	// Displays password reset fields 'password' and 'password again' where users input new password.
 		case 'reset_password':
 			include ROOT . 'views/reset_password.php';
 			break;
-		
-	// Displays user creation form
+
 		case 'create_user':
 			include ROOT . 'views/create_user.php';
 			break;
 	}
 }
-
 require_once '../views/footer.inc.php';
+?>

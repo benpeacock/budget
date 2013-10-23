@@ -10,11 +10,6 @@ class User extends DatabaseObject {
 	public $email;
 	public $username;
 	public $password;
-	
-	/**
-	 * A hash of current timestamp that's re-written everytime User::makeHash() is called.
-	 * @var string - VARCHAR(40)
-	 */
 	public $temp_hash;
 	
 	
@@ -38,7 +33,7 @@ class User extends DatabaseObject {
 				$result = $stmt->rowCount();
 				return $result;
 			} catch (PDOException $e) {
-				$message = 'Unable to create user' . $e->message;
+				echo 'Unable to create user' . $e->message;
 			}
 		}
 	
@@ -62,7 +57,7 @@ class User extends DatabaseObject {
 				return $result;
  			} 
 			catch (PDOException $e) {
-				$message = 'Unable to authenticate user' . $e->message;
+				echo 'Unable to authenticate user' . $e->message;
 			}
 		}
 		
@@ -113,7 +108,6 @@ class User extends DatabaseObject {
 			$dbh = Database::getPdo();
 			try {
 				$hashed_pass = sha1($password);
-				
 				$sql = "UPDATE " . self::DB_TABLE . " SET password = :hashed_pass WHERE email = :email AND temp_hash = :temp_hash";
 				$stmt = $dbh->prepare($sql);
 				$stmt->bindParam(':hashed_pass', $hashed_pass);
@@ -126,7 +120,7 @@ class User extends DatabaseObject {
 						$sql = "UPDATE " . self::DB_TABLE . " SET temp_hash=''";
 						$dbh->query($sql);
 					} catch (PDOException $e) {
-						'Unable to delete temp hash ' . $e->getMessage();
+						echo 'Unable to delete temp hash ' . $e->getMessage();
 					}
 				return $result;
 			} catch (PDOException $e) {
