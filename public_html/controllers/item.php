@@ -21,7 +21,7 @@ if (isset($_GET['action'])) {
 				exit ('Invalid budget id. <a href="/dashboard">Try again</a>');
 			}
 			$item = new Item();
-			$result = $item->deleteRecord($id);
+			$result = $item->deleteRecord($id, $session->user_id);
 			header('Location:/budget/display/' . $budget_id . '');
 			break;
 	}

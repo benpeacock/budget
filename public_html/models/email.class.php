@@ -5,6 +5,7 @@ use Mailgun\Mailgun;
 
 class Email extends DatabaseObject {
 	
+	public $username;
 	public $address;
 	public $temp_hash;
 	
@@ -14,10 +15,11 @@ class Email extends DatabaseObject {
 		
 		$msg = 'Hi, you\'re receiving this because a password reset was requested for your account. ';
 		$msg .= 'To reset your password, click (or copy and paste into your browser) the following link: ';
-		$msg .= 'http://192.241.227.8/budget/controllers/user.php?action=reset_password&email=' . $address . '&temp_hash=' . $temp_hash;
+		$msg .= 'https://accountabroad.com/user/reset_password/' . $address . '/' . $temp_hash;
+		//$msg .= 'https://accountabroad.com/controllers/user.php?action=reset_password&email=' . $address . '&temp_hash' . $temp_hash;
 		
 		$result = $mgClient->sendMessage("$domain",
-		                  array('from'    => 'Admin <me@budget.mailgun.org>',
+		                  array('from'    => 'Admin <admin@accountabroad.com>',
 		                  		'to' => $username . ' <' . $address . '>',
 		                        'subject' => 'Hello',
 		                        'text'    => $msg

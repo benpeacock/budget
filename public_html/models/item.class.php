@@ -1,6 +1,6 @@
 <?php
-
-require_once('init.inc.php');
+require_once dirname(__FILE__) . '../../../config.php';
+require_once ROOT . 'models/init.inc.php';
 
 class Item extends DatabaseObject {
 	

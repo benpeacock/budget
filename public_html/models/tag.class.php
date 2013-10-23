@@ -26,7 +26,7 @@ class Tag extends DatabaseObject {
 					if ($return == 1) {
 						header('Location:/dashboard');
 					} elseif ($return != 1) {
-						$message = 'Could not create tag.';
+						echo 'Could not create tag.';
 					}
 				}
 				catch (PDOException $e) {
@@ -46,7 +46,7 @@ class Tag extends DatabaseObject {
 					$result = $stmt->fetch();
 					return $result;
 				} catch (PDOException $e) {
-					'Unable to retrieve record ' . $e->getMessage();
+					echo 'Unable to retrieve record ' . $e->getMessage();
 				}
 			}
 }

@@ -1,7 +1,7 @@
 <?php
 require_once '../../config.php';
 require_once ROOT . 'models/init.inc.php';
-// can't include header or footer directl for x-editable compatability.  Including instead for each switch case.
+// can't include header or footer directly for x-editable compatability.  Including instead for each switch case.
 
 if (!isset($session->user_id)) {
 	include ROOT . 'views/login_alert.php';

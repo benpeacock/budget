@@ -13,8 +13,8 @@
 	</div>
 	<div>
 		<table class="table table-bordered table-striped">
+			<th>Name<span class="help-block"><small>a-Z, 0-9 only</small></span></th><th>Category</th><th>Tag</th><th>Amount<span class="help-block"><small>0.00 format</small></th><th>Notes<span class="help-block"><small>max 300 characters</small></th><th>Options</th>
 			<tbody>
-				<th>Name<span class="help-block"><small>a-Z, 0-9 only</small></span></th><th>Category</th><th>Tag</th><th>Amount<span class="help-block"><small>0.00 format</small></th><th>Notes<span class="help-block"><small>max 300 characters</small></th><th>Options</th>
 				<?php foreach ($query as $row) { ?>
 					<tr>
 					<td id="item-name"><a class="name" pattern="^[a-zA-Z0-9]+$" maxlength="45" data-type="text" data-url="/models/itemProcessor.php"
@@ -27,8 +27,8 @@
 							  data-pk="<? echo $row['id'] ?>"><?php echo $row['amount'] ?></a></td>
 					<td id="item-note"><a class="note" pattern="^[a-zA-Z0-9]+$" maxlength="45" data-type="textarea" data-url="/models/itemProcessor.php"
 							  data-pk="<? echo $row['id'] ?>"><?php echo $row['note'] ?></a></td>
-					<td id="item-delete"><a onclick="return confirm(\'Delete item?\')" href="item/delete/' . $id . '/<? echo $row['id'] ?>">Delete</a></td>
-					<tr/>
+					<td id="item-delete"><a onclick="return confirm(\'Delete item?\')" href="item/delete/<? echo $row['id'] ?>">Delete</a></td>
+					</tr>
 				<?php } ?>
 				<form method="post" action="/item" class="form-inline">
 					<tr>
