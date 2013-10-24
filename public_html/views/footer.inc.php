@@ -19,5 +19,22 @@
         <!--  MultiSelect JQuery plugin -->
         <script src="/js/jquery.multiselect.js"></script>
         <script src="/js/multiselect_control.js"></script>
+        <!--  Zendesk Widget -->
+        <script type="text/javascript" src="//assets.zendesk.com/external/zenbox/v2.6/zenbox.js"></script>
+			<style type="text/css" media="screen, projection">
+ 				 @import url(//assets.zendesk.com/external/zenbox/v2.6/zenbox.css);
+			</style>
+		<script type="text/javascript">
+  			if (typeof(Zenbox) !== "undefined") {
+		    Zenbox.init({
+		      dropboxID:   "20254926",
+		      url:         "https://accountabroad.zendesk.com",
+		      tabTooltip:  "Help",
+		      tabImageURL: "https://assets.zendesk.com/external/zenbox/images/tab_help_right.png",
+		      tabColor:    "black",
+		      tabPosition: "Right"
+		    });
+		  }
+		</script>
 	</body>
 </html>
