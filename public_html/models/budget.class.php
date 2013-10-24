@@ -46,7 +46,7 @@ class Budget extends DatabaseObject {
 	public function displayBudget($budget_id, $user_id) {
 		$dbh = Database::getPdo();
 		try {
-			$sql = "SELECT * FROM item WHERE budget_id = :budget_id AND user_id = :user_id LIMIT 1";
+			$sql = "SELECT * FROM item WHERE budget_id = :budget_id AND user_id = :user_id";
 			$stmt = $dbh->prepare($sql);
 			$stmt->bindParam(':budget_id', $budget_id, PDO::PARAM_INT);
 			$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
