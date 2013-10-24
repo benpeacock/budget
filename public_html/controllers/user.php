@@ -14,7 +14,7 @@ if(isset($_POST['submit'])) {
 		case 'create':
 			$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 			if (filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
-				exit('Invalid e-mail address. <a href="user.php?action=create_user">Try Again</a>');
+				exit('<div class="alert alert-danger">Invalid e-mail address. <a href="/user/create_user">Try Again</a></div>');
 			}
 			$username = trim(filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING));
 			if (!ctype_alnum($username)) {
@@ -29,8 +29,6 @@ if(isset($_POST['submit'])) {
 			$password = trim(SHA1($_POST['password']));
 			$user = new User();
 			$result = $user->createUser($email, $username, $password);
-			echo 'Result: ' . $result;
-			echo '<br />';
 			if ($result == 1) {
 				$found_user = $user->authenticate($username, $password);
 				if ($found_user) {
@@ -46,7 +44,7 @@ if(isset($_POST['submit'])) {
 				try {
 					$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 					if (filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
-						exit('Invalid e-mail address. <a href="/user/reset_password">Try Again</a>');
+						exit('<div class="alert alert-danger">Invalid e-mail address.  Back to <a href="/login">login</a><div>');
 					}
 					$user = new User();
 					$user = $user->findByEmail($email);
@@ -62,28 +60,28 @@ if(isset($_POST['submit'])) {
 			
 			// Accepts POSTed form data from user.php?action=reset_password link that's sent by e-mail to user
 			case 'reset_password':
-				if ($_POST['password'] != $_POST['password_again']) {
-					exit('Passwords do not match.');
+				if (trim($_POST['password']) != trim($_POST['password_again'])) {
+					exit('<div class="alert alert-danger">Passwords do not match.</div>');
 				} else {
 					try {
 						$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 						if (filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
-							exit('Invalid e-mail address. <a href="user.php?action=reset_password">Try Again</a>');
+							exit('<div class="alert alert-danger">Invalid e-mail address. Back to <a href="/login">login</a><div>');
 						}
 						$temp_hash = filter_input(INPUT_POST, 'temp_hash', FILTER_SANITIZE_STRING);
-						if (filter_var($temp_hash, FILTER_VALIDATE_REGEXP, '^[a-zA-Z0-9]+$') == false) {
-							exit ('Invalid temporary hash.  <a href="user.php?action=reset_password">Try Again</a>');
+						if (filter_var($temp_hash, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp" =>"/^[0-9a-fA-F]{40}$/"))) == false) {
+							exit ('<div class="alert alert-danger">Invalid temporary hash.  Back to <a href="/login">login</a><div>');
 						}
 						if (strlen($_POST['password']) < 8) {
-							exit ('Password minimum length eight characters.');
+							exit ('<div class="alert alert-danger">Password minimum length eight characters. Back to <a href="/login">login</a></div>');
 						}
-						$password = trim(SHA1($_POST['password']));
+						$password = trim(sha1($_POST['password']));
 						$user = new User();
 						$result = $user->resetPassword($email, $temp_hash, $password);
 						if ($result == 1) {
-							echo 'Password successfully reset.  Go to <a href="/login">Login</a>.';
+							echo '<div class="alert alert-success">Password successfully reset.  Go to <a href="/login">Login</a>.</div>';
 						} else {
-							echo 'Password could not be reset.';
+							echo '<div class="alert alert-danger">Password could not be reset.</div>';
 						}
 					} catch (PDOException $e) {
 						echo 'Unable to reset password: ' . $e->getMessage();

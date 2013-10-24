@@ -12,13 +12,17 @@ if (isset($_POST['submit'])) {
 		$session->login($found_user);
 		header('Location:/dashboard');
 	} else {
-		echo 'Could not log in.';
+		require_once ROOT . 'views/header.inc.php';
+		echo '<div class="alert alert-danger">Username or password incorrect.  Try Again.</div>';
+		include ROOT . 'views/login_form.php';
+		require_once ROOT . 'views/footer.inc.php';
 	}
 }
-
-require_once ROOT . 'views/header.inc.php';
-include ROOT . 'views/login_form.php';
-require_once ROOT . 'views/footer.inc.php';
+if (!isset($_POST['submit'])) {
+	require_once ROOT . 'views/header.inc.php';
+	include ROOT . 'views/login_form.php';
+	require_once ROOT . 'views/footer.inc.php';
+}
 ?>
 
 

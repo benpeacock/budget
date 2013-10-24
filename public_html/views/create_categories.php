@@ -11,6 +11,6 @@
 					<button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Create Category</button>
 				</div>
 			</form>
-</div>
-</div>
+		</div>
+	</div>
 </div>

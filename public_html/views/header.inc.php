@@ -21,9 +21,6 @@
 <script src="../../assets/js/respond.min.js"></script>
 <![endif]-->
 
-    <!-- Custom styles for this template -->
-    <link href="/css/carousel.css" rel="stylesheet" type="text/css" />
-    <link href="/css/signin.css" rel="stylesheet" type="text/css" />
     <!--  X-editable plugin from CDN -->
     <link href="/vendor/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet" type="text/css" />
     <!--  JQuery UI CSS -->

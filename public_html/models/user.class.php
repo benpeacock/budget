@@ -107,10 +107,9 @@ class User extends DatabaseObject {
 		public function resetPassword($email, $temp_hash, $password) {
 			$dbh = Database::getPdo();
 			try {
-				$hashed_pass = sha1($password);
-				$sql = "UPDATE " . self::DB_TABLE . " SET password = :hashed_pass WHERE email = :email AND temp_hash = :temp_hash";
+				$sql = "UPDATE " . self::DB_TABLE . " SET password = :password WHERE email = :email AND temp_hash = :temp_hash";
 				$stmt = $dbh->prepare($sql);
-				$stmt->bindParam(':hashed_pass', $hashed_pass);
+				$stmt->bindParam(':password', $password);
 				$stmt->bindParam(':email', $email);
 				$stmt->bindParam(':temp_hash', $temp_hash);
 				$stmt->execute();

@@ -6,7 +6,6 @@
 		<?php 
 		$budget = new Budget;
 		$records = $budget->getByUser($session->user_id);
-		
 		foreach ($records as $row) {
 			echo '<li><a href="/budget/display/' . $row['id'] . '">' . $row['name'] . '</a></li>';
 		}

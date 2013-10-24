@@ -1,4 +1,4 @@
-<!-- GENERAL STYLES -->
+/* GENERAL STYLES */
 
 .pad-20 {
 	padding: 20px 20px 20px 20px;
@@ -8,7 +8,7 @@
 	width: 20%;
 }
 
-<!-- BUDGETS.PHP TABLE LAYOUT STYLES -->
+/* BUDGETS.PHP TABLE LAYOUT STYLES */
 
 #item-name {
 	width: 25%;
@@ -35,7 +35,7 @@
 }
 
 
-<!-- BOOTSTRAP SIGNIN STYLES -->
+/* BOOTSTRAP SIGNIN STYLES */
 
 .form-signin {
 max-width: 330px;
@@ -74,7 +74,7 @@ border-top-right-radius: 0;
 
 
 
-<!-- BOOTSTRAP CAROUSEL STYLES -->
+/* BOOTSTRAP CAROUSEL STYLES */
 
 /* GLOBAL STYLES
 -------------------------------------------------- */

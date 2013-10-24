@@ -19,9 +19,9 @@ class Email extends DatabaseObject {
 		//$msg .= 'https://accountabroad.com/controllers/user.php?action=reset_password&email=' . $address . '&temp_hash' . $temp_hash;
 		
 		$result = $mgClient->sendMessage("$domain",
-		                  array('from'    => 'Admin <admin@accountabroad.com>',
+		                  array('from'    => 'Account Abroad <admin@accountabroad.com>',
 		                  		'to' => $username . ' <' . $address . '>',
-		                        'subject' => 'Hello',
+		                        'subject' => 'Account Abroad Password Reset',
 		                        'text'    => $msg
 		                  		));
 	}
