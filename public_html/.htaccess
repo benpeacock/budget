@@ -18,6 +18,10 @@ RewriteRule ^user/(\w+)$ controllers/user.php?action=$1
 # Example: accountabroad.com/user/reset_password/[email address]/[temp hash]
 RewriteRule ^user/reset_password/([^/]*)/(.*)$  /controllers/user.php?action=reset_password&email=$1&temp_hash=$2
 
+# LOGIN
+# Example: accountabroad.com/login/reset
+RewriteRule ^login/reset$ controllers/login.php?action=reset
+
 # BUDGET
 # Example: 'accountabroad.com/budget/[action_name]
 RewriteRule ^budget/(\w+)$ controllers/budget.php?action=$1

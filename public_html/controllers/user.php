@@ -51,7 +51,7 @@ if(isset($_POST['submit'])) {
 					$temp_hash = $user->makeHash($user->id);
 					$email = new Email();
 					$email = $email->passwordReset($user->username, $user->email, $temp_hash);
-					header('Location: /login');
+					header('Location: /login/reset');
 				} catch (PDOException $e) {
 					echo 'Error sending password reset email ' . $e->getMessage();
 				}

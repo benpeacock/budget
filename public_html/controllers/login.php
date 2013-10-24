@@ -20,6 +20,10 @@ if (isset($_POST['submit'])) {
 }
 if (!isset($_POST['submit'])) {
 	require_once ROOT . 'views/header.inc.php';
+	//display message saying password e-mail was sent if redirected from the forgot_password screen through User controller
+	if (isset($_GET['action']) && $_GET['action'] == 'reset') {
+		echo '<div class="alert alert-success">Password reset e-mail sent.  Please check your e-mail</div>';
+	}
 	include ROOT . 'views/login_form.php';
 	require_once ROOT . 'views/footer.inc.php';
 }
