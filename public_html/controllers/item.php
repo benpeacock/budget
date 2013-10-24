@@ -43,13 +43,13 @@ if (isset($_POST['submit'])) {
 			if (strlen($name) > 45) {
 				exit ('Invalid item name.  Max legnth 45 characters. <a href="/dashboard">Try Again</a>');
 			}
-			if (!empty($category)) {
+			if (!empty($_POST['category'])) {
 				$category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_NUMBER_INT);
 				if (filter_var($category, FILTER_VALIDATE_INT) == false) {
 					exit ('Invalid item category. <a href="/dashboard">Try Again</a>');
 				}
 			}
-			if (!empty($tag)) {
+			if (!empty($_POST['tag'])) {
 				$tag = filter_input(INPUT_POST, 'tag', FILTER_SANITIZE_NUMBER_INT);
 				if (filter_var($tag, FILTER_VALIDATE_INT) == false) {
 					exit ('Invalid item tag. <a href="/dashboard">Try Again</a>');
@@ -59,14 +59,14 @@ if (isset($_POST['submit'])) {
 			if (!is_numeric($amount)) {
 				exit('Invalid item amount. <a href="/dashboard">Try Again</a>');
 			}
-			if (!empty($note)) {
+			if (!empty($_POST['note'])) {
 				$note = filter_input(INPUT_POST, 'note', FILTER_SANITIZE_STRING);
-				if (filter_var($note, FILTER_VALIDATE_REGEXP, '^[a-zA-Z0-9]+$') == false) {
+				if (filter_var($note, FILTER_VALIDATE_REGEXP, array("options" => array("regexp"=>"/^[a-zA-Z0-9]+$/"))) == false) {
 					exit ('Invalid note. <a href="/dashboard">Try Again</a>');
 				}
 			}
 			$item = new Item();
-			$result = $item->addItem($session->user_id, $budget_id, $name, $category='', $tag='', $amount, $note='');
+			$result = $item->addItem($session->user_id, $budget_id, $name, $category, $tag, $amount, $note);
 			if ($result != 1) {
 				exit('Could not create item.');
 			} else {
