@@ -17,7 +17,7 @@
 		              <li class="active"><a href="/">Home</a></li>
 		              <li><a href="/dashboard">My Dashboard</a></li>
 		              <li><a href="/report">Reports</a></li>
-		              <li><a href="#contact">Help</a></li>
+		              <li><a href="https://accountabroad.zendesk.com/hc/en-us">Help</a></li>
 	              </ul>
 	              <ul class="nav navbar-nav navbar-right">
 			              <li class="navbar-text">Hello, 
