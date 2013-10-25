@@ -33,7 +33,7 @@
 				?>
 				<ul class="nav navbar-nav">
 				<li class="active"><a href="/">Home</a></li>
-				<li><a href="#contact">Help</a></li>
+				<li><a href="https://accountabroad.zendesk.com/hc/en-us">Help</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 				<li><a href="/user/create_user">Create Account</a></li>

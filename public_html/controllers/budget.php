@@ -56,7 +56,7 @@ if (isset($_GET['action'])) {
 			}
 			$budget = new Budget();
 			$result = $budget->getOneById($id);
-			if ($budget->user_id != $session->user_id) {
+			if ($result['user_id'] != $session->user_id) {
 				exit ('Invalid ID match.');
 			}
 			include ROOT . 'views/edit_budgets.php';
