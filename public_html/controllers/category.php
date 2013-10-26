@@ -27,12 +27,12 @@ if (isset($_GET['action'])) {
 		case 'edit':
 			$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 			if (filter_var($id, FILTER_VALIDATE_INT) == false) {
-				exit ('Invalid category id.  <a href="/dashboard">Try Again</a>');
+				exit ('<div class="alert alert-danger">Invalid category id.</div>');
 			}
 			$category = new Category();
 			$category_result = $category->getOneById($id);
 			if ($category_result['user_id'] != $session->user_id) {
-				exit ('Invalid ID match.');
+				exit ('<div class="alert alert-danger">Invalid ID match.</div>');
 			}
 			include ROOT . 'views/header.inc.php';
 			include ROOT . 'views/edit_categories.php';
@@ -42,7 +42,7 @@ if (isset($_GET['action'])) {
 		case 'delete':
 			$id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
 			if (filter_var($id, FILTER_VALIDATE_INT) == false) {
-				exit ('Invalid category id.  <a href="/dashboard">Try Again</a>');
+				exit ('<div class="alert alert-danger">Invalid category id.</div>');
 			}
 			$category = new Category();
 			$result = $category->deleteRecord($id, $session->user_id);
@@ -61,10 +61,10 @@ if (isset($_POST['action'])) {
 		case 'create':
 			$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
 			if (!ctype_alnum($name)) {
-				exit ('Invalid category name.  Numbers and letters only.  <a href="/category/create">Try Again</a>');
+				exit ('<div class="alert alert-danger">Invalid category name.  Numbers and letters only.  <a href="/category/create">Try Again</a></div>');
 			}
 			if (strlen($name) > 45) {
-				exit ('Invalid category name.  Max length 45 characters.  <a href="/category/create">Try Again</a>');
+				exit ('<div class="alert alert-danger">Invalid category name.  Max length 45 characters.  <a href="/category/create">Try Again</a></div>');
 			}
 			$category = new Category();
 			$result = $category->createCategory($session->user_id, $name);
@@ -73,14 +73,14 @@ if (isset($_POST['action'])) {
 		case 'edit':
 			$id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
 			if (filter_var($id, FILTER_VALIDATE_INT) == false) {
-				exit ('Invalid category id.  <a href="category.php?action=create">Try Again</a>');
+				exit ('<div class="alert alert-danger">Invalid category id.</div>');
 			}
 			$name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
 			if (!ctype_alnum($name)) {
-				exit ('Invalid category name.  Numbers and letters only.  <a href="category.php?action=create">Try Again</a>');
+				exit ('<div class="alert alert-danger">Invalid category name.  Numbers and letters only.  <a href="category/create">Try Again</a></div>');
 			}
 			if (strlen($name) > 45) {
-				exit ('Invalid category name.  Max length 45 characters.  <a href="category.php?action=create">Try Again</a>');
+				exit ('<div class="alert alert-danger">Invalid category name.  Max length 45 characters.  <a href="category/create">Try Again</a></div>');
 			}			
 			$category = new Category();
 			$result = $category->updateById($id, $name, $session->user_id);
