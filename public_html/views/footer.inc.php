@@ -36,5 +36,6 @@
 		    });
 		  }
 		</script>
+		<script type="text/javascript" src="/js/controls.js"></script>
 	</body>
 </html>

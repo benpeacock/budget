@@ -9,14 +9,8 @@
 				<input type="text" pattern="^[a-zA-Z0-9]+$" maxlength="45" class="form-control input-lg" name="name" placeholder="<?php echo $tag_result['name']; ?>" />
 				<span class="help-block">a-Z, 0-9 only, 45 characters max length</span>
 				<button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">Edit Tag</button>
-				<div class="row">
-				<div class="col-md-4">
-					<a href="/dashboard">Cancel</a>
-				</div>
-					<div class="col-md-4 pull-right">
-						<a onclick="return confirm('Delete tag?')" href="/tag/delete/<?php echo $tag_result['id']; ?>">Delete Tag</a>
-					</div>
-				</div>
+				<button onclick="window.location='/dashboard'" type="button" style="margin: 20px 0 0 0;" class="btn btn-sm btn-default btn-block" >Cancel</button>
+				<button onclick="if(confirm('Delete this tag?')) window.location='/tag/delete/<?php echo $tag_result['id']; ?>';" type="button" style="margin: 20px 0 0 0;" class="btn btn-sm btn-default btn-block">Delete</button>
 			
 			
 			</form>

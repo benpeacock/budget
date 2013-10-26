@@ -1,5 +1,6 @@
 /* GENERAL STYLES */
 
+/* Used to keep navbar from overlapping page content on phone-size devices */
 @media screen and (max-width: 768px) {
     body { padding-top: 40px; }
 }
