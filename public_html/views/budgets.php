@@ -27,7 +27,8 @@
 							  data-pk="<? echo $row['id'] ?>"><?php echo $row['amount'] ?></a></td>
 					<td id="item-note"><a class="note" pattern="^[a-zA-Z0-9]+$" maxlength="45" data-type="textarea" data-url="/models/itemProcessor.php"
 							  data-pk="<? echo $row['id'] ?>"><?php echo $row['note'] ?></a></td>
-					<td id="item-delete"><a onclick="return confirm(\'Delete item?\')" href="item/delete/<? echo $row['id'] ?>">Delete</a></td>
+					<!-- <td id="item-delete"><a onclick="if(confirm('Delete item?')) window.location='/item/delete/<? echo $row['budget_id'] . '/' .$row['id'] ?>';">Delete</a></td> -->
+					<td id="item-delete"><a onclick="window.location='/item/delete/<? echo $row['budget_id'] . '/' .$row['id'] ?>';">Delete</a></td>
 					</tr>
 				<?php } ?>
 				<form method="post" action="/item" class="form-inline">
