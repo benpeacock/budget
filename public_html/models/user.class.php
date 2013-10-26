@@ -12,6 +12,24 @@ class User extends DatabaseObject {
 	public $password;
 	public $temp_hash;
 	
+	/**
+	 * Checks whether a username is already in use by username.
+	 * @param string $username
+	 * @return int occurences of username already in use
+	 */
+	private function checkUser($username) {
+		$dbh = Database::getPdo();
+		try {
+			$sql = "SELECT count(id) FROM " . self::DB_TABLE . " WHERE username = :username";
+			$stmt = $dbh->prepare($sql);
+			$stmt->bindParam(':username', $username, PDO::PARAM_STR);
+			$stmt->execute();
+			$result = $stmt->fetch(PDO::FETCH_NUM);
+			return $result;
+		} catch (PDOException $e) {
+			echo 'Unable to check user.';
+		}
+	}
 	
 	/**
 	 * Creates a new user in db
@@ -23,6 +41,11 @@ class User extends DatabaseObject {
 	public function createUser($email, $username, $password) {
 			$dbh = Database::getPdo();
 			try {
+				$result = $this->checkUser($username);
+				if ($result >= 1) {
+					return 'inuse';
+					exit();
+				}
 				$sql = "INSERT INTO user (email, username, password) VALUES 
 						(:email, :username, :password)";
 				$stmt = $dbh->prepare($sql);

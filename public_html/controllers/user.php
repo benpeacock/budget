@@ -29,6 +29,9 @@ if(isset($_POST['submit'])) {
 			$password = trim(SHA1($_POST['password']));
 			$user = new User();
 			$result = $user->createUser($email, $username, $password);
+			if ($result == 'inuse') {
+				exit('<div class="alert alert-danger">Sorry, that username is already in use.  Please <a href="/user/create_user">try again</a>.</div>');
+			}
 			if ($result == 1) {
 				$found_user = $user->authenticate($username, $password);
 				if ($found_user) {
