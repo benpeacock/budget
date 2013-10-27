@@ -85,7 +85,7 @@ if (isset($_POST['action'])) {
 			$category = new Category();
 			$result = $category->updateById($id, $name, $session->user_id);
 			if ($result == 1) {
-				header('Location:dashboard.php');
+				header('Location:/dashboard');
 			} else {
 				echo 'Unable to update category.';
 			}
