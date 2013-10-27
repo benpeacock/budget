@@ -1,7 +1,7 @@
 <?php
 require_once dirname(__FILE__) . '../../../config.php';
 require_once ROOT . 'models/init.inc.php';
-require ROOT . 'vendor/autoload.php';
+require dirname(__FILE__) . '../../../vendor/autoload.php';
 use Mailgun\Mailgun;
 
 class Email extends DatabaseObject {
