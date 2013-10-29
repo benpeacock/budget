@@ -108,8 +108,8 @@ if(isset($_GET['action'])) {
 			break;
 
 		case 'create_user':
-			include ROOT . 'views/create_user.php';
-			break;
+ 			include ROOT . 'views/create_user.php';
+ 			break;
 	}
 }
 require_once '../views/footer.inc.php';

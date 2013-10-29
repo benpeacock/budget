@@ -9,4 +9,5 @@ require_once ('user.class.php');
 require_once ('session.class.php');
 require_once ('email.class.php');
 require_once ('report.class.php');
+require_once ROOT . 'vendor/sentry.php';
 ?>
