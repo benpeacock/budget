@@ -17,7 +17,7 @@
 			<tbody>
 				<?php foreach ($query as $row) { ?>
 					<tr>
-					<td id="item-name"><a class="name" pattern="^[a-zA-Z0-9]+$" maxlength="45" data-type="text" data-url="/models/itemProcessor.php"
+					<td id="item-name"><a class="name" pattern="^[a-zA-Z0-9 ]+$" maxlength="45" data-type="text" data-url="/models/itemProcessor.php"
 						      data-pk="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></a></td>
 					<td id="item-category"><a class="category" data-type="select" data-url="/models/itemProcessor.php"
 								data-pk="<? echo $row['id'] ?>" data-value="<?php echo $row['category'] ?>" data-source="/category/list/<?php echo $row['user_id'] ?>"></a></td>
@@ -25,7 +25,7 @@
 								data-pk="<? echo $row['id'] ?>" data-value="<?php echo $row['tag'] ?>" data-source="/tag/list/<?php echo $row['user_id'] ?>"></a></td>
 					<td id="item-amount"><a class="amount" data-type="number" data-url="/models/itemProcessor.php"
 							  data-pk="<? echo $row['id'] ?>"><?php echo $row['amount'] ?></a></td>
-					<td id="item-note"><a class="note" pattern="^[a-zA-Z0-9]+$" maxlength="45" data-type="textarea" data-url="/models/itemProcessor.php"
+					<td id="item-note"><a class="note" maxlength="300" data-type="textarea" data-url="/models/itemProcessor.php"
 							  data-pk="<? echo $row['id'] ?>"><?php echo $row['note'] ?></a></td>
 					<!-- <td id="item-delete"><a onclick="if(confirm('Delete item?')) window.location='/item/delete/<? echo $row['budget_id'] . '/' .$row['id'] ?>';">Delete</a></td> -->
 					<td id="item-delete"><a onclick="window.location='/item/delete/<? echo $row['budget_id'] . '/' .$row['id'] ?>';">Delete</a></td>
@@ -37,7 +37,7 @@
 						<input type="hidden" name="budget_id" value="<?php echo $id; ?>" />
 						<td>
 							<label class="sr-only" for="name">Name</label>
-							<input class="form-control" type="text" pattern="^[a-zA-Z0-9]+$" maxlength="45" name="name" placeholder="name (required)" required />
+							<input class="form-control" type="text" pattern="^[a-zA-Z0-9 ]+$" maxlength="45" name="name" placeholder="name (required)" required />
 						</td>
 						<td>
 							<label class="sr-only" for="category">Category</label>
