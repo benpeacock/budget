@@ -31,25 +31,4 @@ class Email extends DatabaseObject {
 		                        'text'    => $msg
 		                  		));
 	}
-	
-	public function emailSQLBackup() {
-		//instantiate Mailgun client
-		$mgClient = new Mailgun(MG_KEY);
-		$domain = "accountabroad.com";
-		
-		// Create backup file
-		$backupfile = 'accountabroad_' . date("Y-m-d") . '.sql';
-		system("mysqldump -h localhost -u DB_USER -p DB_PASS budget > $backupfile");
-		
-		// Create message
-		$result = $mgClient->sendMessage("$domain",
-		                  array('from'    => 'Account Abroad <admin@accountabroad.com>',
-		                  		'to' => 'Ben <benjaminwpeacock@gmail.com>',
-		                        'subject' => 'Account Abroad MySQL Backup',
-		                        'text'    => 'Daily MySQL backup.'),
-		                  array('attachment' => array('/var/www/accountabroad.com/' . $backupfile)));
-		
-		// Delete backup file
-		// unlink($backupfile);
-	}
 } // ends Email class

@@ -17,17 +17,17 @@ class User extends DatabaseObject {
 	 * @param string $username
 	 * @return int occurences of username already in use
 	 */
-	private function checkUser($username) {
+	private static function checkUser($username) {
 		$dbh = Database::getPdo();
 		try {
 			$sql = "SELECT count(id) FROM " . self::DB_TABLE . " WHERE username = :username";
 			$stmt = $dbh->prepare($sql);
 			$stmt->bindParam(':username', $username, PDO::PARAM_STR);
 			$stmt->execute();
-			$result = $stmt->fetch(PDO::FETCH_NUM);
+			$result = $stmt->fetchColumn();
 			return $result;
 		} catch (PDOException $e) {
-			echo 'Unable to check user.';
+			echo 'Unable to check user ' .  $e->getMessage();
 		}
 	}
 	
@@ -41,8 +41,8 @@ class User extends DatabaseObject {
 	public function createUser($email, $username, $password) {
 			$dbh = Database::getPdo();
 			try {
-				$result = $this->checkUser($username);
-				if ($result >= 1) {
+				$existing = self::checkUser($username);
+				if ($existing != 0) {
 					return 'inuse';
 					exit();
 				}
@@ -56,7 +56,7 @@ class User extends DatabaseObject {
 				$result = $stmt->rowCount();
 				return $result;
 			} catch (PDOException $e) {
-				echo 'Unable to create user' . $e->message;
+				echo 'Unable to create user' . $e->getMessage();
 			}
 		}
 	
